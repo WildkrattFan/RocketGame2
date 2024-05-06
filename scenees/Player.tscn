@@ -321,6 +321,9 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_ymuer")
 hframes = 12
 script = ExtResource("3_ilhu4")
+speed = null
+rotation_speed = null
+shoot_speed = null
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["player"]]
 visible = false
