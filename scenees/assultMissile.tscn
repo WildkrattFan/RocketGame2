@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bkw1ancve754p"]
+
+[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_sbv13"]
+[ext_resource type="Texture2D" uid="uid://cj07nasi6jni" path="res://assets/image (1).png" id="2_h6p32"]
+[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_454mv"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
+radius = 148.842
+height = 619.837
+
+[node name="AssultMissile" type="Node2D" groups=["shotBy"]]
+script = ExtResource("1_sbv13")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.103253, 0.0940596)
+texture = ExtResource("2_h6p32")
+script = ExtResource("3_454mv")
+
+[node name="missile" type="Area2D" parent="Sprite2D" groups=["missile"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/missile"]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8ugvu")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Sprite2D/missile" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

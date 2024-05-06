@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddq2f8xek6ot6"]
+
+[ext_resource type="Texture2D" uid="uid://dsembjtmjdhbx" path="res://assets/blackholeLol-removebg-preview.png" id="1_4qa37"]
+[ext_resource type="Script" path="res://script/blackHole.gd" id="1_ms01d"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4hkx"]
+radius = 2188.78
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vppbt"]
+radius = 166.364
+
+[node name="BlackHole" type="Node2D"]
+script = ExtResource("1_ms01d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_4qa37")
+
+[node name="wideBlackHoleRadius" type="Area2D" parent="Sprite2D" groups=["blackHole"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/wideBlackHoleRadius"]
+shape = SubResource("CircleShape2D_g4hkx")
+
+[node name="blackHoleCenter" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/blackHoleCenter"]
+shape = SubResource("CircleShape2D_vppbt")

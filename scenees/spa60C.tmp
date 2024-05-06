@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://bakp3u5xwdbl0"]
+
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/Player.tscn" id="1_hdkg0"]
+[ext_resource type="PackedScene" uid="uid://ddq2f8xek6ot6" path="res://scenees/blackHole.tscn" id="2_xu132"]
+[ext_resource type="PackedScene" uid="uid://dk5gn7spn8rvn" path="res://scenees/splitMine.tscn" id="4_600ua"]
+
+[node name="Space" type="Node2D"]
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+spawn_limit = 5
+
+[node name="AssultShip" parent="." instance=ExtResource("1_hdkg0")]
+position = Vector2(2692, 2655)
+
+[node name="BlackHole" parent="." instance=ExtResource("2_xu132")]
+position = Vector2(5349, -2044)
+
+[node name="BlackHole2" parent="." instance=ExtResource("2_xu132")]
+position = Vector2(-2159, 179)
+
+[node name="SplitMine" parent="." instance=ExtResource("4_600ua")]
+position = Vector2(-2238, 2345)

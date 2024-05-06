@@ -1,0 +1,76 @@
+[gd_scene load_steps=8 format=3 uid="uid://bkuqvkhgochl8"]
+
+[ext_resource type="Script" path="res://script/Button.gd" id="1_0rluh"]
+[ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="1_74r7c"]
+[ext_resource type="Texture2D" uid="uid://tc087lxqwhcs" path="res://assets/upheaval/istockphoto-1403514917-612x612.jpg" id="3_4y372"]
+
+[sub_resource type="Theme" id="Theme_ej0xy"]
+
+[sub_resource type="Theme" id="Theme_ywhrl"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gago"]
+bg_color = Color(0.580392, 0.156863, 0.176471, 1)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsk1d"]
+bg_color = Color(0.67451, 0.156863, 0.176471, 1)
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_ej0xy")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
+show_behind_parent = true
+z_index = -1
+position = Vector2(592.5, 364)
+scale = Vector2(2.07026, 1.92147)
+texture = ExtResource("3_4y372")
+
+[node name="Button" type="Button" parent="CanvasLayer/Sprite2D"]
+top_level = true
+visibility_layer = 15
+offset_left = 448.86
+offset_top = 335.0
+offset_right = 755.86
+offset_bottom = 454.0
+theme = SubResource("Theme_ywhrl")
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+theme_override_colors/icon_normal_color = Color(0.257899, 0.469314, 0.190686, 1)
+theme_override_colors/icon_pressed_color = Color(0.391799, 0.698594, 0.294804, 1)
+theme_override_colors/icon_hover_color = Color(0.418356, 0.745107, 0.314916, 1)
+theme_override_colors/icon_hover_pressed_color = Color(0.389151, 0.693972, 0.292793, 1)
+theme_override_colors/icon_focus_color = Color(0.375928, 0.670945, 0.282726, 1)
+theme_override_colors/icon_disabled_color = Color(0.373286, 0.666356, 0.280711, 1)
+theme_override_fonts/font = ExtResource("1_74r7c")
+theme_override_font_sizes/font_size = 70
+theme_override_styles/normal = SubResource("StyleBoxFlat_0gago")
+theme_override_styles/hover = SubResource("StyleBoxFlat_wsk1d")
+text = "Retry?"
+script = ExtResource("1_0rluh")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Sprite2D/Button"]
+z_index = 6
+layout_mode = 0
+offset_left = -302.86
+offset_top = -270.0
+offset_right = 557.14
+offset_bottom = -113.0
+theme_override_colors/default_color = Color(1, 1, 1, 1)
+theme_override_fonts/normal_font = ExtResource("1_74r7c")
+theme_override_font_sizes/normal_font_size = 100
+text = "Mission Failed!"
+fit_content = true
+autowrap_mode = 2
+
+[connection signal="pressed" from="CanvasLayer/Sprite2D/Button" to="CanvasLayer/Sprite2D/Button" method="_on_pressed"]

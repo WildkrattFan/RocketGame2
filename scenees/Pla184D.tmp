@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://chxgvrijiwjix"]
+
+[ext_resource type="Texture2D" uid="uid://bpb8k85yur801" path="res://icon.svg" id="1_4t7oy"]
+[ext_resource type="Script" path="res://script/Sprite2D.gd" id="3_ilhu4"]
+[ext_resource type="Script" path="res://scenees/Area2D.gd" id="4_4tu5c"]
+[ext_resource type="Script" path="res://scenees/CollisionShape2D.gd" id="5_ftsce"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7vkwy"]
+size = Vector2(123, 123)
+
+[node name="Player" type="Node2D"]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(67, 66)
+texture = ExtResource("1_4t7oy")
+script = ExtResource("3_ilhu4")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D"]
+script = ExtResource("4_4tu5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+position = Vector2(0.5, -0.5)
+shape = SubResource("RectangleShape2D_7vkwy")
+one_way_collision_margin = 0.0
+script = ExtResource("5_ftsce")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+position = Vector2(-2, 2)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 1e+06
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+position = Vector2(224, 63)
+shadow_enabled = true
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="Sprite2D/Area2D/CollisionShape2D" method="_on_area_2d_area_entered"]

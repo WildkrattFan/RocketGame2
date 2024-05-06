@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://gjjfywwhcjoh"]
+
+[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_b2ehw"]
+[ext_resource type="Texture2D" uid="uid://cj07nasi6jni" path="res://assets/image (1).png" id="2_5s776"]
+[ext_resource type="Script" path="res://scenees/Sprite2D.gd" id="3_mhq72"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
+radius = 148.842
+height = 619.837
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
+size = Vector2(3477.21, 4156.94)
+
+[node name="heatMissile" type="Node2D" groups=["shotBy"]]
+script = ExtResource("1_b2ehw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.103253, 0.0940596)
+texture = ExtResource("2_5s776")
+script = ExtResource("3_mhq72")
+
+[node name="heatSeakingMissile" type="Area2D" parent="Sprite2D" groups=["missile"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/heatSeakingMissile"]
+visible = false
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_8ugvu")
+
+[node name="trackingArea" type="Area2D" parent="Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/trackingArea"]
+position = Vector2(1728.61, -143.526)
+scale = Vector2(0.999999, 1)
+shape = SubResource("RectangleShape2D_llflb")
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="area_entered" from="Sprite2D/heatSeakingMissile" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Sprite2D/trackingArea" to="." method="_on_tracking_area_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

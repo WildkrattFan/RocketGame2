@@ -1,0 +1,392 @@
+[gd_scene load_steps=31 format=3 uid="uid://chxgvrijiwjix"]
+
+[ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
+[ext_resource type="Script" path="res://script/Sprite2D.gd" id="3_ilhu4"]
+[ext_resource type="Script" path="res://scenees/Area2D.gd" id="4_4tu5c"]
+[ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
+[ext_resource type="Texture2D" uid="uid://8bb7a0y7v2hl" path="res://assets/upheaval/....jpg" id="5_uxtts"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bmmw"]
+radius = 100.476
+height = 618.858
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5wrao"]
+animation = &"engineOff"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wqc4u"]
+animation = &"engineStart"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tod50"]
+animation = &"engineTurnOff"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_mqnin"]
+animation = &"explosion"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_xb33t"]
+animation = &"flying"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gm1df"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ps4rj"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_j4pqo"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_omyso"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_da0iw"]
+switch_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2r2e5"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_m7ayy"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_a1b4x"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16y7p"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fjqa0"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_wylf0"]
+states/Start/position = Vector2(120, 106)
+states/engineOff/node = SubResource("AnimationNodeAnimation_5wrao")
+states/engineOff/position = Vector2(265, 185)
+"states/engineStart 2/node" = SubResource("AnimationNodeAnimation_wqc4u")
+"states/engineStart 2/position" = Vector2(351, 62)
+states/engineTurnOff/node = SubResource("AnimationNodeAnimation_tod50")
+states/engineTurnOff/position = Vector2(851, 222)
+states/explosion/node = SubResource("AnimationNodeAnimation_mqnin")
+states/explosion/position = Vector2(526, 483)
+states/flying/node = SubResource("AnimationNodeAnimation_xb33t")
+states/flying/position = Vector2(429, 132)
+transitions = ["engineStart 2", "flying", SubResource("AnimationNodeStateMachineTransition_gm1df"), "engineTurnOff", "engineOff", SubResource("AnimationNodeStateMachineTransition_ps4rj"), "engineOff", "engineStart 2", SubResource("AnimationNodeStateMachineTransition_j4pqo"), "flying", "engineTurnOff", SubResource("AnimationNodeStateMachineTransition_omyso"), "Start", "engineOff", SubResource("AnimationNodeStateMachineTransition_da0iw"), "engineOff", "explosion", SubResource("AnimationNodeStateMachineTransition_2r2e5"), "engineStart 2", "explosion", SubResource("AnimationNodeStateMachineTransition_m7ayy"), "flying", "explosion", SubResource("AnimationNodeStateMachineTransition_a1b4x"), "engineTurnOff", "explosion", SubResource("AnimationNodeStateMachineTransition_16y7p"), "explosion", "End", SubResource("AnimationNodeStateMachineTransition_fjqa0")]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m5ax8"]
+radius = 100.0
+
+[sub_resource type="Animation" id="Animation_65o3d"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [SubResource("CircleShape2D_m5ax8")]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:shape:radius")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [100.0]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:disabled")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_r6i71"]
+resource_name = "engineOff"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_qo786"]
+resource_name = "engineStart"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 3, 4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4]
+}
+
+[sub_resource type="Animation" id="Animation_c2sfc"]
+resource_name = "engineTurnOff"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 1,
+"values": [4, 3, 2, 1, 0]
+}
+
+[sub_resource type="Animation" id="Animation_yiuwb"]
+resource_name = "explosion"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("..:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [5, 6, 7, 8, 9, 10, 11]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [SubResource("CircleShape2D_m5ax8"), SubResource("CircleShape2D_m5ax8")]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:shape:radius")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [100.0, 130.0, 230.0, 270.0]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../AnimationPlayer/explosionArea/CollisionShape2D:disabled")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+
+[sub_resource type="Animation" id="Animation_h7yvn"]
+resource_name = "flying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("..:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8t8gj"]
+_data = {
+"RESET": SubResource("Animation_65o3d"),
+"engineOff": SubResource("Animation_r6i71"),
+"engineStart": SubResource("Animation_qo786"),
+"engineTurnOff": SubResource("Animation_c2sfc"),
+"explosion": SubResource("Animation_yiuwb"),
+"flying": SubResource("Animation_h7yvn")
+}
+
+[node name="AssultShip" type="Node2D" groups=["player", "shotBy"]]
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(25, 24)
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ymuer")
+hframes = 12
+script = ExtResource("3_ilhu4")
+
+[node name="playerHitBox" type="Area2D" parent="Sprite2D" groups=["player"]]
+visible = false
+script = ExtResource("4_4tu5c")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/playerHitBox"]
+position = Vector2(9.99994, -10)
+rotation = 4.70366
+shape = SubResource("CapsuleShape2D_0bmmw")
+one_way_collision_margin = 0.0
+script = ExtResource("5_ftsce")
+
+[node name="Timer" type="Timer" parent="Sprite2D"]
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Sprite2D"]
+offset_left = -220.0
+offset_top = 30.0
+offset_right = 1055.0
+offset_bottom = 324.0
+rotation = 4.71239
+scale = Vector2(2, 0.4)
+rounded = true
+texture_progress = ExtResource("5_uxtts")
+tint_under = Color(0.576471, 1, 1, 1)
+
+[node name="death_timer" type="Timer" parent="Sprite2D"]
+wait_time = 2.0
+one_shot = true
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+visible = false
+position = Vector2(-2, 2.00002)
+zoom = Vector2(0.3, 0.3)
+position_smoothing_enabled = true
+position_smoothing_speed = 1.0
+rotation_smoothing_enabled = true
+rotation_smoothing_speed = 100.0
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_wylf0")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../AnimationTree")
+libraries = {
+"": SubResource("AnimationLibrary_8t8gj")
+}
+speed_scale = 0.75
+
+[node name="explosionArea" type="Area2D" parent="Sprite2D/AnimationPlayer"]
+position = Vector2(25, 24)
+scale = Vector2(0.1, 0.1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/AnimationPlayer/explosionArea"]
+position = Vector2(10, -60)
+shape = SubResource("CircleShape2D_m5ax8")
+disabled = true
+
+[node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
+visible = false
+position = Vector2(224, 63)
+shadow_enabled = true
+
+[connection signal="area_entered" from="Sprite2D/playerHitBox" to="Sprite2D" method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Sprite2D/playerHitBox" to="Sprite2D/playerHitBox/CollisionShape2D" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Sprite2D/playerHitBox" to="Sprite2D" method="_on_player_hit_box_area_exited"]
+[connection signal="timeout" from="Sprite2D/Timer" to="Sprite2D" method="_on_timer_timeout"]
+[connection signal="timeout" from="Sprite2D/death_timer" to="Sprite2D" method="_on_death_delay_timeout"]

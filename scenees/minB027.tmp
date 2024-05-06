@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://dtfmj5o2ce2wn"]
+
+[ext_resource type="Texture2D" uid="uid://cl7fw72ebtn45" path="res://assets/green-circle-md.png" id="1_ask4f"]
+[ext_resource type="Script" path="res://script/mine.gd" id="1_f077w"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_o140u"]
+radius = 150.333
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vhitt"]
+radius = 2740.16
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_urci6"]
+radius = 6.90846
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_38lyp"]
+radius = 12.0416
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ihyp8"]
+radius = 10.0499
+
+[node name="Mine" type="Node2D"]
+script = ExtResource("1_f077w")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+texture = ExtResource("1_ask4f")
+
+[node name="Area2D" type="Area2D" parent="Sprite2D" groups=["mine"]]
+visible = false
+scale = Vector2(1.47, 1.47)
+
+[node name="explosionRadius" type="CollisionShape2D" parent="Sprite2D/Area2D"]
+shape = SubResource("CircleShape2D_o140u")
+
+[node name="attractionArea" type="Area2D" parent="Sprite2D" groups=["explosion"]]
+visible = false
+
+[node name="attractionRadius" type="CollisionShape2D" parent="Sprite2D/attractionArea"]
+shape = SubResource("CircleShape2D_vhitt")
+
+[node name="smallExplosion" type="Area2D" parent="Sprite2D" groups=["explosion"]]
+
+[node name="explosion1" type="CollisionShape2D" parent="Sprite2D/smallExplosion"]
+scale = Vector2(2.895, 2.895)
+shape = SubResource("CircleShape2D_urci6")
+
+[node name="wideExplosion" type="Area2D" parent="Sprite2D" groups=["explosion"]]
+scale = Vector2(10, 10)
+
+[node name="explosion3" type="CollisionShape2D" parent="Sprite2D/wideExplosion"]
+shape = SubResource("CircleShape2D_38lyp")
+
+[node name="mediumExplosion" type="Area2D" parent="Sprite2D" groups=["explosion"]]
+scale = Vector2(10, 10)
+
+[node name="explosion2" type="CollisionShape2D" parent="Sprite2D/mediumExplosion"]
+shape = SubResource("CircleShape2D_ihyp8")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 5.0
+one_shot = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+
+[node name="despawTimer" type="Timer" parent="."]
+one_shot = true
+
+[connection signal="area_entered" from="Sprite2D/Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="Sprite2D/attractionArea" to="." method="_on_area_2d_2_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="despawTimer" to="." method="_on_despaw_timer_timeout"]
