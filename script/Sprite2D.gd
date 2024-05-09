@@ -48,7 +48,11 @@ func _process(delta):
 		rotation_direction -= 1
 	
 	# Rotate the sprite
-	rotate(rotation_speed * rotation_direction * delta)
+	if rotation_speed != null and rotation_direction != null and delta != null:
+		rotate(rotation_speed * rotation_direction * delta)
+	else:
+	# Handle the case where one of the variables is nil
+		pass
 	
 	# Calculate movement direction based on rotation
 	var direction = Vector2(0, -1).rotated(rotation)
