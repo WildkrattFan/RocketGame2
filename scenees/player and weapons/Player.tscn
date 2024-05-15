@@ -377,6 +377,12 @@ position = Vector2(10, -60)
 shape = SubResource("CircleShape2D_m5ax8")
 disabled = true
 
+[node name="machine_gun_timer" type="Timer" parent="player"]
+wait_time = 0.05
+
+[node name="machine_gun_timer2" type="Timer" parent="player"]
+wait_time = 0.05
+
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
 position = Vector2(224, 63)
@@ -387,3 +393,5 @@ shadow_enabled = true
 [connection signal="area_exited" from="player/playerHitBox" to="player" method="_on_player_hit_box_area_exited"]
 [connection signal="timeout" from="player/Timer" to="player" method="_on_timer_timeout"]
 [connection signal="timeout" from="player/death_timer" to="player" method="_on_death_delay_timeout"]
+[connection signal="timeout" from="player/machine_gun_timer" to="player" method="_on_machine_gun_timer_timeout"]
+[connection signal="timeout" from="player/machine_gun_timer2" to="player" method="_on_machine_gun_timer_timeout"]

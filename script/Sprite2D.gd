@@ -13,10 +13,12 @@ var blackHole
 var blackHoleSuction = 1500000
 var isExploding = false
 
-var ammo_Type_list = ["Heat Missile", "Assult Missile","Nuke"]
-var ammo_link = [preload("res://scenees/heatMissile.tscn"),preload("res://scenees/assultMissile.tscn"),preload("res://scenees/nuke.tscn")]
-var max_amount_per_ammo = [3,5,1]
+var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke"]
+var ammo_link = [preload("res://scenees/player and weapons/heatMissile.tscn"),preload("res://scenees/player and weapons/bullet.tscn"),preload("res://scenees/player and weapons/nuke.tscn")]
+var max_amount_per_ammo = [3,40,1]
 
+var machine_gun_wait_time = .1
+var can_shoot = true
 
 
 var _stateMachine
@@ -90,9 +92,18 @@ func _process(delta):
 	
 	
 		# Shooting logic
+	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun":
+		if can_shoot:
+			shoot()
+			ammo = ammo - 1
+			can_shoot = false
+			$machine_gun_timer.start()
+		
 	if Input.is_action_just_pressed("shoot") and ammo > 0:
 		shoot()
 		ammo = ammo - 1
+		
+
 	
 	if Input.is_action_just_pressed("reload") and ammo < max_ammo and $Timer.time_left <= 0:
 		start_reload()
@@ -109,8 +120,11 @@ func _process(delta):
 		
 	
 func shoot():
+	var random_variance = 0
 	# Calculate the spawn position of the projectile
-	var spawn_position = position + Vector2(64, 0).rotated(rotation)
+	if current_ammo == "Machine Gun":
+		random_variance =randf_range(-10,10)
+	var spawn_position = position + Vector2(random_variance, -64).rotated(rotation)
 	
 		# Instantiate the projectile scene
 	var new_projectile = projectile_scene.instantiate()
@@ -160,26 +174,31 @@ func _on_area_2d_area_entered(area):
 	if area.name == "Obstical":
 		health -= 10
 		death()
+		
 	elif area.name == "pearcing_missile":
 		health -=10
 		death()
+		
 	elif area.name == "missile":
 		health -= 3
 		death()
-	if area.name == "smallExplosion":
-		health -= 10
+		
+	elif area.name == "nuclear_missile_area":
+		health -= 1
 		death()
-	if area.name == "mediumExplosion":
-		health -=5
-		var direction = (global_position - area.global_position).normalized()
-			# Apply a force to simulate the blast effect
-		velocity = direction * 100
+		
+	if area.name == "bullet_area":
+		health -= 1
 		death()
+		
+		
 	if area.is_in_group("blackHole"):
 		blackHole = area
+		
 	if area.name == "blackHoleCenter":
 		health -= 100
 		death()
+		
 	if area.name == "mediumExplosionArea":
 		var distance_to_explosion = global_position.distance_to(area.global_position)
 		var damage = calculate_damage(distance_to_explosion)
@@ -232,7 +251,11 @@ func switchAmmo():
 		current_ammo_index += 1
 		
 	projectile_scene = ammo_link[current_ammo_index]
-	var current_ammo = ammo_Type_list[current_ammo_index]
+	current_ammo = ammo_Type_list[current_ammo_index]
 	max_ammo = max_amount_per_ammo[current_ammo_index]
 	ammo = max_ammo
 	
+
+
+func _on_machine_gun_timer_timeout():
+	can_shoot = true

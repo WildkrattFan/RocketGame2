@@ -1,27 +1,27 @@
-[gd_scene load_steps=5 format=3 uid="uid://tyjoqgwevkhl"]
+[gd_scene load_steps=5 format=3 uid="uid://bkw1ancve754p"]
 
-[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_08nnm"]
-[ext_resource type="Texture2D" uid="uid://30pj018r31od" path="res://assets/nuclearMissile.png" id="2_jq5qq"]
-[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_8cb1w"]
+[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_3kch5"]
+[ext_resource type="Texture2D" uid="uid://cj07nasi6jni" path="res://assets/image (1).png" id="2_ifcuh"]
+[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_3qjfx"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
-radius = 29.0548
-height = 148.842
+radius = 148.842
+height = 619.837
 
-[node name="nuke" type="Node2D" groups=["shotBy"]]
-scale = Vector2(2, 2)
-script = ExtResource("1_08nnm")
+[node name="AssultMissile" type="Node2D" groups=["shotBy"]]
+script = ExtResource("1_3kch5")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.103253, 0.0940596)
-texture = ExtResource("2_jq5qq")
-script = ExtResource("3_8cb1w")
+texture = ExtResource("2_ifcuh")
+script = ExtResource("3_3qjfx")
 
 [node name="missile" type="Area2D" parent="Sprite2D" groups=["missile"]]
 visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/missile"]
-position = Vector2(-9.68495, -10.6316)
+visible = false
+rotation = 1.5708
 shape = SubResource("CapsuleShape2D_8ugvu")
 
 [node name="Timer" type="Timer" parent="."]

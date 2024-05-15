@@ -51,14 +51,6 @@ func _on_timer_timeout():
 	explosion()
 
 
-func _on_tracking_area_area_entered(area):
-	if area.is_in_group("player"):
-		player = area
-		
-func _on_tracking_area_area_exited(area):
-	if area.is_in_group("player"):
-		player = null
-
 
 func _on_heat_seaking_missile_area_entered(area):
 	if area.is_in_group("player"):
@@ -71,6 +63,15 @@ func _on_heat_seaking_missile_area_entered(area):
 		blackHole = area
 	if area.name == "blackHoleCenter":
 		explosion()
+	if area.name == "mediumExplosionArea":
+		explosion()
 
 
 
+
+
+
+
+
+func _on_nuclear_missile_area_area_entered(area):
+	queue_free()

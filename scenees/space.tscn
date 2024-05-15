@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bakp3u5xwdbl0"]
 
-[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/Player.tscn" id="1_hdkg0"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_hdkg0"]
 [ext_resource type="PackedScene" uid="uid://b08hr8ua5of7h" path="res://scenees/asteroid.tscn" id="3_20ksf"]
 
 [node name="Space" type="Node2D"]
