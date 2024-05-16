@@ -53,18 +53,9 @@ func _on_timer_timeout():
 
 
 
-func _on_heat_seaking_missile_area_entered(area):
-	if area.is_in_group("player"):
-		explosion()
-	if area.is_in_group("mine"):
-		explosion()
-	if area.is_in_group("missile"):
-		explosion()
-	if area.is_in_group("blackHole"):
-		blackHole = area
-	if area.name == "blackHoleCenter":
-		explosion()
-	if area.name == "mediumExplosionArea":
-		explosion()
 
 
+
+
+func _on_nuclear_missile_area_area_entered(area):
+	queue_free()

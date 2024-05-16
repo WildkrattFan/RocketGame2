@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://2y5jb2d64gyr"
-path="res://.godot/imported/29791-3-circle-clipart_800x800.png-0e147712c5e8aba0d92aa0718afc41c0.ctex"
+uid="uid://ddqpboxxiymgk"
+path="res://.godot/imported/heatSeakingMissile-Sheet.png-1c3aee5a0984ac43423ce57c38b16228.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/29791-3-circle-clipart_800x800.png"
-dest_files=["res://.godot/imported/29791-3-circle-clipart_800x800.png-0e147712c5e8aba0d92aa0718afc41c0.ctex"]
+source_file="res://assets/heatSeakingMissile-Sheet.png"
+dest_files=["res://.godot/imported/heatSeakingMissile-Sheet.png-1c3aee5a0984ac43423ce57c38b16228.ctex"]
 
 [params]
 

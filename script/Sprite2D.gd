@@ -44,6 +44,10 @@ func _ready():
 func _process(delta):
 	# Check keyboard input for rotation
 	var rotation_direction = 0
+	
+	
+	
+	
 	if Input.is_action_pressed("ui_right"):
 		rotation_direction += 1
 	if Input.is_action_pressed("ui_left"):

@@ -1,37 +1,184 @@
-[gd_scene load_steps=6 format=3 uid="uid://gjjfywwhcjoh"]
+[gd_scene load_steps=22 format=3 uid="uid://gjjfywwhcjoh"]
 
-[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_6y6fq"]
-[ext_resource type="Texture2D" uid="uid://cj07nasi6jni" path="res://assets/image (1).png" id="2_phga6"]
+[ext_resource type="Script" path="res://scenees/player and weapons/heatMissile.gd" id="1_hxh77"]
+[ext_resource type="Texture2D" uid="uid://ddqpboxxiymgk" path="res://assets/heatSeakingMissile-Sheet.png" id="2_85ip5"]
 [ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_1wd3c"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
-radius = 148.842
-height = 619.837
+radius = 67.7946
+height = 276.421
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
 size = Vector2(3477.21, 4156.94)
 
+[sub_resource type="Animation" id="Animation_rem47"]
+resource_name = "engineStart"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(0, 0), Vector2i(1, 0), Vector2i(2, 0), Vector2i(3, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_2mpef"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector2i(0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_u1btu"]
+resource_name = "engineStop"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(2, 0), Vector2i(1, 0), Vector2i(0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_t4oxt"]
+resource_name = "flying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame_coords")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [Vector2i(3, 0), Vector2i(4, 0), Vector2i(5, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_ihbqb"]
+resource_name = "engineOff"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_0vvqn"]
+_data = {
+"RESET": SubResource("Animation_2mpef"),
+"engineOff": SubResource("Animation_ihbqb"),
+"engineStart": SubResource("Animation_rem47"),
+"engineStop": SubResource("Animation_u1btu"),
+"flying": SubResource("Animation_t4oxt")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3e05x"]
+animation = &"engineOff"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ssbv4"]
+animation = &"engineStart"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hs30y"]
+animation = &"engineStop"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kduh5"]
+animation = &"flying"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_dhdka"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ajee5"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ldc1m"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v6jfn"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_q0yoy"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_25xpr"]
+states/End/position = Vector2(1111, 112)
+states/engineOff/node = SubResource("AnimationNodeAnimation_3e05x")
+states/engineOff/position = Vector2(298, 112)
+states/engineStart/node = SubResource("AnimationNodeAnimation_ssbv4")
+states/engineStart/position = Vector2(430, 43)
+states/engineStop/node = SubResource("AnimationNodeAnimation_hs30y")
+states/engineStop/position = Vector2(690, 112)
+states/flying/node = SubResource("AnimationNodeAnimation_kduh5")
+states/flying/position = Vector2(476, 112)
+transitions = ["flying", "engineStop", SubResource("AnimationNodeStateMachineTransition_dhdka"), "engineStart", "flying", SubResource("AnimationNodeStateMachineTransition_ajee5"), "Start", "engineOff", SubResource("AnimationNodeStateMachineTransition_ldc1m"), "engineOff", "engineStart", SubResource("AnimationNodeStateMachineTransition_v6jfn"), "engineStop", "End", SubResource("AnimationNodeStateMachineTransition_q0yoy")]
+
 [node name="heatMissile" type="Node2D" groups=["shotBy"]]
-script = ExtResource("1_6y6fq")
+script = ExtResource("1_hxh77")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.103253, 0.0940596)
-texture = ExtResource("2_phga6")
+texture = ExtResource("2_85ip5")
+hframes = 7
 script = ExtResource("3_1wd3c")
 
 [node name="heatSeakingMissile" type="Area2D" parent="Sprite2D" groups=["missile"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/heatSeakingMissile"]
-rotation = 1.5708
 shape = SubResource("CapsuleShape2D_8ugvu")
 
 [node name="trackingArea" type="Area2D" parent="Sprite2D"]
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/trackingArea"]
-position = Vector2(1728.61, -143.526)
-scale = Vector2(0.999999, 1)
+position = Vector2(0, -2136.94)
 shape = SubResource("RectangleShape2D_llflb")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+"": SubResource("AnimationLibrary_0vvqn")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+tree_root = SubResource("AnimationNodeStateMachine_25xpr")
+anim_player = NodePath("../AnimationPlayer")
 
 [node name="Timer" type="Timer" parent="."]
 

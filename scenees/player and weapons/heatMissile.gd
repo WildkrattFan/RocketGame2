@@ -5,9 +5,9 @@ var velocity = Vector2.ZERO
 var time_to_explode = 5.0
 var blackHole
 var blackHoleSuction = 1500000
-var rotation_speed = 1
+var rotation_speed = 100
 var player
-@export var tracking_speed = 500
+@export var tracking_speed = 10
 
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 
@@ -31,6 +31,19 @@ func _process(delta):
 		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 		
 		position += suction_direction * suction_strength * delta
+		
+	if player:
+# Calculate the direction towards the player
+		var direction_to_player = (player.global_position - global_position).normalized()
+		# Calculate the angle to rotate towards the player
+		var goal_rotation = direction_to_player.angle() - rotation
+		rotation = lerp_angle(rotation, goal_rotation,delta)
+		# Calculate the velocity to move towards the player
+		velocity = direction_to_player * tracking_speed
+		_stateMachine.travel("flying")
+	else:
+		rotation = rotation
+		_stateMachine.travel("engineOff")
 		
 
 func set_velocity(new_velocity):
@@ -68,3 +81,14 @@ func _on_heat_seaking_missile_area_entered(area):
 		explosion()
 
 
+
+
+func _on_tracking_area_area_entered(area):
+	if area.name == "playerHitBox":
+		player = area
+		print("player!!")
+
+
+func _on_tracking_area_area_exited(area):
+	if area.name == "playerHitBox":
+		player = null
