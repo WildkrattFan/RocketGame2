@@ -5,9 +5,9 @@ var velocity = Vector2.ZERO
 var time_to_explode = 5.0
 var blackHole
 var blackHoleSuction = 1500000
-var rotation_speed = 100
+var rotation_speed = 1000
 var player
-@export var tracking_speed = 10
+@export var tracking_speed = 7000
 
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 
@@ -36,7 +36,7 @@ func _process(delta):
 # Calculate the direction towards the player
 		var direction_to_player = (player.global_position - global_position).normalized()
 		# Calculate the angle to rotate towards the player
-		var goal_rotation = direction_to_player.angle() - rotation
+		var goal_rotation = direction_to_player.angle() * 180 / PI
 		rotation = lerp_angle(rotation, goal_rotation,delta)
 		# Calculate the velocity to move towards the player
 		velocity = direction_to_player * tracking_speed

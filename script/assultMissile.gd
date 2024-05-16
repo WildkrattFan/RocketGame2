@@ -66,5 +66,7 @@ func _on_heat_seaking_missile_area_entered(area):
 		explosion()
 	if area.name == "mediumExplosionArea":
 		explosion()
+	if area.name == "bullet_area":
+		explosion()
 
 
