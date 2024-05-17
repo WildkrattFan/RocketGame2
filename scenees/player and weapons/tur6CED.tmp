@@ -1,0 +1,161 @@
+[gd_scene load_steps=19 format=3 uid="uid://btdoppmsv78tv"]
+
+[ext_resource type="Texture2D" uid="uid://betw0tvg2amcl" path="res://assets/missileTurret-Sheet.png" id="1_k4u0e"]
+[ext_resource type="Script" path="res://scenees/player and weapons/turret.gd" id="1_m3e43"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kcuw8"]
+radius = 350.051
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_c7l16"]
+radius = 3428.58
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_00svk"]
+animation = &"hasMissile"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_riifc"]
+animation = &"launchMissile"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3q24c"]
+animation = &"noMissile"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jgtek"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_hi01h"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_7vyl4"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3phii"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_j3u6s"]
+states/hasMissile/node = SubResource("AnimationNodeAnimation_00svk")
+states/hasMissile/position = Vector2(346, 54)
+states/launchMissile/node = SubResource("AnimationNodeAnimation_riifc")
+states/launchMissile/position = Vector2(453, 145)
+states/noMissile/node = SubResource("AnimationNodeAnimation_3q24c")
+states/noMissile/position = Vector2(663, 116)
+transitions = ["Start", "hasMissile", SubResource("AnimationNodeStateMachineTransition_jgtek"), "hasMissile", "launchMissile", SubResource("AnimationNodeStateMachineTransition_hi01h"), "launchMissile", "noMissile", SubResource("AnimationNodeStateMachineTransition_7vyl4"), "noMissile", "End", SubResource("AnimationNodeStateMachineTransition_3phii")]
+
+[sub_resource type="Animation" id="Animation_s5avb"]
+resource_name = "launchMissile"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_efkk8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_1xahl"]
+resource_name = "hasMissile"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_omrif"]
+resource_name = "noMissile"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.1),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_yamt3"]
+_data = {
+"RESET": SubResource("Animation_efkk8"),
+"hasMissile": SubResource("Animation_1xahl"),
+"launchMissile": SubResource("Animation_s5avb"),
+"noMissile": SubResource("Animation_omrif")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u5n1d"]
+size = Vector2(285, 1437)
+
+[node name="Turret" type="Node2D"]
+script = ExtResource("1_m3e43")
+rotation_speed = null
+missile_spawn_offset = null
+reloadWaitTime = null
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(0.625, 0.625)
+texture = ExtResource("1_k4u0e")
+hframes = 4
+
+[node name="turretHitBox" type="Area2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(0.247219, 0.247219)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/turretHitBox"]
+position = Vector2(15, -97)
+shape = SubResource("CircleShape2D_kcuw8")
+
+[node name="turretScanRadius" type="Area2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(0.247219, 0.247219)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/turretScanRadius"]
+position = Vector2(6, -36)
+shape = SubResource("CircleShape2D_c7l16")
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_j3u6s")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_yamt3")
+}
+
+[node name="firingArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="firingArea"]
+position = Vector2(-5.5, -708.5)
+shape = SubResource("RectangleShape2D_u5n1d")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+
+[connection signal="area_entered" from="Sprite2D/turretHitBox" to="." method="_on_turret_hit_box_area_entered"]
+[connection signal="area_entered" from="Sprite2D/turretScanRadius" to="." method="_on_turret_scan_radius_area_entered"]
+[connection signal="area_entered" from="firingArea" to="." method="_on_firing_area_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

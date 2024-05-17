@@ -20,30 +20,30 @@ func _ready():
 
 func _process(delta):
 	# Move the projectile based on its velocity
-	position += velocity/5 * delta
+	position += velocity * delta
 	
 	if blackHole:
 		var suction_direction = (blackHole.global_position - global_position).normalized()
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var suction_strength = blackHoleSuction / distance_to_black_hole
 			# Adjust the rotation towards the black hole
-		var target_rotation = (position/delta).angle()
+		var target_rotation = suction_direction.angle()
 		rotation = lerp_angle(rotation, target_rotation, rotation_speed * delta)
 		
 		position += suction_direction * suction_strength * delta
 		
 	if player:
-# Calculate the direction towards the player
+		# Calculate the direction towards the player
 		var direction_to_player = (player.global_position - global_position).normalized()
-		# Calculate the angle to rotate towards the player
-		var goal_rotation = direction_to_player.angle() * 180 / PI
-		rotation = lerp_angle(rotation, goal_rotation,delta)
 		# Calculate the velocity to move towards the player
-		velocity = direction_to_player * tracking_speed
+		velocity = direction_to_player * speed
+		# Calculate the angle to rotate towards the player
+		var target_rotation = velocity.angle()
+		rotation = lerp_angle(rotation, target_rotation, tracking_speed * delta)
 		_stateMachine.travel("flying")
 	else:
-		rotation = rotation
 		_stateMachine.travel("engineOff")
+
 		
 
 func set_velocity(new_velocity):
@@ -57,36 +57,41 @@ func explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position
 	get_parent().add_child(explosion)
-	queue_free()
+	call_deferred("queue_free")
 	
 
 
 func _on_timer_timeout():
-	explosion()
+	call_deferred("explosion")
 
 
 
 func _on_heat_seaking_missile_area_entered(area):
 	if area.is_in_group("player"):
-		explosion()
+		call_deferred("explosion")
 	if area.is_in_group("mine"):
-		explosion()
+		call_deferred("explosion")
 	if area.is_in_group("missile"):
-		explosion()
+		call_deferred("explosion")
 	if area.is_in_group("blackHole"):
 		blackHole = area
 	if area.name == "blackHoleCenter":
-		explosion()
+		call_deferred("explosion")
 	if area.name == "mediumExplosionArea":
-		explosion()
+		call_deferred("explosion")
+	if area.name == "turretHitBox":
+		call_deferred("explosion")
 
 
 
 
 func _on_tracking_area_area_entered(area):
-	if area.name == "playerHitBox":
+	#if area.name == "playerHitBox":
+		#print("tracking player")
+		#player = area
+	if area.name == "turretHitBox":
+		print("tracking turret")
 		player = area
-		print("player!!")
 
 
 func _on_tracking_area_area_exited(area):
