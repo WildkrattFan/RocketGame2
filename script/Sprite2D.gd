@@ -32,10 +32,10 @@ var ammo = max_ammo
 
 func _ready():
 	$Timer.set_wait_time(reload_time)
-	$TextureProgressBar.visible = false
 	_stateMachine = $AnimationTree.get("parameters/playback")
-	
-	
+	$CanvasLayer/ammoTypeLabel.text = "Ammo Type: " + current_ammo
+	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
+	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 	health = MAX_HEALTH
 	
 	# Start a timer to replenish ammo after a certain duration
@@ -48,9 +48,9 @@ func _process(delta):
 	
 	
 	
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		rotation_direction += 1
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		rotation_direction -= 1
 	
 	# Rotate the sprite
@@ -96,31 +96,41 @@ func _process(delta):
 	
 	
 		# Shooting logic
-	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun":
+	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0  and !isExploding:
 		if can_shoot:
 			shoot()
 			ammo = ammo - 1
+			$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
+			$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 			can_shoot = false
 			$machine_gun_timer.start()
 		
-	if Input.is_action_just_pressed("shoot") and ammo > 0:
+	if Input.is_action_just_pressed("shoot") and ammo > 0 and $Timer.time_left <= 0 and !isExploding:
 		shoot()
 		ammo = ammo - 1
+		$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
+		$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
+		
+	if ammo <= 0:
+		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(224, 27, 0)) 
+	else:
+		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(0, 154, 39)) 
 		
 
 	
-	if Input.is_action_just_pressed("reload") and ammo < max_ammo and $Timer.time_left <= 0:
+	if Input.is_action_just_pressed("reload") and ammo < max_ammo and $Timer.time_left <= 0  and !isExploding:
 		start_reload()
 		
 		
-	if Input.is_action_just_pressed("switchAmmo") and ammo == max_ammo:
+	if Input.is_action_just_pressed("switchAmmo") and ammo == max_ammo  and !isExploding:
 		switchAmmo()
+		$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 		
 		# Update the reload progress bar if reloading
 	if $Timer.time_left > 0:
 		
 		#3 / 3-2-1-0 
-		$TextureProgressBar.value = (((reload_time - $Timer.time_left) / reload_time ) * 100)
+		$CanvasLayer/TextureProgressBar.value = (((reload_time - $Timer.time_left) / reload_time ) * 100)
 		
 	
 func shoot():
@@ -129,7 +139,6 @@ func shoot():
 	if current_ammo == "Machine Gun":
 		random_variance =randf_range(-10,10)
 	var spawn_position = position + Vector2(random_variance, -64).rotated(rotation)
-	
 		# Instantiate the projectile scene
 	var new_projectile = projectile_scene.instantiate()
 	
@@ -152,25 +161,33 @@ func start_reload():
 		# Start reloading
 		remaining_reload_time = reload_time
 		$Timer.start()
+		$CanvasLayer/ammoTypeLabel.text = "Reloading..."
 
 		# Show the reload progress bar
-		$TextureProgressBar.visible = true
+		$CanvasLayer/ammoRemainingLabel.text = str(0) + "/" + str(max_ammo)
 
 func _on_timer_timeout():
 	# Stop reloading when timer times out
 	remaining_reload_time = 0
 	$Timer.set_wait_time(reload_time)
 	$Timer.stop()
-
-	# Hide the reload progress bar
-	$TextureProgressBar.visible = false
+	$CanvasLayer/ammoTypeLabel.text = "Ammo: " + current_ammo
 
 	# Refill ammo
 	ammo = max_ammo
+	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 
 func setVelocity(newVelocity):
 	velocity = newVelocity
 
+func calculate_damage(distance):
+	var explosion_radius = 490.0
+	var max_damage = 10
+	var min_damage = 1
+	var damage_range = max_damage - min_damage
+	var normalized_distance = clamp((explosion_radius - distance) / explosion_radius, 0.0, 10.0)
+	var damage = int(min_damage + normalized_distance * damage_range)
+	return damage
 
 
 # Called when another area enters this area.
@@ -210,6 +227,7 @@ func _on_area_2d_area_entered(area):
 		var direction = (global_position - area.global_position).normalized()
 		var explosion_strength = 5000 / distance_to_explosion
 		velocity = direction *  explosion_strength # Apply force to simulate blast effect
+		print(damage)
 		death()
 		
 		
@@ -226,19 +244,7 @@ func _on_player_hit_box_area_exited(area):
 	if area.is_in_group("blackHole"):
 		blackHole = null
 		
-func calculate_damage(distance):
-	# Define the radius of the explosion
-	var explosion_radius = 490.0  # Adjust this according to your needs
-	
-	# Calculate the damage based on distance from explosion
-	var max_damage = 10
-	var min_damage = 1
-	var damage_range = max_damage - min_damage
-	var normalized_distance = clamp((explosion_radius - distance) / explosion_radius, 0.0, 10.0)
-	var damage = int(min_damage + normalized_distance * damage_range)
 
-	
-	return damage
 
 
 
@@ -258,6 +264,7 @@ func switchAmmo():
 	current_ammo = ammo_Type_list[current_ammo_index]
 	max_ammo = max_amount_per_ammo[current_ammo_index]
 	ammo = max_ammo
+	$CanvasLayer/ammoTypeLabel.text = "Ammo: " + current_ammo
 	
 
 

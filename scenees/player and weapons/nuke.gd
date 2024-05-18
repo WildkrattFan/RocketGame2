@@ -16,7 +16,6 @@ var _stateMachine
 func _ready():
 	$Timer.set_wait_time(time_to_explode)
 	$Timer.start()
-	_stateMachine = $Sprite2D/AnimationTree.get("parameters/playback")
 
 func _process(delta):
 	# Move the projectile based on its velocity
@@ -43,6 +42,7 @@ func explosion():
 	var spawn_position = position + Vector2(64, 0).rotated(rotation)
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position
+	explosion.scale = Vector2(10,10)
 	get_parent().add_child(explosion)
 	queue_free()
 	
