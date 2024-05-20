@@ -29,6 +29,8 @@ var current_ammo = ammo_Type_list[current_ammo_index]
 var max_ammo = max_amount_per_ammo[current_ammo_index]
 var ammo = max_ammo
 
+var score = 0
+
 
 func _ready():
 	$Timer.set_wait_time(reload_time)
@@ -269,3 +271,7 @@ func switchAmmo():
 
 func _on_machine_gun_timer_timeout():
 	can_shoot = true
+
+func add_score(num):
+	score += num
+	print(score)

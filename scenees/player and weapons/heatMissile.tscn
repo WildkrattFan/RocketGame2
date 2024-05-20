@@ -162,12 +162,14 @@ hframes = 7
 script = ExtResource("3_1wd3c")
 
 [node name="heatSeakingMissile" type="Area2D" parent="Sprite2D" groups=["missile"]]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/heatSeakingMissile"]
 position = Vector2(0, -10.6316)
 shape = SubResource("CapsuleShape2D_8ugvu")
 
 [node name="trackingArea" type="Area2D" parent="Sprite2D"]
+visible = false
 position = Vector2(0, 53.1578)
 monitorable = false
 

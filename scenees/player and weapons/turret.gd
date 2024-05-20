@@ -15,6 +15,7 @@ var explosion = preload("res://scenees/mediumExplosion.tscn")
 
 var _stateMachine
 var playerInRange = false
+var killedBy
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -47,10 +48,12 @@ func _on_turret_scan_radius_area_entered(area):
 
 func _on_turret_hit_box_area_entered(area):
 	if area.is_in_group("missile") and area.name != "nuclear_missile_area":
+		killedBy = area.get_parent()
 		call_deferred("explode")  # Ensure explode is called deferred
 	if area.name == "bullet_area":
 		health -= 1
 		if health <= 0:
+			killedBy = area.get_parent()
 			call_deferred("explode")
 
 func fire_heat_seeking_missile():
@@ -83,6 +86,10 @@ func fire_heat_seeking_missile():
 		$Timer.start()
 
 func explode():
+	print(killedBy)
+	if killedBy:
+		if killedBy.has_method("add_score"):
+			killedBy.add_score(2)
 	var spawn_position = position + Vector2(64, 0).rotated(rotation)
 	var explosion = explosion.instantiate()
 	explosion.position = spawn_position

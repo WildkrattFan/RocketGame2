@@ -127,6 +127,7 @@ position = Vector2(15, -97)
 shape = SubResource("CircleShape2D_kcuw8")
 
 [node name="turretScanRadius" type="Area2D" parent="Sprite2D"]
+visible = false
 scale = Vector2(0.247219, 0.247219)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/turretScanRadius"]
@@ -143,6 +144,7 @@ libraries = {
 }
 
 [node name="firingArea" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="firingArea"]
 position = Vector2(-20.5, -1039)
