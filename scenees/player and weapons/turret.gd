@@ -48,12 +48,12 @@ func _on_turret_scan_radius_area_entered(area):
 
 func _on_turret_hit_box_area_entered(area):
 	if area.is_in_group("missile") and area.name != "nuclear_missile_area":
-		killedBy = area.get_parent()
+		killedBy = area.get_parent().shotBy
 		call_deferred("explode")  # Ensure explode is called deferred
 	if area.name == "bullet_area":
 		health -= 1
 		if health <= 0:
-			killedBy = area.get_parent()
+			killedBy = area.get_parent().shotBy
 			call_deferred("explode")
 
 func fire_heat_seeking_missile():

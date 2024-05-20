@@ -4,13 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://ddqpboxxiymgk" path="res://assets/heatSeakingMissile-Sheet.png" id="2_85ip5"]
 [ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_1wd3c"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
-radius = 67.7946
-height = 276.421
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
-size = Vector2(4919.96, 16409.8)
-
 [sub_resource type="Animation" id="Animation_2mpef"]
 length = 0.001
 tracks/0/type = "value"
@@ -150,6 +143,13 @@ states/flying/node = SubResource("AnimationNodeAnimation_kduh5")
 states/flying/position = Vector2(476, 112)
 transitions = ["flying", "engineStop", SubResource("AnimationNodeStateMachineTransition_dhdka"), "engineStart", "flying", SubResource("AnimationNodeStateMachineTransition_ajee5"), "Start", "engineOff", SubResource("AnimationNodeStateMachineTransition_ldc1m"), "engineOff", "engineStart", SubResource("AnimationNodeStateMachineTransition_v6jfn"), "engineStop", "End", SubResource("AnimationNodeStateMachineTransition_q0yoy")]
 
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
+radius = 67.7946
+height = 276.421
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
+size = Vector2(4919.96, 16409.8)
+
 [node name="heatMissile" type="Node2D" groups=["shotBy"]]
 rotation = -6.28319
 script = ExtResource("1_hxh77")
@@ -160,23 +160,6 @@ scale = Vector2(0.103253, 0.0940596)
 texture = ExtResource("2_85ip5")
 hframes = 7
 script = ExtResource("3_1wd3c")
-
-[node name="heatSeakingMissile" type="Area2D" parent="Sprite2D" groups=["missile"]]
-visible = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/heatSeakingMissile"]
-position = Vector2(0, -10.6316)
-shape = SubResource("CapsuleShape2D_8ugvu")
-
-[node name="trackingArea" type="Area2D" parent="Sprite2D"]
-visible = false
-position = Vector2(0, 53.1578)
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/trackingArea"]
-position = Vector2(-145.242, -8263.37)
-scale = Vector2(0.999999, 1)
-shape = SubResource("RectangleShape2D_llflb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
@@ -189,7 +172,25 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="Timer" type="Timer" parent="."]
 
-[connection signal="area_entered" from="Sprite2D/heatSeakingMissile" to="." method="_on_heat_seaking_missile_area_entered"]
-[connection signal="area_entered" from="Sprite2D/trackingArea" to="." method="_on_tracking_area_area_entered"]
-[connection signal="area_exited" from="Sprite2D/trackingArea" to="." method="_on_tracking_area_area_exited"]
+[node name="heatSeakingMissile" type="Area2D" parent="." groups=["missile"]]
+position = Vector2(0, 14)
+scale = Vector2(0.103253, 0.0940596)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="heatSeakingMissile"]
+position = Vector2(0, -10.6316)
+shape = SubResource("CapsuleShape2D_8ugvu")
+
+[node name="trackingArea" type="Area2D" parent="."]
+position = Vector2(0, 19)
+scale = Vector2(0.103253, 0.0940596)
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="trackingArea"]
+position = Vector2(-145.242, -8263.37)
+scale = Vector2(0.999999, 1)
+shape = SubResource("RectangleShape2D_llflb")
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="heatSeakingMissile" to="." method="_on_heat_seaking_missile_area_entered"]
+[connection signal="area_entered" from="trackingArea" to="." method="_on_tracking_area_area_entered"]
+[connection signal="area_exited" from="trackingArea" to="." method="_on_tracking_area_area_exited"]

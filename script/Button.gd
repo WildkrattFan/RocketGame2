@@ -17,4 +17,4 @@ func _on_pressed():
 	# Reset any other relevant player state
 	
 	# Reload the current scene to restart the game
-	get_tree().change_scene_to_file("res://scenees/space.tscn")
+	get_tree().change_scene_to_file("res://scenees/space2.tscn")

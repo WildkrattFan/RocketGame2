@@ -17,14 +17,15 @@ scale = Vector2(0.103253, 0.0940596)
 texture = ExtResource("2_jj7by")
 script = ExtResource("3_uo7a1")
 
-[node name="nuclear_missile_area" type="Area2D" parent="Sprite2D" groups=["missile"]]
-visible = false
+[node name="Timer" type="Timer" parent="."]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/nuclear_missile_area"]
+[node name="nuclear_missile_area" type="Area2D" parent="." groups=["missile"]]
+visible = false
+scale = Vector2(0.103253, 0.0940596)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="nuclear_missile_area"]
 position = Vector2(-9.68495, -10.6316)
 shape = SubResource("CapsuleShape2D_8ugvu")
 
-[node name="Timer" type="Timer" parent="."]
-
-[connection signal="area_entered" from="Sprite2D/nuclear_missile_area" to="." method="_on_nuclear_missile_area_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="nuclear_missile_area" to="." method="_on_nuclear_missile_area_area_entered"]

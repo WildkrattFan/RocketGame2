@@ -153,6 +153,8 @@ func shoot():
 	new_projectile.set_velocity(shootDirection * shoot_speed)
 	
 		# Add the projectile to the scene
+	new_projectile.setPlayer(self)
+	print(self)
 	get_parent().add_child(new_projectile)
 	
 

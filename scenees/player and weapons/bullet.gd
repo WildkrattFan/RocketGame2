@@ -6,6 +6,7 @@ var time_to_explode = 5.0
 var blackHole
 var blackHoleSuction = 1500000
 var rotation_speed = 1
+var shotBy
 
 func _ready():
 	pass
@@ -36,3 +37,6 @@ func _on_bullet_area_area_entered(area):
 		queue_free()
 	if area.name == "turretHitBox":
 		queue_free()
+
+func setPlayer(player):
+	shotBy = player

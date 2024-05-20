@@ -8,6 +8,7 @@ var blackHoleSuction = 1500000
 var rotation_speed = 1
 var player
 @export var tracking_speed = 500
+var shotBy
 
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 
@@ -31,6 +32,8 @@ func _process(delta):
 		
 		position += suction_direction * suction_strength * delta
 		
+func setPlayer(player):
+	shotBy = player
 
 func set_velocity(new_velocity):
 	velocity = new_velocity
@@ -43,6 +46,7 @@ func explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position
 	explosion.scale = Vector2(10,10)
+	explosion.setPlayer(shotBy)
 	get_parent().add_child(explosion)
 	queue_free()
 	

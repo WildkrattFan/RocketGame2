@@ -9,6 +9,8 @@ var rotation_speed = 2
 var player
 @export var tracking_speed = 1000
 
+var shotBy
+
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 
 var _stateMachine
@@ -59,6 +61,7 @@ func explosion():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position
 	get_parent().add_child(explosion)
+	explosion.setPlayer(shotBy)
 	call_deferred("queue_free")
 	
 
@@ -99,3 +102,6 @@ func _on_tracking_area_area_entered(area):
 func _on_tracking_area_area_exited(area):
 	if area.name == "playerHitBox":
 		player = null
+		
+func setPlayer(player):
+	shotBy = player
