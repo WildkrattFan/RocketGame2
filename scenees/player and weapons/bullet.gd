@@ -30,4 +30,9 @@ func set_velocity(new_velocity):
 
 
 func _on_bullet_area_area_entered(area):
-	queue_free()
+	if area.name == "playerHitBox":
+		queue_free()
+	if area.name == "heatSeakingMissile" or area.name == "nuclear_missile_area" or area.name == "mediumExplosionArea":
+		queue_free()
+	if area.name == "turretHitBox":
+		queue_free()

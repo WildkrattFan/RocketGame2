@@ -227,7 +227,6 @@ func _on_area_2d_area_entered(area):
 		var direction = (global_position - area.global_position).normalized()
 		var explosion_strength = 5000 / distance_to_explosion
 		velocity = direction *  explosion_strength # Apply force to simulate blast effect
-		print(damage)
 		death()
 		
 		

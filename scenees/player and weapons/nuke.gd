@@ -58,4 +58,11 @@ func _on_timer_timeout():
 
 
 func _on_nuclear_missile_area_area_entered(area):
-	queue_free()
+	if area.name == "bullet_area":
+		queue_free()
+	if area.name == "playerHitBox":
+		queue_free()
+	if area.name == "heatSeakingMissile":
+		queue_free()
+	if area.name == "turretHitBox":
+		queue_free()

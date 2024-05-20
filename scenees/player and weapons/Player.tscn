@@ -390,23 +390,29 @@ text = "Ammo Type:"
 fit_content = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="player/CanvasLayer"]
-offset_left = 143.0
-offset_top = 1.0
-offset_right = 437.0
-offset_bottom = 295.0
+offset_left = 151.0
+offset_top = 2.0
+offset_right = 445.0
+offset_bottom = 296.0
 scale = Vector2(0.3, 0.06)
 rounded = true
 texture_progress = ExtResource("5_uxtts")
 tint_under = Color(0.576471, 1, 1, 1)
 
 [node name="ammoRemainingLabel" type="RichTextLabel" parent="player/CanvasLayer"]
-offset_left = 234.0
-offset_top = 1.0
-offset_right = 305.0
-offset_bottom = 41.0
+offset_left = 245.0
+offset_top = 2.0
+offset_right = 316.0
+offset_bottom = 42.0
 theme_override_colors/default_color = Color(0.878431, 0.105882, 0, 1)
 text = "3/3"
 fit_content = true
+
+[node name="healthBar" type="TextureProgressBar" parent="player/CanvasLayer"]
+offset_left = -1.0
+offset_top = 28.0
+offset_right = 272.0
+offset_bottom = 68.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false

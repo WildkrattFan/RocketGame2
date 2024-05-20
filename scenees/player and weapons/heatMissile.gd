@@ -83,10 +83,10 @@ func _on_heat_seaking_missile_area_entered(area):
 		call_deferred("explosion")
 	if area.name == "turretHitBox":
 		call_deferred("explosion")
+	if area.name == "bullet_area":
+		call_deferred("explosion")
 
 
-func set_target(area):
-	player = area
 
 func _on_tracking_area_area_entered(area):
 	if !player:
@@ -98,4 +98,4 @@ func _on_tracking_area_area_entered(area):
 
 func _on_tracking_area_area_exited(area):
 	if area.name == "playerHitBox":
-		player = false
+		player = null

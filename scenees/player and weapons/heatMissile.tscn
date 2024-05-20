@@ -9,7 +9,7 @@ radius = 67.7946
 height = 276.421
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
-size = Vector2(32444.6, 16409.8)
+size = Vector2(4919.96, 16409.8)
 
 [sub_resource type="Animation" id="Animation_2mpef"]
 length = 0.001
@@ -172,8 +172,8 @@ position = Vector2(0, 53.1578)
 monitorable = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/trackingArea"]
-position = Vector2(1772.36, -8263.37)
-scale = Vector2(1, 1)
+position = Vector2(-145.242, -8263.37)
+scale = Vector2(0.999999, 1)
 shape = SubResource("RectangleShape2D_llflb")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]

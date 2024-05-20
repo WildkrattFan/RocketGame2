@@ -5,11 +5,13 @@ extends Node2D
 @export var missile_spawn_offset: Vector2 = Vector2(0, -200)  # Offset for missile spawn point
 @export var reloadWaitTime = 3.0
 var shoot_speed = 200
+var health = 10
 
 # Declare player reference and missile spawn point
 var player = null
 var player_velocity: Vector2 = Vector2.ZERO
 var ammo = 1
+var explosion = preload("res://scenees/mediumExplosion.tscn")
 
 var _stateMachine
 var playerInRange = false
@@ -31,10 +33,9 @@ func _process(delta):
 		var direction = (predicted_position - global_position).normalized()
 		
 		# Calculate the target angle
-		var goal_rotation = direction.angle() - Vector2(0,-1).angle()
+		var goal_rotation = direction.angle() - Vector2(0, -1).angle()
 		
 		rotation = lerp_angle(rotation, goal_rotation, rotation_speed * delta)
-		
 
 func _on_turret_scan_radius_area_entered(area):
 	if area.name == "playerHitBox":
@@ -45,65 +46,62 @@ func _on_turret_scan_radius_area_entered(area):
 			player_velocity = Vector2.ZERO
 
 func _on_turret_hit_box_area_entered(area):
-	if area.is_in_group("missile"):
+	if area.is_in_group("missile") and area.name != "nuclear_missile_area":
 		call_deferred("explode")  # Ensure explode is called deferred
+	if area.name == "bullet_area":
+		health -= 1
+		if health <= 0:
+			call_deferred("explode")
 
 func fire_heat_seeking_missile():
-	if player == null:
-		return  # Ensure player is not null before firing\
-	if ammo <= 0:
-		return
-	if ammo > 0:
-		ammo -= 1
-		$Timer.start()
+	if player == null or ammo <= 0:
+		return  # Ensure player is not null and ammo is available before firing
 
+	ammo -= 1  # Decrement ammo count
 	_stateMachine.travel("launchMissile")
+	
 	# Load the missile scene
 	var missile_scene = preload("res://scenees/player and weapons/heatMissile.tscn")
 	# Instantiate the missile
 	var missile = missile_scene.instantiate()
 	
 	# Calculate the missile spawn position using the offset
-	var spawn_position = global_position + Vector2(0,-200).rotated(rotation)
+	var spawn_position = global_position + Vector2(0, -200).rotated(rotation)
 	missile.position = spawn_position
-	missile.scale = Vector2(2,2)
+	missile.scale = Vector2(2, 2)
+	
 	# Calculate the missile velocity based on the turret's rotation
 	var shoot_direction = Vector2(0, -1).rotated(rotation)
 	missile.rotation = rotation
 	missile.set_velocity(shoot_direction * shoot_speed)
-	missile.set_target(player)
+	
 	# Add the missile to the scene
 	get_parent().add_child(missile)
-	
-	
-	# Decrement ammo count
-	ammo -= 1
 	
 	# Start reload timer if out of ammo
 	if ammo <= 0:
 		$Timer.start()
 
-	
 func explode():
-	# Handle turret explosion
-	queue_free()  # Destroy the turret safely
+	var spawn_position = position + Vector2(64, 0).rotated(rotation)
+	var explosion = explosion.instantiate()
+	explosion.position = spawn_position
+	get_parent().add_child(explosion)
+	call_deferred("queue_free")
 
 func _on_firing_area_area_entered(area):
 	if area.name == "playerHitBox":
-		fire_heat_seeking_missile()
 		playerInRange = true
-
 
 func _on_timer_timeout():
 	ammo = 1
 	_stateMachine.travel("hasMissile")
 	$Timer.set_wait_time(reloadWaitTime)
 
-
 func _on_firing_area_area_exited(area):
 	if area.name == "playerHitBox":
 		playerInRange = false
 
-
 func _on_turret_scan_radius_area_exited(area):
-	player = null
+	if area.name == "playerHitBox":
+		player = null
