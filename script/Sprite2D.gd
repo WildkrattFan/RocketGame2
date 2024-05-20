@@ -13,6 +13,8 @@ var blackHole
 var blackHoleSuction = 1500000
 var isExploding = false
 
+var team = "red"
+
 var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke"]
 var ammo_link = [preload("res://scenees/player and weapons/heatMissile.tscn"),preload("res://scenees/player and weapons/bullet.tscn"),preload("res://scenees/player and weapons/nuke.tscn")]
 var max_amount_per_ammo = [3,40,1]
@@ -31,14 +33,15 @@ var ammo = max_ammo
 
 var score = 0
 
-
 func _ready():
+	$CanvasLayer/score.text = "Points: " + str(score)
 	$Timer.set_wait_time(reload_time)
 	_stateMachine = $AnimationTree.get("parameters/playback")
 	$CanvasLayer/ammoTypeLabel.text = "Ammo Type: " + current_ammo
 	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
 	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 	health = MAX_HEALTH
+	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
 	
 	# Start a timer to replenish ammo after a certain duration
 
@@ -236,6 +239,7 @@ func _on_area_2d_area_entered(area):
 		
 		
 func death():
+	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
 	if(health <= 0):
 			
 		# Implement player death logic here
@@ -276,4 +280,7 @@ func _on_machine_gun_timer_timeout():
 
 func add_score(num):
 	score += num
-	print(score)
+	$CanvasLayer/score.text = "Points: " + str(score)
+
+func set_team(New_team):
+	team = New_team

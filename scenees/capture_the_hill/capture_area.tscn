@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://camp71o4ahpar"]
+
+[ext_resource type="Texture2D" uid="uid://cl7fw72ebtn45" path="res://assets/green-circle-md.png" id="1_2evnr"]
+[ext_resource type="Script" path="res://scenees/capture_the_hill/capture_area.gd" id="1_4g7g7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_7542u"]
+radius = 152.053
+
+[node name="CaptureArea" type="Node2D"]
+script = ExtResource("1_4g7g7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_2evnr")
+
+[node name="capture_area_area" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="capture_area_area"]
+shape = SubResource("CircleShape2D_7542u")
+
+[node name="timeToCapture" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="area_entered" from="capture_area_area" to="." method="_on_capture_area_area_area_entered"]
+[connection signal="area_exited" from="capture_area_area" to="." method="_on_capture_area_area_area_exited"]
+[connection signal="timeout" from="timeToCapture" to="." method="_on_time_to_capture_timeout"]
