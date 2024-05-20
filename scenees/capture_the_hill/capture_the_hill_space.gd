@@ -10,7 +10,6 @@ var player_scene = preload("res://scenees/player and weapons/Player.tscn")
 func _ready():
 	$CanvasLayer/blueTeamProgressBar.value = 0
 	$CanvasLayer/redTeamProgressBar.value = 0
-	$CanvasLayer/blue_red.text =(str(0) + "/" + str(0))
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -19,7 +18,7 @@ func _process(delta):
 	var blueTeamScore = $CaptureArea.blueScore
 	$CanvasLayer/blueTeamProgressBar.value = (float(blueTeamScore) / float(goalScore)) * 100
 	$CanvasLayer/redTeamProgressBar.value = (float(redTeamScore) / float(goalScore)) * 100
-	$CanvasLayer/blue_red.text =(str(blueTeamScore) + "/" + str(redTeamScore))
+	$CanvasLayer/blue_red.text =  "[center]" + str(blueTeamScore) + " / " + str(redTeamScore) + "[/center]"
 
 func newPlayer():
 	if redTeamCount > blueTeamCount:

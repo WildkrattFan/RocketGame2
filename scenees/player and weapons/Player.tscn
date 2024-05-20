@@ -1,11 +1,12 @@
-[gd_scene load_steps=32 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=33 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
 [ext_resource type="Script" path="res://script/Sprite2D.gd" id="3_ilhu4"]
 [ext_resource type="Script" path="res://script/Area2D.gd" id="4_4tu5c"]
 [ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
-[ext_resource type="Texture2D" uid="uid://8bb7a0y7v2hl" path="res://assets/upheaval/....jpg" id="5_uxtts"]
-[ext_resource type="Texture2D" uid="uid://l535vesqdfm6" path="res://assets/m3a8f0ct.bmp" id="6_0gs6r"]
+[ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
+[ext_resource type="Texture2D" uid="uid://c7n0ny8cm4bxj" path="res://assets/bars/reloadBarMain.png" id="7_iq23l"]
+[ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bmmw"]
 radius = 100.0
@@ -73,7 +74,7 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/path = NodePath("..:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
@@ -85,58 +86,46 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("..:frame")
+tracks/1/path = NodePath("../explosionArea/CollisionShape2D:shape")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [SubResource("CircleShape2D_m5ax8")]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("../explosionArea/CollisionShape2D:shape")
+tracks/2/path = NodePath("../explosionArea/CollisionShape2D:scale")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [SubResource("CircleShape2D_m5ax8")]
+"update": 0,
+"values": [Vector2(1, 1)]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("../explosionArea/CollisionShape2D:scale")
+tracks/3/path = NodePath("../explosionArea/CollisionShape2D:shape:radius")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector2(1, 1)]
+"values": [100.0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("../explosionArea/CollisionShape2D:shape:radius")
+tracks/4/path = NodePath("../explosionArea/CollisionShape2D:disabled")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [100.0]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("../explosionArea/CollisionShape2D:disabled")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -149,22 +138,10 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/path = NodePath("..:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -176,22 +153,10 @@ resource_name = "engineStart"
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/path = NodePath("..:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 3, 4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1),
 "update": 1,
@@ -282,22 +247,10 @@ loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("../Sprite2D:frame")
+tracks/0/path = NodePath("..:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [4]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("..:frame")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -387,40 +340,41 @@ offset_top = -168.48
 offset_right = 229.976
 offset_bottom = -18.48
 theme_override_font_sizes/normal_font_size = 10
-text = "Ammo Type:"
+text = "Ammo:"
 fit_content = true
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="player/CanvasLayer"]
-offset_left = 151.0
-offset_top = 2.0
-offset_right = 445.0
-offset_bottom = 296.0
+offset_left = 131.0
+offset_top = -9.0
+offset_right = 771.0
+offset_bottom = 631.0
 scale = Vector2(0.3, 0.06)
 rounded = true
-texture_progress = ExtResource("5_uxtts")
+texture_under = ExtResource("5_g2a1h")
+texture_progress = ExtResource("7_iq23l")
 tint_under = Color(0.576471, 1, 1, 1)
 
 [node name="ammoRemainingLabel" type="RichTextLabel" parent="player/CanvasLayer"]
-offset_left = 245.0
-offset_top = 2.0
-offset_right = 316.0
-offset_bottom = 42.0
+offset_left = 329.0
+offset_top = -1.0
+offset_right = 400.0
+offset_bottom = 39.0
 theme_override_colors/default_color = Color(0.878431, 0.105882, 0, 1)
 text = "3/3"
 fit_content = true
 
 [node name="healthBar" type="TextureProgressBar" parent="player/CanvasLayer"]
-offset_left = -1.0
-offset_top = 28.0
-offset_right = 539.0
-offset_bottom = 388.0
-scale = Vector2(0.5, 0.07)
-texture_progress = ExtResource("6_0gs6r")
+offset_top = 9.0
+offset_right = 640.0
+offset_bottom = 649.0
+scale = Vector2(0.37, 0.075)
+texture_under = ExtResource("5_g2a1h")
+texture_progress = ExtResource("9_uvvyq")
 
 [node name="score" type="RichTextLabel" parent="player/CanvasLayer"]
-offset_top = 66.0
+offset_top = 50.0
 offset_right = 75.0
-offset_bottom = 106.0
+offset_bottom = 90.0
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false

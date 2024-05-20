@@ -6,6 +6,11 @@ var redScore = 0
 var blueInArea = 0
 var redInArea = 0
 
+# Load the textures
+var gray_texture = preload("res://scenees/capture_the_hill/captureAreaSprites/captureTheHillAreaGray.png")
+var blue_texture = preload("res://scenees/capture_the_hill/captureAreaSprites/captureTheHillAreaBlue.png")
+var red_texture = preload("res://scenees/capture_the_hill/captureAreaSprites/captureTheHillAreaRed.png")
+var purple_texture = preload("res://scenees/capture_the_hill/captureAreaSprites/captureTheHillAreaPurple.png")
 
 
 
@@ -16,8 +21,17 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print(blueScore)
-	pass
+	update_texture()
+
+func update_texture():
+	if blueInArea == 0 and redInArea == 0:
+		$Sprite2D.texture = gray_texture
+	elif blueInArea > redInArea:
+		$Sprite2D.texture = blue_texture
+	elif redInArea > blueInArea:
+		$Sprite2D.texture = red_texture
+	else:
+		$Sprite2D.texture = purple_texture
 
 
 func _on_capture_area_area_area_entered(area):

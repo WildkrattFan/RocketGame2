@@ -37,7 +37,7 @@ func _ready():
 	$CanvasLayer/score.text = "Points: " + str(score)
 	$Timer.set_wait_time(reload_time)
 	_stateMachine = $AnimationTree.get("parameters/playback")
-	$CanvasLayer/ammoTypeLabel.text = "Ammo Type: " + current_ammo
+	$CanvasLayer/ammoTypeLabel.text = "Ammo: " + current_ammo
 	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
 	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 	health = MAX_HEALTH

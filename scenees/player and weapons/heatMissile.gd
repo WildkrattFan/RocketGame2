@@ -2,7 +2,7 @@ extends Node2D
 
 @export var speed = 200  # Adjust this value as needed
 var velocity = Vector2.ZERO
-var time_to_explode = 5.0
+var time_to_explode = 1.5
 var blackHole
 var blackHoleSuction = 1500000
 var rotation_speed = 2

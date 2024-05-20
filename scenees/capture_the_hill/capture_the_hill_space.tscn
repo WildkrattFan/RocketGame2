@@ -3,9 +3,9 @@
 [ext_resource type="Script" path="res://scenees/capture_the_hill/capture_the_hill_space.gd" id="1_8bjsg"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_37ipo"]
 [ext_resource type="PackedScene" uid="uid://camp71o4ahpar" path="res://scenees/capture_the_hill/capture_area.tscn" id="2_uvtru"]
-[ext_resource type="Texture2D" uid="uid://f7xs07uylc0r" path="res://assets/9t3bs278.bmp" id="4_opcp0"]
-[ext_resource type="Texture2D" uid="uid://vt74sft7pyur" path="res://assets/l5yygqld.bmp" id="5_osp73"]
-[ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="6_lo20j"]
+[ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="4_s03ej"]
+[ext_resource type="Texture2D" uid="uid://cwwwuw7rmajvl" path="res://assets/bars/blueProgress.png" id="5_mek5s"]
+[ext_resource type="Texture2D" uid="uid://8impfjw22k17" path="res://assets/bars/redProgress.png" id="6_koikm"]
 
 [node name="CaptureTheHillSpace" type="Node2D"]
 script = ExtResource("1_8bjsg")
@@ -19,41 +19,30 @@ position = Vector2(517, 289)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="blueTeamProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 293.0
-offset_top = 9.0
-offset_right = 3985.0
-offset_bottom = 947.0
-scale = Vector2(0.185, 0.045)
-texture_progress = ExtResource("4_opcp0")
+offset_left = 1.00003
+offset_top = 512.0
+offset_right = 3693.0
+offset_bottom = 1450.0
+scale = Vector2(0.865, 0.315)
+texture_under = ExtResource("4_s03ej")
+texture_progress = ExtResource("5_mek5s")
 
 [node name="redTeamProgressBar" type="TextureProgressBar" parent="CanvasLayer"]
-offset_left = 588.0
-offset_top = 9.0
-offset_right = 2508.0
-offset_bottom = 1089.0
-scale = Vector2(0.15, 0.04)
+offset_left = 599.0
+offset_top = 512.0
+offset_right = 2519.0
+offset_bottom = 1592.0
+scale = Vector2(0.865, 0.315)
 fill_mode = 1
-texture_progress = ExtResource("5_osp73")
+texture_under = ExtResource("4_s03ej")
+texture_progress = ExtResource("6_koikm")
 
 [node name="blue_red" type="RichTextLabel" parent="CanvasLayer"]
-offset_left = 565.0
-offset_top = 47.0
-offset_right = 605.0
-offset_bottom = 87.0
+offset_left = 548.0
+offset_top = 556.0
+offset_right = 607.0
+offset_bottom = 602.0
+bbcode_enabled = true
 text = "0/0"
-
-[node name="Turret" parent="." instance=ExtResource("6_lo20j")]
-position = Vector2(75, 530)
-reloadWaitTime = 10.0
-
-[node name="Turret2" parent="." instance=ExtResource("6_lo20j")]
-position = Vector2(965, 572)
-reloadWaitTime = 10.0
-
-[node name="Turret3" parent="." instance=ExtResource("6_lo20j")]
-position = Vector2(111, 102)
-reloadWaitTime = 10.0
-
-[node name="Turret4" parent="." instance=ExtResource("6_lo20j")]
-position = Vector2(1095, 121)
-reloadWaitTime = 10.0
+fit_content = true
+scroll_active = false
