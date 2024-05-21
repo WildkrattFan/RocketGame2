@@ -1,0 +1,78 @@
+[gd_scene load_steps=5 format=3 uid="uid://b1xa61s4wsnfi"]
+
+[ext_resource type="Script" path="res://scenees/startScreen.gd" id="1_wy37u"]
+[ext_resource type="Texture2D" uid="uid://clch8r61b7v5e" path="res://assets/spaceTitleScreen.png" id="1_ydybr"]
+
+[sub_resource type="Theme" id="Theme_foq17"]
+
+[sub_resource type="Theme" id="Theme_0616k"]
+
+[node name="StartScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_wy37u")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(613, 315)
+scale = Vector2(0.215, 0.215)
+texture = ExtResource("1_ydybr")
+
+[node name="spaceGame" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 221.0
+offset_right = 1027.0
+offset_bottom = 301.0
+theme = SubResource("Theme_foq17")
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 10
+theme_override_font_sizes/normal_font_size = 100
+text = "SPACE GAME"
+
+[node name="controlsButton" type="Button" parent="."]
+layout_mode = 0
+offset_left = 434.0
+offset_top = 378.0
+offset_right = 508.0
+offset_bottom = 409.0
+text = "Controls"
+
+[node name="play" type="Button" parent="."]
+layout_mode = 0
+offset_left = 578.0
+offset_top = 378.0
+offset_right = 619.0
+offset_bottom = 409.0
+text = "Play"
+
+[node name="controlsPopup" type="Popup" parent="."]
+title = "Controls"
+initial_position = 1
+size = Vector2i(500, 305)
+theme = SubResource("Theme_0616k")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="controlsPopup"]
+offset_left = 125.255
+offset_right = 375.255
+offset_bottom = 500.0
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/outline_size = 4
+theme_override_font_sizes/normal_font_size = 50
+text = "Controls"
+fit_content = true
+
+[node name="RichTextLabel2" type="RichTextLabel" parent="controlsPopup"]
+offset_top = 78.185
+offset_right = 491.99
+offset_bottom = 306.12
+theme_override_font_sizes/normal_font_size = 40
+text = "Space: Shoot
+WASD or Arrow Keys: fly
+Shift: Switch Ammo
+R: Reload"
+
+[connection signal="button_down" from="controlsButton" to="." method="_on_controls_button_button_down"]
+[connection signal="button_down" from="play" to="." method="_on_play_button_down"]
