@@ -73,3 +73,7 @@ func get_spawn_position(team):
 		return Vector2(100, 100)  # Replace with actual blue team spawn position
 	else:
 		return Vector2(900, 100)  # Replace with actual red team spawn position
+
+
+func _on_multiplayer_spawner_spawned(node):
+	print("spawning player")

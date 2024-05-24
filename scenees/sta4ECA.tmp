@@ -84,6 +84,10 @@ offset_right = 731.0
 offset_bottom = 409.0
 text = "Host"
 
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenees/player and weapons/Player.tscn")
+spawn_path = NodePath("..")
+
 [connection signal="button_down" from="controlsButton" to="." method="_on_controls_button_button_down"]
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]

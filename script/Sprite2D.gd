@@ -34,6 +34,7 @@ var ammo = max_ammo
 var score = 0
 
 func _ready():
+	self.modulate = Color(0, 0, 1)
 	$CanvasLayer/score.text = "Points: " + str(score)
 	$Timer.set_wait_time(reload_time)
 	_stateMachine = $AnimationTree.get("parameters/playback")
@@ -47,96 +48,81 @@ func _ready():
 
 
 func _process(delta):
+	if is_multiplayer_authority():
+		handle_input(delta)
+	apply_movement(delta)
+	
+
+func handle_input(delta):
 	# Check keyboard input for rotation
 	var rotation_direction = 0
-	
-	
-	
-	
 	if Input.is_action_pressed("right"):
 		rotation_direction += 1
 	if Input.is_action_pressed("left"):
 		rotation_direction -= 1
-	
+
 	# Rotate the sprite
-	if rotation_speed != null and rotation_direction != null and delta != null:
-		rotate(rotation_speed * rotation_direction * delta)
-	else:
-	# Handle the case where one of the variables is nil
-		pass
-	
+	rotate(rotation_speed * rotation_direction * delta)
+
 	# Calculate movement direction based on rotation
 	var direction = Vector2(0, -1).rotated(rotation)
-	
+
 	# Check keyboard input for movement
 	if Input.is_action_pressed("foreward"):
 		velocity += direction * speed * delta
 		_stateMachine.travel("flying")
 	elif Input.is_action_pressed("down"):
-		velocity -= direction * speed/2 * delta
+		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")
 	else:
 		_stateMachine.travel("engineOff")
-		
+
 	if isExploding:
 		_stateMachine.travel("explosion")
-		velocity = Vector2.ZERO 
-	
-		
-	
-	
+		velocity = Vector2.ZERO
+
 	# Apply friction to slow down the player's movement
 	velocity *= 0.97
-	
-	# Move the sprite based on velocity
+
+	# Shooting logic
+	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0 and !isExploding:
+		if can_shoot:
+			shoot()
+			ammo -= 1
+			update_ammo_display()
+			can_shoot = false
+			$machine_gun_timer.start()
+
+	if Input.is_action_just_pressed("shoot") and ammo > 0 and $Timer.time_left <= 0 and !isExploding:
+		shoot()
+		ammo -= 1
+		update_ammo_display()
+
+	if ammo <= 0:
+		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(224, 27, 0))
+	else:
+		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(0, 154, 39))
+
+	if Input.is_action_just_pressed("reload") and ammo < max_ammo and $Timer.time_left <= 0 and !isExploding:
+		start_reload()
+
+	if Input.is_action_just_pressed("switchAmmo") and ammo == max_ammo and !isExploding:
+		switchAmmo()
+		update_ammo_display()
+
+	# Update the reload progress bar if reloading
+	if $Timer.time_left > 0:
+		$CanvasLayer/TextureProgressBar.value = ((reload_time - $Timer.time_left) / reload_time) * 100
+
+func apply_movement(delta):
 	position += velocity
-	
 	if blackHole:
 		var suction_direction = (blackHole.global_position - global_position).normalized()
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var collisionShape = blackHole.get_node("CollisionShape2D") # Assuming the collision shape node is named "wideBlackHoleArea"
 		var radius = collisionShape.shape.radius
-		var suction_strength = blackHoleSuction / (distance_to_black_hole - radius/ radius)
+		var suction_strength = blackHoleSuction / (distance_to_black_hole - radius / radius)
 		position += suction_direction * suction_strength * delta
-	
-	
-		# Shooting logic
-	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0  and !isExploding:
-		if can_shoot:
-			shoot()
-			ammo = ammo - 1
-			$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
-			$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
-			can_shoot = false
-			$machine_gun_timer.start()
-		
-	if Input.is_action_just_pressed("shoot") and ammo > 0 and $Timer.time_left <= 0 and !isExploding:
-		shoot()
-		ammo = ammo - 1
-		$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
-		$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
-		
-	if ammo <= 0:
-		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(224, 27, 0)) 
-	else:
-		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(0, 154, 39)) 
-		
-
-	
-	if Input.is_action_just_pressed("reload") and ammo < max_ammo and $Timer.time_left <= 0  and !isExploding:
-		start_reload()
-		
-		
-	if Input.is_action_just_pressed("switchAmmo") and ammo == max_ammo  and !isExploding:
-		switchAmmo()
-		$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
-		
-		# Update the reload progress bar if reloading
-	if $Timer.time_left > 0:
-		
-		#3 / 3-2-1-0 
-		$CanvasLayer/TextureProgressBar.value = (((reload_time - $Timer.time_left) / reload_time ) * 100)
-		
 	
 func shoot():
 	var random_variance = 0
@@ -284,3 +270,12 @@ func add_score(num):
 
 func set_team(New_team):
 	team = New_team
+	
+func _enter_tree():
+	print("entering tree")
+	print(name)
+	set_multiplayer_authority(name.to_int())
+
+func update_ammo_display():
+	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
+	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
