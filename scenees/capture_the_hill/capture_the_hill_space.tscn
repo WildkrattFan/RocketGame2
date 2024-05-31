@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://d0uooh231uisb"]
+[gd_scene load_steps=7 format=3 uid="uid://d0uooh231uisb"]
 
 [ext_resource type="Script" path="res://scenees/capture_the_hill/capture_the_hill_space.gd" id="1_8bjsg"]
 [ext_resource type="PackedScene" uid="uid://camp71o4ahpar" path="res://scenees/capture_the_hill/capture_area.tscn" id="2_uvtru"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="4_s03ej"]
 [ext_resource type="Texture2D" uid="uid://cwwwuw7rmajvl" path="res://assets/bars/blueProgress.png" id="5_mek5s"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="6_1s22s"]
 [ext_resource type="Texture2D" uid="uid://8impfjw22k17" path="res://assets/bars/redProgress.png" id="6_koikm"]
 
 [node name="CaptureTheHillSpace" type="Node2D"]
@@ -47,5 +48,7 @@ scroll_active = false
 _spawnable_scenes = PackedStringArray("res://scenees/player and weapons/Player.tscn")
 spawn_path = NodePath("..")
 spawn_limit = 100
+
+[node name="player" parent="." instance=ExtResource("6_1s22s")]
 
 [connection signal="spawned" from="captureTheHillSpawner" to="." method="_on_multiplayer_spawner_spawned"]

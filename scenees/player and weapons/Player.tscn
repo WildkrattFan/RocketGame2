@@ -292,6 +292,9 @@ properties/6/replication_mode = 1
 properties/7/path = NodePath("..:rotation")
 properties/7/spawn = true
 properties/7/replication_mode = 1
+properties/8/path = NodePath("Camera2D:position")
+properties/8/spawn = true
+properties/8/replication_mode = 1
 
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
 
