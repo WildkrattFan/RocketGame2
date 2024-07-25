@@ -33,8 +33,9 @@ var ammo = max_ammo
 
 var score = 0
 
+signal exploded
+
 func _ready():
-	self.modulate = Color(0, 0, 1)
 	$CanvasLayer/score.text = "Points: " + str(score)
 	$Timer.set_wait_time(reload_time)
 	_stateMachine = $AnimationTree.get("parameters/playback")
@@ -231,6 +232,7 @@ func death():
 		# Implement player death logic here
 		isExploding = true
 		$death_timer.start()
+		
 
 
 func _on_player_hit_box_area_exited(area):
@@ -244,7 +246,9 @@ func _on_player_hit_box_area_exited(area):
 func _on_death_delay_timeout():
 			
 		# 2. Display game over screen (if applicable)
-	get_tree().change_scene_to_file("res://scenees/GameOverScreen.tscn")
+	exploded.emit()
+	print("exploded")
+	
 	
 
 func switchAmmo():

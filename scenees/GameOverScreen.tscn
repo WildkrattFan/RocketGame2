@@ -1,7 +1,8 @@
-[gd_scene load_steps=8 format=3 uid="uid://bkuqvkhgochl8"]
+[gd_scene load_steps=9 format=3 uid="uid://bkuqvkhgochl8"]
 
 [ext_resource type="Script" path="res://script/Button.gd" id="1_0rluh"]
 [ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="1_74r7c"]
+[ext_resource type="Script" path="res://scenees/GameOverScreen.gd" id="1_pknlo"]
 [ext_resource type="Texture2D" uid="uid://tc087lxqwhcs" path="res://assets/upheaval/istockphoto-1403514917-612x612.jpg" id="3_4y372"]
 
 [sub_resource type="Theme" id="Theme_ej0xy"]
@@ -26,6 +27,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme = SubResource("Theme_ej0xy")
+script = ExtResource("1_pknlo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -73,4 +75,4 @@ text = "Mission Failed!"
 fit_content = true
 autowrap_mode = 2
 
-[connection signal="pressed" from="CanvasLayer/Sprite2D/Button" to="CanvasLayer/Sprite2D/Button" method="_on_pressed"]
+[connection signal="pressed" from="CanvasLayer/Sprite2D/Button" to="." method="_on_button_pressed"]

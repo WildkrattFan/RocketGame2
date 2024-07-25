@@ -1,5 +1,6 @@
-[gd_scene load_steps=34 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=35 format=3 uid="uid://chxgvrijiwjix"]
 
+[ext_resource type="Script" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
 [ext_resource type="Script" path="res://script/Sprite2D.gd" id="3_ilhu4"]
 [ext_resource type="Script" path="res://script/Area2D.gd" id="4_4tu5c"]
@@ -297,6 +298,7 @@ properties/8/spawn = true
 properties/8/replication_mode = 1
 
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
+script = ExtResource("1_n223q")
 
 [node name="player" type="Sprite2D" parent="."]
 position = Vector2(25, 24)
@@ -413,6 +415,7 @@ visible = false
 position = Vector2(224, 63)
 shadow_enabled = true
 
+[connection signal="exploded" from="player" to="." method="_on_player_exploded"]
 [connection signal="area_entered" from="player/playerHitBox" to="player" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="player/playerHitBox" to="player/playerHitBox/CollisionShape2D" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="player/playerHitBox" to="player" method="_on_player_hit_box_area_exited"]

@@ -1,0 +1,16 @@
+[gd_scene load_steps=4 format=3 uid="uid://b3hmt0x6urp0w"]
+
+[ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
+[ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="2_py6hg"]
+
+[node name="DefaultLevel" type="Node2D"]
+script = ExtResource("1_88a0l")
+
+[node name="player" parent="." instance=ExtResource("1_lm03g")]
+position = Vector2(92, 200)
+
+[node name="Turret" parent="." instance=ExtResource("2_py6hg")]
+position = Vector2(650, 363)
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]

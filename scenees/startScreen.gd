@@ -1,6 +1,7 @@
 extends Control
 
 var game_scene = preload("res://scenees/capture_the_hill/capture_the_hill_space.tscn")
+var demo_scene = preload("")
 @export var player_scene = preload("res://scenees/player and weapons/Player.tscn")
 var peer = ENetMultiplayerPeer.new()
 
@@ -16,16 +17,20 @@ func _on_controls_button_button_down():
 	$controlsPopup.visible = true
 
 func _on_host_pressed():
-	print("Starting server...")
-	peer.create_server(135)
-	multiplayer.multiplayer_peer = peer
-	# Load the game scene for the host
-	_load_game_scene()
+	#print("Starting server...")
+	#peer.create_server(135)
+	#multiplayer.multiplayer_peer = peer
+	## Load the game scene for the host
+	#_load_game_scene()
+	$hostPopup.visible = true
 
 func _on_play_pressed():
-	print("Attempting to create client...")
-	peer.create_client("localhost", 135)
-	multiplayer.multiplayer_peer = peer
+	
+	get_tree().change_scene_to_packed(game_scene)
+	#TODO: Implement online play!
+	#print("Attempting to create client...")
+	#peer.create_client("localhost", 135)
+	#multiplayer.multiplayer_peer = peer
 
 func _add_player(id):
 	print("Adding player with ID:", id)
