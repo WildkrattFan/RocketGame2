@@ -12,7 +12,6 @@ size = Vector2(123, 125)
 texture = ExtResource("1_y1r0y")
 
 [node name="Obstical" type="Area2D" parent="Sprite2D"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Obstical"]
 process_physics_priority = 1

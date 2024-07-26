@@ -307,7 +307,7 @@ texture = ExtResource("1_ymuer")
 hframes = 12
 script = ExtResource("3_ilhu4")
 
-[node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player"]]
+[node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
 visible = false
 script = ExtResource("4_4tu5c")
 

@@ -9,21 +9,34 @@ func _ready():
 	player = get_parent().get_node("player")
 	if player:
 		print("Player node found!")
-	pass # Replace with function body.
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	player = get_parent().get_node("player")
-	print(player.global_position)
 	if player:
-		$NavigationAgent2D.target_position  = player.global_position
+		update_raycast_target()
+		check_line_of_sight(delta)
 		
-		moveTowardsTarget(delta)
-		
-func moveTowardsTarget(delta):
-	if not $NavigationAgent2D.is_navigation_finished():
-		var next_position = $NavigationAgent2D.get_next_path_position()
-		var direction = (next_position - global_position).normalized()
-		var velocity = direction * speed * delta
-		position += velocity
+func update_raycast_target():
+	# Update the raycast direction to point towards the player
+	var direction_to_player = (player.global_position - global_position)
+	print("direction updated")
+	$RayCast2D.target_position = direction_to_player
+	$RayCast2D.force_update_transform()
+	$RayCast2D.force_raycast_update()
+	print("raycast updated to" + str(direction_to_player))
+
+func check_line_of_sight(delta):
+	# Enable the raycast and update it
+	$RayCast2D.enabled = true
+	$RayCast2D.force_raycast_update()
+	
+	if $RayCast2D.is_colliding():
+		var collider = $RayCast2D.get_collider()
+		if collider.is_in_group('player'):  # Check if the collider is the player's hitbox
+			move_towards_target(delta)
+
+
+func move_towards_target(delta):
+	if player:
+		var direction = (player.global_position - global_position).normalized()
+		position += direction * speed * delta
