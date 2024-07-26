@@ -213,6 +213,9 @@ func _on_area_2d_area_entered(area):
 	if area.name == "blackHoleCenter":
 		health -= 100
 		death()
+	if area.name == "hitBox":
+		health -= 100
+		death()
 		
 	if area.name == "mediumExplosionArea":
 		var distance_to_explosion = global_position.distance_to(area.global_position)

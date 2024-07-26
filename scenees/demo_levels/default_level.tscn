@@ -1,16 +1,23 @@
-[gd_scene load_steps=4 format=3 uid="uid://b3hmt0x6urp0w"]
+[gd_scene load_steps=5 format=3 uid="uid://b3hmt0x6urp0w"]
 
 [ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
-[ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="2_py6hg"]
+[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="3_tqd8t"]
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_ohr0q"]
+outlines = Array[PackedVector2Array]([PackedVector2Array(5706, 3350, 5652, -1787, -1351, -1735, -5726, -1796, -5582, 3233)])
+source_geometry_group_name = &"navigation_polygon_source_group"
 
 [node name="DefaultLevel" type="Node2D"]
 script = ExtResource("1_88a0l")
 
 [node name="player" parent="." instance=ExtResource("1_lm03g")]
-position = Vector2(92, 200)
+position = Vector2(5.53, 200)
 
-[node name="Turret" parent="." instance=ExtResource("2_py6hg")]
-position = Vector2(650, 363)
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_ohr0q")
+
+[node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
+position = Vector2(297, 551)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
