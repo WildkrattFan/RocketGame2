@@ -12,10 +12,10 @@ func _process(delta):
 	pass
 
 func player_explosion():
-	print("explosion recieved")
 	var gameOver = gameOverScene.instantiate()
 	get_parent().add_child(gameOver)
 	$player.visible = false
+	$player/player/CanvasLayer.visible = false
 
 
 func _on_player_main_player_exploded():

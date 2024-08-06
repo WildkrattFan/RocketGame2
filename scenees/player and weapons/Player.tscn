@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=36 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Script" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
@@ -10,8 +10,8 @@
 [ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bmmw"]
-radius = 100.0
-height = 320.0
+radius = 110.0
+height = 380.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5wrao"]
 animation = &"engineOff"
@@ -297,22 +297,24 @@ properties/8/path = NodePath("Camera2D:position")
 properties/8/spawn = true
 properties/8/replication_mode = 1
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_tk25e"]
+radius = 230.0
+
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
 script = ExtResource("1_n223q")
 
-[node name="player" type="Sprite2D" parent="."]
-position = Vector2(25, 24)
+[node name="player" type="Sprite2D" parent="." groups=["player"]]
+position = Vector2(0, 9.605)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_ymuer")
 hframes = 12
 script = ExtResource("3_ilhu4")
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
-visible = false
 script = ExtResource("4_4tu5c")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitBox"]
-position = Vector2(-1.90735e-06, -130)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitBox" groups=["player"]]
+position = Vector2(-1.90735e-06, -100)
 shape = SubResource("CapsuleShape2D_0bmmw")
 one_way_collision_margin = 0.0
 script = ExtResource("5_ftsce")
@@ -366,10 +368,10 @@ anchor_left = 0.237
 anchor_top = 0.26
 anchor_right = 0.237
 anchor_bottom = 0.26
-offset_left = -270.024
-offset_top = -168.48
-offset_right = 229.976
-offset_bottom = -18.48
+offset_left = -267.024
+offset_top = -162.48
+offset_right = 232.976
+offset_bottom = -12.48
 theme_override_font_sizes/normal_font_size = 10
 text = "Ammo:"
 fit_content = true
@@ -409,6 +411,15 @@ offset_bottom = 90.0
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="player"]
 replication_config = SubResource("SceneReplicationConfig_iphfq")
+
+[node name="visibility area" type="Area2D" parent="player" groups=["player"]]
+rotation = -0.00873252
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="player/visibility area" groups=["player"]]
+position = Vector2(10, -96.05)
+shape = SubResource("CircleShape2D_tk25e")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false

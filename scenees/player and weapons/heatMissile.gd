@@ -97,11 +97,14 @@ func _on_tracking_area_area_entered(area):
 			player = area
 		if area.name == "turretHitBox":
 			player = area
+		if area.is_in_group("enemy"):
+			player = area
 
 
 func _on_tracking_area_area_exited(area):
 	if area.name == "playerHitBox":
 		player = null
+		print("tracking area exited")
 		
 func setPlayer(player):
 	shotBy = player

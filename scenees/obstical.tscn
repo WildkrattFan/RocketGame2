@@ -12,9 +12,13 @@ size = Vector2(123, 125)
 texture = ExtResource("1_y1r0y")
 
 [node name="Obstical" type="Area2D" parent="Sprite2D"]
+collision_layer = 3
+collision_mask = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Obstical"]
 process_physics_priority = 1
+light_mask = 3
+visibility_layer = 3
 position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_qnbj8")
 one_way_collision_margin = 0.0

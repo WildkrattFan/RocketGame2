@@ -2,12 +2,13 @@ extends Sprite2D
 
 @export var speed = 50
 @export var rotation_speed = 2
-@export var shoot_speed = 1700
+@export var shoot_speed = 4000
 var health
 const MAX_HEALTH = 10
-var reload_time = 3.0
+var reload_time = 5.0
 var remaining_reload_time = 0.0
 var velocity = Vector2.ZERO
+var max_velocity = 1700
 var reload_progress_bar
 var blackHole
 var blackHoleSuction = 1500000
@@ -49,6 +50,7 @@ func _ready():
 
 
 func _process(delta):
+	print(velocity)
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
 	apply_movement(delta)
@@ -84,6 +86,9 @@ func handle_input(delta):
 
 	# Apply friction to slow down the player's movement
 	velocity *= 0.97
+	
+	if velocity.length() > max_velocity:
+		velocity = velocity.normalized() * max_velocity
 
 	# Shooting logic
 	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0 and !isExploding:
@@ -130,7 +135,7 @@ func shoot():
 	# Calculate the spawn position of the projectile
 	if current_ammo == "Machine Gun":
 		random_variance =randf_range(-10,10)
-	var spawn_position = position + Vector2(random_variance, -64).rotated(rotation)
+	var spawn_position = position + Vector2(random_variance, -85).rotated(rotation)
 		# Instantiate the projectile scene
 	var new_projectile = projectile_scene.instantiate()
 	
@@ -140,11 +145,10 @@ func shoot():
 	
 		# Set the projectile's velocity
 	var shootDirection = Vector2(0, -1).rotated(rotation)
-	new_projectile.set_velocity(shootDirection * shoot_speed)
+	new_projectile.set_velocity(shootDirection * shoot_speed + self.velocity)
 	
 		# Add the projectile to the scene
 	new_projectile.setPlayer(self)
-	print(self)
 	get_parent().add_child(new_projectile)
 	
 
@@ -250,7 +254,6 @@ func _on_death_delay_timeout():
 			
 		# 2. Display game over screen (if applicable)
 	exploded.emit()
-	print("exploded")
 	
 	
 
@@ -279,8 +282,6 @@ func set_team(New_team):
 	team = New_team
 	
 func _enter_tree():
-	print("entering tree")
-	print(name)
 	set_multiplayer_authority(name.to_int())
 
 func update_ammo_display():

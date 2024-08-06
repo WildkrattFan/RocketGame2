@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://btp0cnq64nui6"]
+[gd_scene load_steps=7 format=3 uid="uid://btp0cnq64nui6"]
 
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ro37q"]
 [ext_resource type="Script" path="res://scenees/player and weapons/assultEnemy.gd" id="1_svosa"]
@@ -7,12 +7,19 @@
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x700c"]
 radius = 16.0
-height = 42.0
+height = 50.0
 
-[node name="AssultEnemy" type="Node2D"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhvbx"]
+size = Vector2(43.7677, 20.8021)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnfek"]
+radius = 1638.04
+
+[node name="AssultEnemy" type="Node2D" groups=["enemy"]]
 script = ExtResource("1_svosa")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4, 13)
 scale = Vector2(0.157813, 0.157813)
 texture = ExtResource("1_ro37q")
 hframes = 11
@@ -22,12 +29,37 @@ tree_root = SubResource("AnimationNodeStateMachine_qmooi")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 
-[node name="hitBox" type="Area2D" parent="."]
+[node name="hitBox" type="Area2D" parent="Sprite2D" groups=["enemy"]]
+visible = false
+scale = Vector2(6.33661, 6.33661)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hitBox"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitBox"]
 position = Vector2(-4, -18)
 shape = SubResource("CapsuleShape2D_x700c")
 
 [node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
 target_position = Vector2(5, -438)
+collision_mask = 2
 collide_with_areas = true
+
+[node name="dodge_area" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dodge_area"]
+position = Vector2(-11, -119.5)
+scale = Vector2(30.045, 30.045)
+shape = SubResource("RectangleShape2D_lhvbx")
+
+[node name="sight_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sight_area"]
+shape = SubResource("CircleShape2D_lnfek")
+
+[connection signal="area_entered" from="Sprite2D/hitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="dodge_area" to="." method="_on_dodge_area_area_entered"]
+[connection signal="area_exited" from="dodge_area" to="." method="_on_dodge_area_area_exited"]
+[connection signal="area_entered" from="sight_area" to="." method="_on_sight_area_area_entered"]
+[connection signal="area_exited" from="sight_area" to="." method="_on_sight_area_area_exited"]

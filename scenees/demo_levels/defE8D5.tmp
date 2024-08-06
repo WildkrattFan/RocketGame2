@@ -1,12 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://b3hmt0x6urp0w"]
+[gd_scene load_steps=5 format=3 uid="uid://b3hmt0x6urp0w"]
 
 [ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
 [ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="3_tqd8t"]
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
-[ext_resource type="Texture2D" uid="uid://c3d2ym7qfoot2" path="res://assets/tempBackground.png" id="5_urtpt"]
-
-[sub_resource type="ImageTexture" id="ImageTexture_526fl"]
 
 [node name="DefaultLevel" type="Node2D"]
 script = ExtResource("1_88a0l")
@@ -20,21 +17,8 @@ position = Vector2(297, 551)
 [node name="Obstical" parent="." instance=ExtResource("4_o3rul")]
 position = Vector2(48, 318)
 
-[node name="TextureRect" type="TextureRect" parent="."]
-offset_right = 40.0
-offset_bottom = 40.0
-texture = SubResource("ImageTexture_526fl")
-
-[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
-show_behind_parent = true
-position = Vector2(-980, -2651)
-scale = Vector2(23.4375, 23.4375)
-texture = ExtResource("5_urtpt")
-
 [node name="AssultEnemy2" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-1732, -349)
+position = Vector2(922, 373)
 
 [node name="AssultEnemy3" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(3979, -129)
-
-[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+position = Vector2(-72, 647)

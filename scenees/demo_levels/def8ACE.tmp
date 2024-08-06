@@ -1,0 +1,18 @@
+[gd_scene load_steps=5 format=3 uid="uid://b3hmt0x6urp0w"]
+
+[ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
+[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="3_tqd8t"]
+[ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
+
+[node name="DefaultLevel" type="Node2D"]
+script = ExtResource("1_88a0l")
+
+[node name="player" parent="." instance=ExtResource("1_lm03g")]
+position = Vector2(409, 5)
+
+[node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
+position = Vector2(297, 551)
+
+[node name="Obstical" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(48, 318)
