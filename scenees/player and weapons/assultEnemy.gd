@@ -1,6 +1,6 @@
 extends Node2D
 
-var assultMissile = preload("res://scenees/player and weapons/assultMissile.tscn")
+var bullet = preload("res://scenees/player and weapons/bullet.tscn")
 var player
 var speed = 700
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
@@ -10,6 +10,10 @@ var dodged = false
 var behavior_state = "patrol"
 var dodge_direction = Vector2.ZERO
 var minimum_distance = 200  # Minimum distance to maintain from other enemies
+var can_shoot = true
+
+var ammo = 20
+var player_in_range = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -39,6 +43,11 @@ func _process(delta):
 		dodge(delta)
 	
 	separate_from_enemies(delta)
+	
+	
+	if player_in_range and can_shoot and $reload_timer.time_left > 0.0:
+		print("player in range")
+		shoot()
 		
 func update_raycast_target():
 	# Update the raycast direction to point towards the player
@@ -119,7 +128,7 @@ func dodge(delta):
 
 	# Rotate to face dodge direction
 	var goal_rotation = dodge_direction.angle() - Vector2(0, -1).angle()
-	$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, goal_rotation, 2 * delta)
+	rotation = lerp_angle(rotation, goal_rotation, 2 * delta)
 
 
 
@@ -145,3 +154,49 @@ func separate_from_enemies(delta):
 			if distance_to_enemy < minimum_distance:
 				var separation_force = (global_position - enemy.global_position).normalized()
 				position += separation_force * speed * delta
+
+func shoot():
+	if ammo > 0:
+		var shoot_speed = 5000
+		var spawn_position = position + Vector2(0, -85).rotated(rotation)
+			# Instantiate the projectile scene
+		var new_projectile = bullet.instantiate()
+		
+			# Set the projectile's position and rotation
+		new_projectile.position = spawn_position
+		new_projectile.rotation = rotation
+		
+			# Set the projectile's velocity
+		new_projectile.setPlayer(self)
+		var shootDirection = Vector2(0, -1).rotated(rotation)
+		new_projectile.set_velocity(shootDirection * shoot_speed)
+		
+			# Add the projectile to the scene
+		get_parent().add_child(new_projectile)
+		ammo -= 1
+		$shot_timer.wait_time == 0.05
+		$shot_timer.start()
+		can_shoot = false
+		print(ammo)
+	else:
+		print("reloading")
+		$reload_timer.wait_time == 5.0
+		$reload_timer.start()
+
+func _on_reload_timer_timeout():
+	ammo == 20
+	print("reload successful!")
+
+
+func _on_shot_timer_timeout():
+	can_shoot = true
+
+
+func _on_shoot_area_area_entered(area):
+	if area.is_in_group("player"):
+		player_in_range = true
+
+
+func _on_shoot_area_area_exited(area):
+	if area.is_in_group("player"):
+		player_in_range = false

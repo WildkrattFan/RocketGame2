@@ -14,9 +14,6 @@ script = ExtResource("1_88a0l")
 [node name="player" parent="." instance=ExtResource("1_lm03g")]
 position = Vector2(409, 5)
 
-[node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(297, 551)
-
 [node name="Obstical" parent="." instance=ExtResource("4_o3rul")]
 position = Vector2(48, 318)
 
@@ -31,10 +28,7 @@ position = Vector2(-980, -2651)
 scale = Vector2(23.4375, 23.4375)
 texture = ExtResource("5_urtpt")
 
-[node name="AssultEnemy2" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-1732, -349)
-
-[node name="AssultEnemy3" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(3979, -129)
+[node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
+position = Vector2(959, 1710)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]

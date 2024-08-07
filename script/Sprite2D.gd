@@ -50,7 +50,6 @@ func _ready():
 
 
 func _process(delta):
-	print(velocity)
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
 	apply_movement(delta)
