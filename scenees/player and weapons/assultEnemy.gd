@@ -11,6 +11,7 @@ var behavior_state = "patrol"
 var dodge_direction = Vector2.ZERO
 var minimum_distance = 200  # Minimum distance to maintain from other enemies
 var can_shoot = true
+var reloading = false
 
 var ammo = 20
 var player_in_range = false
@@ -45,7 +46,7 @@ func _process(delta):
 	separate_from_enemies(delta)
 	
 	
-	if player_in_range and can_shoot and $reload_timer.time_left > 0.0:
+	if player_in_range and can_shoot and !reloading:
 		print("player in range")
 		shoot()
 		
@@ -128,7 +129,7 @@ func dodge(delta):
 
 	# Rotate to face dodge direction
 	var goal_rotation = dodge_direction.angle() - Vector2(0, -1).angle()
-	rotation = lerp_angle(rotation, goal_rotation, 2 * delta)
+	$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, goal_rotation, 2 * delta)
 
 
 
@@ -158,7 +159,7 @@ func separate_from_enemies(delta):
 func shoot():
 	if ammo > 0:
 		var shoot_speed = 5000
-		var spawn_position = position + Vector2(0, -85).rotated(rotation)
+		var spawn_position = position + Vector2(0, -85).rotated($Sprite2D.rotation)
 			# Instantiate the projectile scene
 		var new_projectile = bullet.instantiate()
 		
@@ -168,7 +169,7 @@ func shoot():
 		
 			# Set the projectile's velocity
 		new_projectile.setPlayer(self)
-		var shootDirection = Vector2(0, -1).rotated(rotation)
+		var shootDirection = Vector2(0, -1).rotated($Sprite2D.rotation)
 		new_projectile.set_velocity(shootDirection * shoot_speed)
 		
 			# Add the projectile to the scene
@@ -182,10 +183,12 @@ func shoot():
 		print("reloading")
 		$reload_timer.wait_time == 5.0
 		$reload_timer.start()
+		reloading = true
 
 func _on_reload_timer_timeout():
-	ammo == 20
+	ammo = 20
 	print("reload successful!")
+	reloading = false
 
 
 func _on_shot_timer_timeout():

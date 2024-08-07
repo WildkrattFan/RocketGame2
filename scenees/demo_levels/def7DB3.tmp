@@ -31,31 +31,4 @@ texture = ExtResource("5_urtpt")
 [node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
 position = Vector2(959, 1710)
 
-[node name="AssultEnemy2" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-1809, 880)
-
-[node name="AssultEnemy3" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(3180, 1357)
-
-[node name="AssultEnemy4" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-4350, 1890)
-
-[node name="AssultEnemy5" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-1413, 1398)
-
-[node name="AssultEnemy6" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-431, 1826)
-
-[node name="AssultEnemy7" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-110, 1943)
-
-[node name="AssultEnemy8" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(2613, 1153)
-
-[node name="AssultEnemy9" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(2239, 523)
-
-[node name="AssultEnemy10" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(1459, 865)
-
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]

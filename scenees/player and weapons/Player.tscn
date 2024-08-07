@@ -327,7 +327,7 @@ one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(10, 10)
-zoom = Vector2(0.3, 0.3)
+zoom = Vector2(0.25, 0.25)
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0

@@ -8,7 +8,7 @@ const MAX_HEALTH = 10
 var reload_time = 5.0
 var remaining_reload_time = 0.0
 var velocity = Vector2.ZERO
-var max_velocity = 1700
+var max_velocity = 15
 var reload_progress_bar
 var blackHole
 var blackHoleSuction = 1500000
