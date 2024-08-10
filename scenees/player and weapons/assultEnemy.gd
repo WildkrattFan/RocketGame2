@@ -8,6 +8,7 @@ var blackHole
 var blackHoleSuction = 1500000
 var dodged = false
 var behavior_state = "patrol"
+var previous_state
 var dodge_direction = Vector2.ZERO
 var minimum_distance = 200  # Minimum distance to maintain from other enemies
 var can_shoot = true
@@ -29,8 +30,8 @@ func _process(delta):
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var suction_strength = blackHoleSuction / distance_to_black_hole
 			# Adjust the rotation towards the black hole
-		var target_rotation = suction_direction.angle()
-		rotation = lerp_angle(rotation, target_rotation, 2 * delta)
+		#var target_rotation = suction_direction.angle()
+		#$Sprite2D.rotation = lerp_angle(rotation, target_rotation, 2 * delta)
 		
 		position += suction_direction * suction_strength * delta
 	
@@ -47,7 +48,6 @@ func _process(delta):
 	
 	
 	if player_in_range and can_shoot and !reloading:
-		print("player in range")
 		shoot()
 		
 func update_raycast_target():
@@ -107,12 +107,14 @@ func explosion():
 
 func _on_dodge_area_area_entered(area):
 	if area.is_in_group("missile"):
+		previous_state = behavior_state
 		behavior_state = "dodging"
 		dodged = false
 		
 func _on_dodge_area_area_exited(area):
 	if area.is_in_group("missile"):
-		behavior_state = "tracking"
+		behavior_state = previous_state
+		print("dodge_area_exited")
 
 func dodge(delta):
 	var dodge_speed = 1000
@@ -160,34 +162,40 @@ func shoot():
 	if ammo > 0:
 		var shoot_speed = 5000
 		var spawn_position = position + Vector2(0, -85).rotated($Sprite2D.rotation)
-			# Instantiate the projectile scene
+		
+		# Instantiate the projectile scene
 		var new_projectile = bullet.instantiate()
 		
-			# Set the projectile's position and rotation
+		# Set the projectile's position and rotation
 		new_projectile.position = spawn_position
 		new_projectile.rotation = rotation
 		
-			# Set the projectile's velocity
-		new_projectile.setPlayer(self)
-		var shootDirection = Vector2(0, -1).rotated($Sprite2D.rotation)
-		new_projectile.set_velocity(shootDirection * shoot_speed)
+		# Calculate the shoot direction with a random spread
+		# Use a small angle in radians for the spread
+		var spread_angle = deg_to_rad(randf_range(-7, 7))  # Random angle between -5 and 5 degrees
 		
-			# Add the projectile to the scene
+		# Create the shoot direction vector and apply spread
+		var shoot_direction = Vector2(0, -1).rotated($Sprite2D.rotation + spread_angle)
+		
+		# Set the projectile's velocity
+		new_projectile.setPlayer(self)
+		new_projectile.set_velocity(shoot_direction * shoot_speed)
+		
+		# Add the projectile to the scene
 		get_parent().add_child(new_projectile)
+		
 		ammo -= 1
-		$shot_timer.wait_time == 0.05
+		$shot_timer.wait_time = 0.05
 		$shot_timer.start()
 		can_shoot = false
-		print(ammo)
 	else:
-		print("reloading")
-		$reload_timer.wait_time == 5.0
+		$reload_timer.wait_time = 5.0
 		$reload_timer.start()
 		reloading = true
 
+
 func _on_reload_timer_timeout():
 	ammo = 20
-	print("reload successful!")
 	reloading = false
 
 
