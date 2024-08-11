@@ -192,6 +192,9 @@ func _on_area_2d_area_entered(area):
 	if area.name == "Obstical":
 		health -= 10
 		death()
+	if area.is_in_group("Obstical"):
+		health -= 10
+		death()
 		
 	elif area.name == "pearcing_missile":
 		health -=10

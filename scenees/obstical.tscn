@@ -11,7 +11,7 @@ size = Vector2(123, 125)
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_y1r0y")
 
-[node name="Obstical" type="Area2D" parent="Sprite2D"]
+[node name="Obstical" type="Area2D" parent="Sprite2D" groups=["obstical"]]
 collision_layer = 3
 collision_mask = 3
 

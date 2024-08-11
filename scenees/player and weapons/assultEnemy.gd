@@ -110,11 +110,15 @@ func _on_dodge_area_area_entered(area):
 		previous_state = behavior_state
 		behavior_state = "dodging"
 		dodged = false
+	if area.is_in_group("explosion"):
+		behavior_state = "dodging"
+		dodged = false
 		
 func _on_dodge_area_area_exited(area):
 	if area.is_in_group("missile"):
 		behavior_state = previous_state
-		print("dodge_area_exited")
+	if area.is_in_group("explosion"):
+		behavior_state = previous_state
 
 func dodge(delta):
 	var dodge_speed = 1000

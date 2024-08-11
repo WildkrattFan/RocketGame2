@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3hmt0x6urp0w"]
+[gd_scene load_steps=7 format=3 uid="uid://b3hmt0x6urp0w"]
 
 [ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
-[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="3_tqd8t"]
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
 [ext_resource type="Texture2D" uid="uid://c3d2ym7qfoot2" path="res://assets/tempBackground.png" id="5_urtpt"]
 [ext_resource type="PackedScene" uid="uid://2qqvyinh0rsu" path="res://scenees/asteroid.tscn" id="6_vh1nn"]
@@ -43,11 +42,5 @@ position = Vector2(2776, 424)
 
 [node name="Asteroid5" parent="." instance=ExtResource("6_vh1nn")]
 position = Vector2(1195, 588)
-
-[node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(2448, 1828)
-
-[node name="AssultEnemy2" parent="." instance=ExtResource("3_tqd8t")]
-position = Vector2(-1265, 1397)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
