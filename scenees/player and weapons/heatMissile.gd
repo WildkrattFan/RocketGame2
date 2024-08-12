@@ -88,6 +88,8 @@ func _on_heat_seaking_missile_area_entered(area):
 		call_deferred("explosion")
 	if area.name == "bullet_area":
 		call_deferred("explosion")
+	if area.is_in_group("Obstical"):
+		call_deferred("explosion")
 
 
 

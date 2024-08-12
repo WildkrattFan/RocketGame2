@@ -37,6 +37,10 @@ func _on_bullet_area_area_entered(area):
 		queue_free()
 	if area.name == "turretHitBox":
 		queue_free()
+	if area.is_in_group("obstical"):
+		queue_free()
+	if area.is_in_group("enemy"):
+		queue_free()
 
 func setPlayer(player):
 	shotBy = player

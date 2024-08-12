@@ -70,3 +70,5 @@ func _on_nuclear_missile_area_area_entered(area):
 		queue_free()
 	if area.name == "turretHitBox":
 		queue_free()
+	if area.is_in_group("Obstical"):
+		queue_free()

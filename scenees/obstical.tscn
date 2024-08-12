@@ -13,10 +13,10 @@ script = ExtResource("1_5hcse")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_y1r0y")
 
-[node name="Obstical" type="Area2D" parent="Sprite2D" groups=["obstical"]]
+[node name="hitbox" type="Area2D" parent="Sprite2D" groups=["Obstical", "obstical"]]
 collision_layer = 7
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Obstical"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
 process_physics_priority = 1
 light_mask = 3
 visibility_layer = 3
@@ -24,3 +24,5 @@ position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_qnbj8")
 one_way_collision_margin = 0.0
 script = ExtResource("2_168iw")
+
+[connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
