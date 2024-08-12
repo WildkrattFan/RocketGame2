@@ -1,5 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://btu1fjdg3tft"]
+[gd_scene load_steps=5 format=3 uid="uid://btu1fjdg3tft"]
 
+[ext_resource type="Script" path="res://scenees/obstical.gd" id="1_5hcse"]
 [ext_resource type="Texture2D" uid="uid://bpb8k85yur801" path="res://icon.svg" id="1_y1r0y"]
 [ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="2_168iw"]
 
@@ -7,13 +8,13 @@
 size = Vector2(123, 125)
 
 [node name="Obstical" type="Node2D"]
+script = ExtResource("1_5hcse")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_y1r0y")
 
 [node name="Obstical" type="Area2D" parent="Sprite2D" groups=["obstical"]]
-collision_layer = 3
-collision_mask = 3
+collision_layer = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/Obstical"]
 process_physics_priority = 1
@@ -23,5 +24,3 @@ position = Vector2(-0.5, -0.5)
 shape = SubResource("RectangleShape2D_qnbj8")
 one_way_collision_margin = 0.0
 script = ExtResource("2_168iw")
-
-[node name="RigidBody2D" type="RigidBody2D" parent="Sprite2D/Obstical"]

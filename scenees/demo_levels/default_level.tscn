@@ -1,11 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3hmt0x6urp0w"]
+[gd_scene load_steps=7 format=3 uid="uid://b3hmt0x6urp0w"]
 
 [ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
 [ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="3_tqd8t"]
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
 [ext_resource type="Texture2D" uid="uid://c3d2ym7qfoot2" path="res://assets/tempBackground.png" id="5_urtpt"]
-[ext_resource type="PackedScene" uid="uid://2qqvyinh0rsu" path="res://scenees/asteroid.tscn" id="6_vh1nn"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_526fl"]
 
@@ -28,21 +27,6 @@ show_behind_parent = true
 position = Vector2(156, -2935)
 scale = Vector2(23.4375, 23.4375)
 texture = ExtResource("5_urtpt")
-
-[node name="Asteroid" parent="." instance=ExtResource("6_vh1nn")]
-position = Vector2(-1328, 1772)
-
-[node name="Asteroid2" parent="." instance=ExtResource("6_vh1nn")]
-position = Vector2(3713, 1751)
-
-[node name="Asteroid3" parent="." instance=ExtResource("6_vh1nn")]
-position = Vector2(2018, -608)
-
-[node name="Asteroid4" parent="." instance=ExtResource("6_vh1nn")]
-position = Vector2(2776, 424)
-
-[node name="Asteroid5" parent="." instance=ExtResource("6_vh1nn")]
-position = Vector2(1195, 588)
 
 [node name="AssultEnemy" parent="." instance=ExtResource("3_tqd8t")]
 position = Vector2(2448, 1828)
