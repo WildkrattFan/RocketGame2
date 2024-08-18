@@ -1,6 +1,7 @@
 extends Node2D
 
 var randomScale
+var max_health 
 var health
 var randomDirection = Vector2.ZERO
 var randomSpeed
@@ -8,19 +9,22 @@ var randomRotation
 var randomRotatation_speed
 var blackHole
 var blackHoleSuction = 1500000
+var _stateMachine
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomScale = randf_range(1,8)
+	randomScale = randf_range(1,6)
 	scale.x = randomScale
 	scale.y = randomScale
 	health = randomScale * 10
+	max_health = health
 	randomDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1))
 	randomSpeed = randf_range(0,3)
 	randomRotation = randf_range(0,359)
 	rotation = randomRotation
 	
 	randomRotatation_speed = randf_range(-.002,.002)
+	_stateMachine = $Sprite2D/AnimationTree.get("parameters/playback")
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -68,8 +72,25 @@ func _on_hitbox_area_entered(area):
 	split(area)
 
 func split(area):
-	print(health)
 	#TODO: complete the split function if needed
-	if health <= 0:
+	var health_percent = health / max_health
+	
+	print(health_percent)
+	if health_percent <= 0:
+		randomDirection = randomDirection * 0
+		_stateMachine.travel("destruction")
+	elif health_percent <= 0.2:
+		print("0.2 animation")
+		_stateMachine.travel("20")
+	elif health_percent <= 0.4:
+		_stateMachine.travel("40")
+	elif health_percent <= 0.6:
+		_stateMachine.travel("60")
+	elif health_percent <= 0.8:
+		_stateMachine.travel("80")
+	
+
+
+func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
+	if anim_name == "destruction":
 		queue_free()
-	pass
