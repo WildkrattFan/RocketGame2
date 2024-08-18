@@ -150,7 +150,7 @@ height = 276.421
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_llflb"]
 size = Vector2(4919.96, 16409.8)
 
-[node name="heatMissile" type="Node2D" groups=["shotBy"]]
+[node name="heatMissile" type="Node2D" groups=["missile", "shotBy"]]
 rotation = -6.28319
 script = ExtResource("1_hxh77")
 

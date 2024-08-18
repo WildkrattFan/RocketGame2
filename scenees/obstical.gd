@@ -11,7 +11,7 @@ var blackHoleSuction = 1500000
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomScale = randf_range(1,15)
+	randomScale = randf_range(1,8)
 	scale.x = randomScale
 	scale.y = randomScale
 	health = randomScale * 10
@@ -50,7 +50,7 @@ func _on_hitbox_area_entered(area):
 	elif area.name == "pearcing_missile":
 		health -=10
 		
-	elif area.is_in_group("missile") & area.name != "nuclear_missile_area" :
+	elif area.is_in_group("missile") and area.name != "nuclear_missile_area" :
 		health -= 15
 		
 	elif area.name == "nuclear_missile_area":

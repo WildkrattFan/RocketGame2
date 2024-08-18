@@ -2,7 +2,7 @@ extends Sprite2D
 
 @export var speed = 50
 @export var rotation_speed = 2
-@export var shoot_speed = 4000
+@export var shoot_speed = 1500
 var health
 const MAX_HEALTH = 10
 var reload_time = 5.0

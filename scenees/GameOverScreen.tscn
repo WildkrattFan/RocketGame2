@@ -9,15 +9,15 @@
 
 [sub_resource type="Theme" id="Theme_ywhrl"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsk1d"]
+bg_color = Color(0.67451, 0.156863, 0.176471, 1)
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0gago"]
 bg_color = Color(0.580392, 0.156863, 0.176471, 1)
 corner_radius_top_left = 10
 corner_radius_top_right = 10
 corner_radius_bottom_right = 10
 corner_radius_bottom_left = 10
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wsk1d"]
-bg_color = Color(0.67451, 0.156863, 0.176471, 1)
 
 [node name="GameOverScreen" type="Control"]
 layout_mode = 3
@@ -49,15 +49,15 @@ theme = SubResource("Theme_ywhrl")
 theme_override_colors/font_color = Color(0, 0, 0, 1)
 theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
 theme_override_colors/icon_normal_color = Color(0.257899, 0.469314, 0.190686, 1)
+theme_override_colors/icon_focus_color = Color(0.375928, 0.670945, 0.282726, 1)
 theme_override_colors/icon_pressed_color = Color(0.391799, 0.698594, 0.294804, 1)
 theme_override_colors/icon_hover_color = Color(0.418356, 0.745107, 0.314916, 1)
 theme_override_colors/icon_hover_pressed_color = Color(0.389151, 0.693972, 0.292793, 1)
-theme_override_colors/icon_focus_color = Color(0.375928, 0.670945, 0.282726, 1)
 theme_override_colors/icon_disabled_color = Color(0.373286, 0.666356, 0.280711, 1)
 theme_override_fonts/font = ExtResource("1_74r7c")
 theme_override_font_sizes/font_size = 70
-theme_override_styles/normal = SubResource("StyleBoxFlat_0gago")
 theme_override_styles/hover = SubResource("StyleBoxFlat_wsk1d")
+theme_override_styles/normal = SubResource("StyleBoxFlat_0gago")
 text = "Retry?"
 script = ExtResource("1_0rluh")
 

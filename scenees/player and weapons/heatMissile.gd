@@ -7,7 +7,7 @@ var blackHole
 var blackHoleSuction = 1500000
 var rotation_speed = 2
 var player
-@export var tracking_speed = 1000
+@export var tracking_speed = 1500
 
 var shotBy
 

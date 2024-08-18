@@ -119,7 +119,6 @@ texture = ExtResource("1_k4u0e")
 hframes = 4
 
 [node name="turretHitBox" type="Area2D" parent="Sprite2D"]
-visible = false
 scale = Vector2(0.247219, 0.247219)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/turretHitBox"]

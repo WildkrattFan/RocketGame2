@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_ctvxq"]
 radius = 260.325
 
-[node name="SplitMine" type="Node2D"]
+[node name="SplitMine" type="Node2D" groups=["explosion", "mine"]]
 script = ExtResource("1_7lnwd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

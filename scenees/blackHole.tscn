@@ -9,7 +9,7 @@ radius = 2188.78
 [sub_resource type="CircleShape2D" id="CircleShape2D_vppbt"]
 radius = 166.364
 
-[node name="BlackHole" type="Node2D"]
+[node name="BlackHole" type="Node2D" groups=["blackHole"]]
 script = ExtResource("1_ms01d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

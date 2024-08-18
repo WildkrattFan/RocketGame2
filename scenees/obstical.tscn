@@ -1,28 +1,118 @@
-[gd_scene load_steps=5 format=3 uid="uid://btu1fjdg3tft"]
+[gd_scene load_steps=7 format=3 uid="uid://btu1fjdg3tft"]
 
 [ext_resource type="Script" path="res://scenees/obstical.gd" id="1_5hcse"]
-[ext_resource type="Texture2D" uid="uid://bpb8k85yur801" path="res://icon.svg" id="1_y1r0y"]
-[ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="2_168iw"]
+[ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_b27cs"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_qnbj8"]
-size = Vector2(123, 125)
+[sub_resource type="Animation" id="Animation_5o41b"]
+resource_name = "destruction"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/hitbox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.0333333),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
 
-[node name="Obstical" type="Node2D"]
+[sub_resource type="Animation" id="Animation_g4j5n"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D/hitbox:monitoring")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/hitbox:monitorable")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o11ef"]
+_data = {
+"RESET": SubResource("Animation_g4j5n"),
+"destruction": SubResource("Animation_5o41b")
+}
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pb4c3"]
+
+[node name="Obstical" type="Node2D" groups=["Obstical"]]
 script = ExtResource("1_5hcse")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_y1r0y")
+texture = ExtResource("2_b27cs")
+hframes = 7
+frame = 4
 
 [node name="hitbox" type="Area2D" parent="Sprite2D" groups=["Obstical", "obstical"]]
 collision_layer = 7
+monitoring = false
+monitorable = false
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
-process_physics_priority = 1
-light_mask = 3
-visibility_layer = 3
-position = Vector2(-0.5, -0.5)
-shape = SubResource("RectangleShape2D_qnbj8")
-one_way_collision_margin = 0.0
-script = ExtResource("2_168iw")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/hitbox"]
+polygon = PackedVector2Array(-50, -149, -150, -83, -192, -48, -191, -13, -176, 23, -122, 73, -67, 100, -26, 119, 37, 119, 111, 87, 133, 21, 116, -64, 15, -151)
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+"": SubResource("AnimationLibrary_o11ef")
+}
+tree_root = SubResource("AnimationNodeStateMachine_pb4c3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
 
 [connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
