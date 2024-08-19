@@ -7,7 +7,7 @@ var gameOverScene = preload("res://scenees/GameOverScreen.tscn")
 func _ready():
 	pass
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
+# Called every frame. 'deltaW' is the elapsed time since the previous frame.
 func _process(delta):
 	pass
 

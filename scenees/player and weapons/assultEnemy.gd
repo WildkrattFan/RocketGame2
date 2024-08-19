@@ -167,7 +167,7 @@ func separate_from_enemies(delta):
 func shoot():
 	if ammo > 0:
 		var shoot_speed = 5000
-		var spawn_position = position + Vector2(0, -85).rotated($Sprite2D.rotation)
+		var spawn_position = position + Vector2(0, -110).rotated($Sprite2D.rotation)
 		
 		# Instantiate the projectile scene
 		var new_projectile = bullet.instantiate()

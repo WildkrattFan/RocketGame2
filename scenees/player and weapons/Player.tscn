@@ -314,7 +314,7 @@ curve = SubResource("Curve_dq3jh")
 
 [sub_resource type="Curve" id="Curve_iyub0"]
 min_value = -1.0
-_data = [Vector2(0, -0.560439), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_akhtx"]
@@ -348,6 +348,7 @@ hue_variation_max = 0.2
 hue_variation_curve = SubResource("CurveTexture_akhtx")
 
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
+scale = Vector2(2, 2)
 script = ExtResource("1_n223q")
 
 [node name="player" type="Sprite2D" parent="." groups=["player"]]
