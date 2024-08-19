@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=47 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Script" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
@@ -8,6 +8,9 @@
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
 [ext_resource type="Texture2D" uid="uid://c7n0ny8cm4bxj" path="res://assets/bars/reloadBarMain.png" id="7_iq23l"]
 [ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
+[ext_resource type="Texture2D" uid="uid://d6fwd0xaoav7" path="res://assets/trail.png" id="10_3cbov"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wjm0e"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_0bmmw"]
 radius = 110.0
@@ -300,10 +303,55 @@ properties/8/replication_mode = 1
 [sub_resource type="CircleShape2D" id="CircleShape2D_tk25e"]
 radius = 230.0
 
+[sub_resource type="Curve" id="Curve_dq3jh"]
+max_value = 0.01
+_data = [Vector2(0, 0.0659341), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n2yt5"]
+width = 252
+curve = SubResource("Curve_dq3jh")
+
+[sub_resource type="Curve" id="Curve_iyub0"]
+min_value = -1.0
+_data = [Vector2(0, -0.560439), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_akhtx"]
+curve = SubResource("Curve_iyub0")
+
+[sub_resource type="Curve" id="Curve_lrcau"]
+_data = [Vector2(0.04, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ohpag"]
+curve = SubResource("Curve_lrcau")
+
+[sub_resource type="Curve" id="Curve_2qccv"]
+max_value = 3.0
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(1, 3), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_r317a"]
+curve = SubResource("Curve_2qccv")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_1re50"]
+particle_flag_disable_z = true
+gravity = Vector3(0, 98, 0)
+scale_min = 0.2
+scale_max = 0.2
+scale_curve = SubResource("CurveTexture_ohpag")
+scale_over_velocity_curve = SubResource("CurveTexture_r317a")
+emission_curve = SubResource("CurveTexture_n2yt5")
+hue_variation_min = -2.23517e-08
+hue_variation_max = 0.2
+hue_variation_curve = SubResource("CurveTexture_akhtx")
+
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
 script = ExtResource("1_n223q")
 
 [node name="player" type="Sprite2D" parent="." groups=["player"]]
+material = SubResource("ShaderMaterial_wjm0e")
 position = Vector2(0, 9.605)
 scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_ymuer")
@@ -311,6 +359,7 @@ hframes = 12
 script = ExtResource("3_ilhu4")
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
+visible = false
 script = ExtResource("4_4tu5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitBox" groups=["player"]]
@@ -326,6 +375,7 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="player"]
+visible = false
 position = Vector2(10, 10)
 zoom = Vector2(0.25, 0.25)
 limit_smoothed = true
@@ -413,6 +463,7 @@ offset_bottom = 90.0
 replication_config = SubResource("SceneReplicationConfig_iphfq")
 
 [node name="visibility area" type="Area2D" parent="player" groups=["player"]]
+visible = false
 rotation = -0.00873252
 collision_layer = 2
 collision_mask = 2
@@ -420,6 +471,11 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/visibility area" groups=["player"]]
 position = Vector2(10, -96.05)
 shape = SubResource("CircleShape2D_tk25e")
+
+[node name="trail" type="GPUParticles2D" parent="player"]
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_1re50")
+texture = ExtResource("10_3cbov")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false

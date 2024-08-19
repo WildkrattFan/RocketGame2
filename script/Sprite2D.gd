@@ -50,6 +50,8 @@ func _ready():
 
 
 func _process(delta):
+	self.material.set_shader_parameter("player_velocity", velocity)
+	self.material.set_shader
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
 	apply_movement(delta)
@@ -73,11 +75,14 @@ func handle_input(delta):
 	if Input.is_action_pressed("foreward"):
 		velocity += direction * speed * delta
 		_stateMachine.travel("flying")
+		$trail.emitting = true
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")
+		$trail.emitting = false
 	else:
 		_stateMachine.travel("engineOff")
+		$trail.emitting = false
 
 	if isExploding:
 		_stateMachine.travel("explosion")

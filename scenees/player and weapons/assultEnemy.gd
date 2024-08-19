@@ -93,6 +93,8 @@ func _on_hit_box_area_entered(area):
 		call_deferred("explosion")
 	if area.name == "bullet_area":
 		call_deferred("explosion")
+	if area.is_in_group("Obstical"):
+		call_deferred("explosion")
 
 
 func explosion():

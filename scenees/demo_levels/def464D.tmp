@@ -1,0 +1,35 @@
+[gd_scene load_steps=6 format=3 uid="uid://b3hmt0x6urp0w"]
+
+[ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
+[ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="4_eg5ea"]
+[ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
+
+[sub_resource type="ImageTexture" id="ImageTexture_526fl"]
+
+[node name="DefaultLevel" type="Node2D"]
+script = ExtResource("1_88a0l")
+
+[node name="player" parent="." instance=ExtResource("1_lm03g")]
+position = Vector2(409, 5)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+texture = SubResource("ImageTexture_526fl")
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+position = Vector2(156, -2935)
+scale = Vector2(2, 2)
+texture = ExtResource("4_eg5ea")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12563, -15635, -12564, 9784, 12856, 9784, 12855, -15635, -12562, -15635, -12524, -15863, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="Obstical" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-675, 225)
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]

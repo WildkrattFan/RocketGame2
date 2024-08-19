@@ -1,9 +1,10 @@
-[gd_scene load_steps=6 format=3 uid="uid://b3hmt0x6urp0w"]
+[gd_scene load_steps=7 format=3 uid="uid://b3hmt0x6urp0w"]
 
 [ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
 [ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="4_eg5ea"]
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="4_o3rul"]
+[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="5_2u2yo"]
 
 [sub_resource type="ImageTexture" id="ImageTexture_526fl"]
 
@@ -31,5 +32,89 @@ polygon = PackedVector2Array(-12563, -15635, -12564, 9784, 12856, 9784, 12855, -
 
 [node name="Obstical" parent="." instance=ExtResource("4_o3rul")]
 position = Vector2(-675, 225)
+
+[node name="Obstical2" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(5683, 3656)
+
+[node name="Obstical3" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-5269, 6598)
+
+[node name="Obstical4" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-5020, 1914)
+
+[node name="Obstical5" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-4997, -1005)
+
+[node name="Obstical6" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-1535, -2023)
+
+[node name="Obstical7" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(1701, 2412)
+
+[node name="Obstical8" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-1897, 4041)
+
+[node name="Obstical9" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(343, 5444)
+
+[node name="Obstical10" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(4280, -326)
+
+[node name="Obstical11" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(4257, -2295)
+
+[node name="Obstical12" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(1587, -3019)
+
+[node name="Obstical13" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-2372, -3585)
+
+[node name="Obstical14" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-9138, -779)
+
+[node name="Obstical15" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-8685, 3090)
+
+[node name="Obstical16" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-6129, -1322)
+
+[node name="Obstical17" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-834, 6643)
+
+[node name="Obstical18" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(-5699, 4493)
+
+[node name="Obstical19" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(4574, 4584)
+
+[node name="Obstical20" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(8172, 3000)
+
+[node name="Obstical21" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(9462, -3720)
+
+[node name="Obstical22" parent="." instance=ExtResource("4_o3rul")]
+position = Vector2(3556, -4015)
+
+[node name="AssultEnemy" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(-2983, 7299)
+
+[node name="AssultEnemy2" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(-9726, 4765)
+
+[node name="AssultEnemy3" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(-7667, 579)
+
+[node name="AssultEnemy4" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(-6423, -3675)
+
+[node name="AssultEnemy5" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(-924, -4784)
+
+[node name="AssultEnemy6" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(9896, -2207)
+
+[node name="AssultEnemy7" parent="." instance=ExtResource("5_2u2yo")]
+position = Vector2(6864, 7342)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
