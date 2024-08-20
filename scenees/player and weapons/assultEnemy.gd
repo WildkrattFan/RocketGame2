@@ -2,7 +2,7 @@ extends Node2D
 
 var bullet = preload("res://scenees/player and weapons/bullet.tscn")
 var player
-var speed = 700
+var speed = 1600
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 var blackHole
 var blackHoleSuction = 1500000
@@ -13,6 +13,7 @@ var dodge_direction = Vector2.ZERO
 var minimum_distance = 200  # Minimum distance to maintain from other enemies
 var can_shoot = true
 var reloading = false
+var killedBy
 
 var ammo = 20
 var player_in_range = false
@@ -82,6 +83,7 @@ func _on_hit_box_area_entered(area):
 	if area.is_in_group("mine"):
 		call_deferred("explosion")
 	if area.is_in_group("missile"):
+		killedBy = area.get_parent().shotBy
 		call_deferred("explosion")
 	if area.is_in_group("blackHole"):
 		blackHole = area
@@ -93,11 +95,15 @@ func _on_hit_box_area_entered(area):
 		call_deferred("explosion")
 	if area.name == "bullet_area":
 		call_deferred("explosion")
+		killedBy = area.get_parent().shotBy
 	if area.is_in_group("Obstical"):
 		call_deferred("explosion")
 
 
 func explosion():
+	if killedBy:
+		if killedBy.has_method("add_score"):
+			killedBy.add_score(3)
 	var spawn_position = position + Vector2(64, 0).rotated(rotation)
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position

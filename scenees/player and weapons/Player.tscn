@@ -7,8 +7,8 @@
 [ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
 [ext_resource type="Texture2D" uid="uid://c7n0ny8cm4bxj" path="res://assets/bars/reloadBarMain.png" id="7_iq23l"]
+[ext_resource type="Texture2D" uid="uid://s3jq4ii3sfc6" path="res://assets/trai2l.png" id="9_31u5o"]
 [ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
-[ext_resource type="Texture2D" uid="uid://d6fwd0xaoav7" path="res://assets/trail.png" id="10_3cbov"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wjm0e"]
 
@@ -321,7 +321,8 @@ point_count = 2
 curve = SubResource("Curve_iyub0")
 
 [sub_resource type="Curve" id="Curve_lrcau"]
-_data = [Vector2(0.04, 0), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+max_value = 2.0
+_data = [Vector2(0, 0.351648), 0.0, 0.0, 0, 0, Vector2(0.993333, 1.42857), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_ohpag"]
@@ -474,9 +475,10 @@ position = Vector2(10, -96.05)
 shape = SubResource("CircleShape2D_tk25e")
 
 [node name="trail" type="GPUParticles2D" parent="player"]
+show_behind_parent = true
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_1re50")
-texture = ExtResource("10_3cbov")
+texture = ExtResource("9_31u5o")
 
 [node name="DirectionalLight2D" type="DirectionalLight2D" parent="."]
 visible = false
