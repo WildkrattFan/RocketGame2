@@ -29,3 +29,9 @@ func _on_button_pressed():
 	# Reload the current scene to restart the game
 	get_tree().reload_current_scene()
 	queue_free()
+
+
+func _on_button_2_pressed() -> void:
+	print("going to menu")
+	get_tree().change_scene_to_file("res://scenees/startScreen.tscn")
+	queue_free()

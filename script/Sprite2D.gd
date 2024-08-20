@@ -8,6 +8,7 @@ const MAX_HEALTH = 10
 var reload_time = 5.0
 var remaining_reload_time = 0.0
 var velocity = Vector2.ZERO
+var normal_max_veloicty = 15
 var max_velocity = 15
 var reload_progress_bar
 var blackHole
@@ -76,6 +77,11 @@ func handle_input(delta):
 		velocity += direction * speed * delta
 		_stateMachine.travel("flying")
 		$trail.emitting = true
+		if Input.is_action_pressed("boost"):
+			velocity += direction * speed * 2 * delta
+			max_velocity = 100
+		elif max_velocity > normal_max_veloicty:
+			max_velocity *= .97
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")
