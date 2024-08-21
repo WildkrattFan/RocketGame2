@@ -1,0 +1,126 @@
+[gd_scene load_steps=8 format=3 uid="uid://bbmprwkra6k2v"]
+
+[ext_resource type="Script" path="res://script/default_level.gd" id="1_4bbxk"]
+[ext_resource type="Shader" path="res://script/default_level.gdshader" id="2_osw5g"]
+[ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="3_gygkv"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_jiwsh"]
+[ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="5_h2vde"]
+[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="5_v7g60"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
+shader = ExtResource("2_osw5g")
+
+[node name="DefaultLevel" type="Node2D"]
+script = ExtResource("1_4bbxk")
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_71qnq")
+position = Vector2(44, -3146)
+scale = Vector2(2, 2)
+texture = ExtResource("3_gygkv")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+visible = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -15847, -12671, -15847, -12609, -16235, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="player" parent="." instance=ExtResource("4_jiwsh")]
+position = Vector2(466, 1465)
+
+[node name="Obstical" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-5482, 2279)
+
+[node name="Obstical2" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-8535, -3181)
+
+[node name="Obstical3" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(1415, -7096)
+
+[node name="Obstical4" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(7844, -2211)
+
+[node name="Obstical5" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(4863, 4578)
+
+[node name="Obstical6" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-597, 4434)
+
+[node name="Obstical7" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-3506, -810)
+
+[node name="Obstical8" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(2804, -3251)
+
+[node name="Obstical9" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(7937, 2470)
+
+[node name="Obstical10" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-1638, -4870)
+
+[node name="Obstical11" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-6230, 5444)
+
+[node name="Obstical12" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-8538, 624)
+
+[node name="Obstical13" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-1134, -4429)
+
+[node name="Obstical14" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(7425, -7828)
+
+[node name="Obstical15" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-6706, -12188)
+
+[node name="Obstical16" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-9747, -8367)
+
+[node name="Obstical17" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-1916, -14771)
+
+[node name="AssultEnemy" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(3736, 3437)
+
+[node name="AssultEnemy2" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(8122, 6087)
+
+[node name="AssultEnemy3" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(-5164, 8376)
+
+[node name="AssultEnemy4" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(-11436, 3324)
+
+[node name="AssultEnemy5" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(-9979, -5965)
+
+[node name="AssultEnemy6" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(-5793, -10127)
+
+[node name="AssultEnemy7" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(-5972, -14034)
+
+[node name="AssultEnemy8" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(9595, -13989)
+
+[node name="AssultEnemy9" parent="." instance=ExtResource("5_v7g60")]
+position = Vector2(4552, -10058)
+
+[node name="Obstical18" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-1891, -8974)
+
+[node name="Obstical19" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(6973, -5301)
+
+[node name="Obstical20" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-8660, 4682)
+
+[node name="Obstical21" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-3726, 4041)
+
+[node name="Obstical22" parent="." instance=ExtResource("5_h2vde")]
+position = Vector2(-4004, -3242)
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+[connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]

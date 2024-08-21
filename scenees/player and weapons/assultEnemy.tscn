@@ -41,6 +41,7 @@ tree_root = SubResource("AnimationNodeStateMachine_qmooi")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 
 [node name="hitBox" type="Area2D" parent="Sprite2D" groups=["enemy"]]
+visible = false
 scale = Vector2(6.33661, 6.33661)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitBox"]
@@ -48,6 +49,7 @@ position = Vector2(-4, -18)
 shape = SubResource("CapsuleShape2D_x700c")
 
 [node name="shoot_area" type="Area2D" parent="Sprite2D"]
+visible = false
 position = Vector2(-25.3465, -82.376)
 scale = Vector2(6.33661, 6.33661)
 
@@ -71,6 +73,7 @@ scale = Vector2(30.045, 30.045)
 shape = SubResource("RectangleShape2D_lhvbx")
 
 [node name="sight_area" type="Area2D" parent="."]
+visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="sight_area"]
 position = Vector2(2.5, -499)

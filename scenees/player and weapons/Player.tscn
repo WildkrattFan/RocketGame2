@@ -315,7 +315,8 @@ curve = SubResource("Curve_dq3jh")
 
 [sub_resource type="Curve" id="Curve_iyub0"]
 min_value = -1.0
-_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+max_value = 2.0
+_data = [Vector2(0, -1), 0.0, 0.0, 0, 0, Vector2(1, 1.76923), 0.0, 0.0, 0, 0]
 point_count = 2
 
 [sub_resource type="CurveTexture" id="CurveTexture_akhtx"]
@@ -380,7 +381,7 @@ one_shot = true
 [node name="Camera2D" type="Camera2D" parent="player"]
 visible = false
 position = Vector2(10, 10)
-zoom = Vector2(0.25, 0.25)
+zoom = Vector2(0.2, 0.2)
 limit_smoothed = true
 position_smoothing_enabled = true
 position_smoothing_speed = 4.0
@@ -480,12 +481,12 @@ shape = SubResource("CircleShape2D_tk25e")
 
 [node name="trail" type="GPUParticles2D" parent="player"]
 show_behind_parent = true
-emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_1re50")
 texture = ExtResource("9_31u5o")
 
 [connection signal="exploded" from="player" to="." method="_on_player_exploded"]
+[connection signal="points_added" from="player" to="." method="_on_player_points_added"]
 [connection signal="area_entered" from="player/playerHitBox" to="player" method="_on_area_2d_area_entered"]
 [connection signal="area_entered" from="player/playerHitBox" to="player/playerHitBox/CollisionShape2D" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="player/playerHitBox" to="player" method="_on_player_hit_box_area_exited"]

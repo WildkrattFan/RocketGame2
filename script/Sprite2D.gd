@@ -39,6 +39,7 @@ var enemyPosList = []
 var directionList = []
 
 signal exploded
+signal points_added
 
 func _ready():
 
@@ -295,6 +296,7 @@ func _on_machine_gun_timer_timeout():
 func add_score(num):
 	score += num
 	$CanvasLayer/score.text = "Points: " + str(score)
+	points_added.emit()
 
 
 func set_team(New_team):
@@ -308,3 +310,7 @@ func _enter_tree():
 func update_ammo_display():
 	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
 	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
+	
+	
+func get_points():
+	return score

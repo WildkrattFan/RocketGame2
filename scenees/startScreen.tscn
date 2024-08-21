@@ -1,12 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://b1xa61s4wsnfi"]
+[gd_scene load_steps=5 format=3 uid="uid://b1xa61s4wsnfi"]
 
 [ext_resource type="Script" path="res://script/startScreen.gd" id="1_wy37u"]
 [ext_resource type="Texture2D" uid="uid://clch8r61b7v5e" path="res://assets/spaceTitleScreen.png" id="1_ydybr"]
+[ext_resource type="Theme" uid="uid://bwmoc62uymsn6" path="res://pause_menu_theme.tres" id="3_0t8ob"]
 [ext_resource type="AudioStream" uid="uid://1576rsdrpj46" path="res://assets/neon-signs-simon-folwar-main-version-6833-02-40.mp3" id="3_sicsd"]
-
-[sub_resource type="Theme" id="Theme_foq17"]
-
-[sub_resource type="Theme" id="Theme_0616k"]
 
 [node name="StartScreen" type="Control"]
 layout_mode = 3
@@ -24,10 +21,11 @@ texture = ExtResource("1_ydybr")
 
 [node name="spaceGame" type="RichTextLabel" parent="."]
 layout_mode = 0
-offset_left = 221.0
-offset_right = 1027.0
-offset_bottom = 301.0
-theme = SubResource("Theme_foq17")
+offset_left = 203.0
+offset_top = 23.0
+offset_right = 1009.0
+offset_bottom = 324.0
+theme = ExtResource("3_0t8ob")
 theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/outline_size = 10
 theme_override_font_sizes/normal_font_size = 100
@@ -35,25 +33,27 @@ text = "SPACE GAME"
 
 [node name="controlsButton" type="Button" parent="."]
 layout_mode = 0
-offset_left = 434.0
-offset_top = 378.0
-offset_right = 508.0
-offset_bottom = 409.0
+offset_left = 305.0
+offset_top = 379.0
+offset_right = 486.0
+offset_bottom = 420.0
+theme = ExtResource("3_0t8ob")
 text = "Controls"
 
 [node name="play" type="Button" parent="."]
 layout_mode = 0
-offset_left = 578.0
-offset_top = 378.0
-offset_right = 619.0
-offset_bottom = 409.0
+offset_left = 549.0
+offset_top = 380.0
+offset_right = 659.0
+offset_bottom = 421.0
+theme = ExtResource("3_0t8ob")
 text = "Play"
 
 [node name="controlsPopup" type="Popup" parent="."]
 title = "Controls"
 initial_position = 1
 size = Vector2i(500, 353)
-theme = SubResource("Theme_0616k")
+theme = ExtResource("3_0t8ob")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="controlsPopup"]
 offset_left = 125.255
@@ -79,19 +79,25 @@ fit_content = true
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
-offset_left = 687.0
-offset_top = 378.0
-offset_right = 731.0
-offset_bottom = 409.0
+offset_left = 789.0
+offset_top = 381.0
+offset_right = 892.0
+offset_bottom = 422.0
+theme = ExtResource("3_0t8ob")
 text = "Host"
 
 [node name="hostPopup" type="Popup" parent="."]
-position = Vector2i(345, 321)
-size = Vector2i(464, 23)
+transparent_bg = true
+position = Vector2i(-27, 274)
+size = Vector2i(1366, 100)
+unresizable = false
+theme = ExtResource("3_0t8ob")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="hostPopup"]
-offset_right = 40.0
+offset_left = 81.51
+offset_right = 1106.51
 offset_bottom = 40.0
+theme_override_font_sizes/normal_font_size = 30
 text = "Online play is still in developnment! Please check back later!"
 fit_content = true
 scroll_active = false

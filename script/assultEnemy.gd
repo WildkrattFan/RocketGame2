@@ -74,7 +74,7 @@ func move_towards_target(delta):
 		var direction = (player.global_position - global_position).normalized()
 		position += direction * speed * delta
 		var goal_rotation = direction.angle() - Vector2(0,-1).angle()
-		$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, goal_rotation, 2 * delta)
+		$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, goal_rotation, 3 * delta)
 
 
 func _on_hit_box_area_entered(area):

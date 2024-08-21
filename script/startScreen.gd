@@ -1,7 +1,7 @@
 extends Control
 
 var game_scene = preload("res://scenees/capture_the_hill/capture_the_hill_space.tscn")
-var demo_scene = preload("res://scenees/demo_levels/default_level.tscn")
+var levels_scene = preload("res://scenees/levels_screen.tscn")
 @export var player_scene = preload("res://scenees/player and weapons/Player.tscn")
 var peer = ENetMultiplayerPeer.new()
 
@@ -36,7 +36,7 @@ func _on_host_pressed():
 
 func _on_play_pressed():
 	
-	get_tree().change_scene_to_packed(demo_scene)
+	get_tree().change_scene_to_packed(levels_scene)
 	#TODO: Implement online play!
 	#print("Attempting to create client...")
 	#peer.create_client("localhost", 135)
