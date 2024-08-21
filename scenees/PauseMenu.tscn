@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://bwmoc62uymsn6" path="res://pause_menu_theme.tres" id="2_nlk7g"]
 
 [node name="PauseMenu" type="Control"]
+process_mode = 2
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -15,14 +16,7 @@ script = ExtResource("1_23l4v")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="Control" type="Control" parent="CanvasLayer"]
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 offset_left = -188.0
 offset_top = -543.0
 offset_right = 1387.0
@@ -30,8 +24,7 @@ offset_bottom = 1032.0
 texture = ExtResource("1_fsflp")
 expand_mode = 1
 
-[node name="resume_button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="resume_button" type="Button" parent="CanvasLayer"]
 offset_left = 650.0
 offset_top = 400.0
 offset_right = 788.0
@@ -39,8 +32,7 @@ offset_bottom = 441.0
 theme = ExtResource("2_nlk7g")
 text = "Resume"
 
-[node name="quit_button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="quit_button" type="Button" parent="CanvasLayer"]
 offset_left = 100.0
 offset_top = 400.0
 offset_right = 189.0
@@ -48,8 +40,7 @@ offset_bottom = 441.0
 theme = ExtResource("2_nlk7g")
 text = "Quit"
 
-[node name="restart_button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="restart_button" type="Button" parent="CanvasLayer"]
 offset_left = 350.0
 offset_top = 400.0
 offset_right = 502.0
@@ -57,8 +48,7 @@ offset_bottom = 441.0
 theme = ExtResource("2_nlk7g")
 text = "Restart"
 
-[node name="options_button" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="options_button" type="Button" parent="CanvasLayer"]
 offset_left = 900.0
 offset_top = 400.0
 offset_right = 1052.0
@@ -66,8 +56,7 @@ offset_bottom = 441.0
 theme = ExtResource("2_nlk7g")
 text = "Options"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/Control"]
-layout_mode = 0
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer"]
 offset_left = 250.0
 offset_top = 162.0
 offset_right = 897.0
@@ -76,8 +65,8 @@ theme = ExtResource("2_nlk7g")
 theme_override_font_sizes/normal_font_size = 100
 text = "Game Paused"
 
-[connection signal="button_down" from="CanvasLayer/Control/resume_button" to="." method="_on_resume_button_button_down"]
-[connection signal="pressed" from="CanvasLayer/Control/resume_button" to="." method="_on_resume_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/quit_button" to="." method="_on_quit_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/restart_button" to="." method="_on_restart_button_pressed"]
-[connection signal="pressed" from="CanvasLayer/Control/options_button" to="." method="_on_options_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/resume_button" to="." method="_on_resume_button_button_down"]
+[connection signal="pressed" from="CanvasLayer/resume_button" to="." method="_on_resume_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/quit_button" to="." method="_on_quit_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/restart_button" to="." method="_on_restart_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/options_button" to="." method="_on_options_button_pressed"]

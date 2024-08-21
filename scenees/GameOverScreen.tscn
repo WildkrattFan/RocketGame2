@@ -23,6 +23,7 @@ theme = SubResource("Theme_ej0xy")
 script = ExtResource("1_pknlo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
+process_mode = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 show_behind_parent = true

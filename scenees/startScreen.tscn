@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1xa61s4wsnfi"]
+[gd_scene load_steps=6 format=3 uid="uid://b1xa61s4wsnfi"]
 
 [ext_resource type="Script" path="res://script/startScreen.gd" id="1_wy37u"]
 [ext_resource type="Texture2D" uid="uid://clch8r61b7v5e" path="res://assets/spaceTitleScreen.png" id="1_ydybr"]
+[ext_resource type="AudioStream" uid="uid://1576rsdrpj46" path="res://assets/neon-signs-simon-folwar-main-version-6833-02-40.mp3" id="3_sicsd"]
 
 [sub_resource type="Theme" id="Theme_foq17"]
 
@@ -51,7 +52,7 @@ text = "Play"
 [node name="controlsPopup" type="Popup" parent="."]
 title = "Controls"
 initial_position = 1
-size = Vector2i(500, 305)
+size = Vector2i(500, 353)
 theme = SubResource("Theme_0616k")
 
 [node name="RichTextLabel" type="RichTextLabel" parent="controlsPopup"]
@@ -72,7 +73,9 @@ theme_override_font_sizes/normal_font_size = 40
 text = "Space: Shoot
 WASD or Arrow Keys: fly
 Shift: Switch Ammo
-R: Reload"
+R: Reload
+E: Boost"
+fit_content = true
 
 [node name="Host" type="Button" parent="."]
 layout_mode = 0
@@ -93,6 +96,10 @@ text = "Online play is still in developnment! Please check back later!"
 fit_content = true
 scroll_active = false
 autowrap_mode = 0
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_sicsd")
+volume_db = -21.027
 
 [connection signal="button_down" from="controlsButton" to="." method="_on_controls_button_button_down"]
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]

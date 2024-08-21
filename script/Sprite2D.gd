@@ -79,10 +79,12 @@ func handle_input(delta):
 		_stateMachine.travel("flying")
 		$trail.emitting = true
 		if Input.is_action_pressed("boost"):
-			velocity += direction * speed * 2 * delta
+			velocity += direction * speed * 10 * delta
+			$Camera2D.position_smoothing_speed = 15
 			max_velocity = 100
 		elif max_velocity > normal_max_velocity:
 			max_velocity *= .97
+			$Camera2D.position_smoothing_speed = 4
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")

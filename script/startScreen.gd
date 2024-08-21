@@ -12,6 +12,16 @@ func _ready():
 	multiplayer.connection_failed.connect(_on_connection_failed)
 	multiplayer.server_disconnected.connect(_on_server_disconnected)
 	multiplayer.peer_connected.connect(_on_peer_connected)
+	
+	
+func _process(delta: float) -> void:
+	
+	if $AudioStreamPlayer.playing == false:
+		$AudioStreamPlayer.play()
+		
+	#Music from #Uppbeat (free for Creators!):
+	#https://uppbeat.io/t/simon-folwar/neon-signs
+	#License code: QFOIC2KZCJDRWPGA
 
 func _on_controls_button_button_down():
 	$controlsPopup.visible = true
