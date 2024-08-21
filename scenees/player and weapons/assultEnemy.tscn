@@ -1,8 +1,8 @@
 [gd_scene load_steps=10 format=3 uid="uid://btp0cnq64nui6"]
 
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ro37q"]
-[ext_resource type="Script" path="res://scenees/player and weapons/assultEnemy.gd" id="1_svosa"]
-[ext_resource type="Shader" path="res://scenees/player and weapons/assultEnemy.gdshader" id="2_i37mw"]
+[ext_resource type="Script" path="res://script/assultEnemy.gd" id="1_svosa"]
+[ext_resource type="Shader" path="res://script/assultEnemy.gdshader" id="2_i37mw"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_5wasw"]
 shader = ExtResource("2_i37mw")

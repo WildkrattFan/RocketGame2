@@ -32,6 +32,5 @@ func _on_button_pressed():
 
 
 func _on_button_2_pressed() -> void:
-	print("going to menu")
 	get_tree().change_scene_to_file("res://scenees/startScreen.tscn")
 	queue_free()

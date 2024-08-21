@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://c2wufphomwct7"]
+
+[node name="ScanShot" type="Node2D"]

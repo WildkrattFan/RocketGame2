@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://btu1fjdg3tft"]
 
-[ext_resource type="Script" path="res://scenees/obstical.gd" id="1_5hcse"]
+[ext_resource type="Script" path="res://script/obstical.gd" id="1_5hcse"]
 [ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_b27cs"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ci40t"]

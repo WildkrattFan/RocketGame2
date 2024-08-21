@@ -86,7 +86,6 @@ func fire_heat_seeking_missile():
 		$Timer.start()
 
 func explode():
-	print(killedBy)
 	if killedBy:
 		if killedBy.has_method("add_score"):
 			killedBy.add_score(2)

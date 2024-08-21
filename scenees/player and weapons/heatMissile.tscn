@@ -1,6 +1,6 @@
 [gd_scene load_steps=22 format=3 uid="uid://gjjfywwhcjoh"]
 
-[ext_resource type="Script" path="res://scenees/player and weapons/heatMissile.gd" id="1_hxh77"]
+[ext_resource type="Script" path="res://script/heatMissile.gd" id="1_hxh77"]
 [ext_resource type="Texture2D" uid="uid://ddqpboxxiymgk" path="res://assets/heatSeakingMissile-Sheet.png" id="2_85ip5"]
 [ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_1wd3c"]
 

@@ -1,7 +1,13 @@
-[gd_scene load_steps=19 format=3 uid="uid://btdoppmsv78tv"]
+[gd_scene load_steps=21 format=3 uid="uid://btdoppmsv78tv"]
 
 [ext_resource type="Texture2D" uid="uid://betw0tvg2amcl" path="res://assets/missileTurret-Sheet.png" id="1_k4u0e"]
-[ext_resource type="Script" path="res://scenees/player and weapons/turret.gd" id="1_m3e43"]
+[ext_resource type="Script" path="res://script/turret.gd" id="1_m3e43"]
+[ext_resource type="Shader" path="res://script/assultEnemy.gdshader" id="2_07hp0"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_krc6s"]
+shader = ExtResource("2_07hp0")
+shader_parameter/line_color = Color(1, 0, 0, 1)
+shader_parameter/line_thickness = 8.865
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kcuw8"]
 radius = 350.051
@@ -114,11 +120,12 @@ size = Vector2(929, 2098)
 script = ExtResource("1_m3e43")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_krc6s")
 scale = Vector2(0.625, 0.625)
 texture = ExtResource("1_k4u0e")
 hframes = 4
 
-[node name="turretHitBox" type="Area2D" parent="Sprite2D"]
+[node name="turretHitBox" type="Area2D" parent="Sprite2D" groups=["enemy"]]
 scale = Vector2(0.247219, 0.247219)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/turretHitBox"]

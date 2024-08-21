@@ -75,12 +75,10 @@ func split(area):
 	#TODO: complete the split function if needed
 	var health_percent = health / max_health
 	
-	print(health_percent)
 	if health_percent <= 0:
 		randomDirection = randomDirection * 0
 		_stateMachine.travel("destruction")
 	elif health_percent <= 0.2:
-		print("0.2 animation")
 		_stateMachine.travel("20")
 	elif health_percent <= 0.4:
 		_stateMachine.travel("40")

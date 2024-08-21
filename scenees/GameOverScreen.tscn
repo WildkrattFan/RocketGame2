@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://script/Button.gd" id="1_0rluh"]
 [ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="1_74r7c"]
-[ext_resource type="Script" path="res://scenees/GameOverScreen.gd" id="1_pknlo"]
+[ext_resource type="Script" path="res://script/GameOverScreen.gd" id="1_pknlo"]
 [ext_resource type="Texture2D" uid="uid://dtosstxaeyoup" path="res://assets/gameOverScreen.png" id="2_w7jo2"]
 
 [sub_resource type="Theme" id="Theme_ej0xy"]

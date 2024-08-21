@@ -8,7 +8,7 @@ const MAX_HEALTH = 10
 var reload_time = 5.0
 var remaining_reload_time = 0.0
 var velocity = Vector2.ZERO
-var normal_max_veloicty = 15
+var normal_max_velocity = 15
 var max_velocity = 15
 var reload_progress_bar
 var blackHole
@@ -17,13 +17,12 @@ var isExploding = false
 
 var team = "red"
 
-var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke"]
+var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke", "Scanner"]
 var ammo_link = [preload("res://scenees/player and weapons/heatMissile.tscn"),preload("res://scenees/player and weapons/bullet.tscn"),preload("res://scenees/player and weapons/nuke.tscn")]
-var max_amount_per_ammo = [3,40,1]
+var max_amount_per_ammo = [3,40,1,1]
 
 var machine_gun_wait_time = .1
 var can_shoot = true
-
 
 var _stateMachine
 
@@ -35,9 +34,14 @@ var ammo = max_ammo
 
 var score = 0
 
+var enemyScannedList = []
+var enemyPosList = []
+var directionList = []
+
 signal exploded
 
 func _ready():
+
 	$CanvasLayer/score.text = "Points: " + str(score)
 	$Timer.set_wait_time(reload_time)
 	_stateMachine = $AnimationTree.get("parameters/playback")
@@ -49,14 +53,10 @@ func _ready():
 	
 	# Start a timer to replenish ammo after a certain duration
 
-
 func _process(delta):
-	self.material.set_shader_parameter("player_velocity", velocity)
-	self.material.set_shader
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
 	apply_movement(delta)
-	
 
 func handle_input(delta):
 	# Check keyboard input for rotation
@@ -72,6 +72,7 @@ func handle_input(delta):
 	# Calculate movement direction based on rotation
 	var direction = Vector2(0, -1).rotated(rotation)
 
+
 	# Check keyboard input for movement
 	if Input.is_action_pressed("foreward"):
 		velocity += direction * speed * delta
@@ -80,7 +81,7 @@ func handle_input(delta):
 		if Input.is_action_pressed("boost"):
 			velocity += direction * speed * 2 * delta
 			max_velocity = 100
-		elif max_velocity > normal_max_veloicty:
+		elif max_velocity > normal_max_velocity:
 			max_velocity *= .97
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
@@ -100,6 +101,7 @@ func handle_input(delta):
 	if velocity.length() > max_velocity:
 		velocity = velocity.normalized() * max_velocity
 
+
 	# Shooting logic
 	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0 and !isExploding:
 		if can_shoot:
@@ -109,10 +111,12 @@ func handle_input(delta):
 			can_shoot = false
 			$machine_gun_timer.start()
 
+	
 	if Input.is_action_just_pressed("shoot") and ammo > 0 and $Timer.time_left <= 0 and !isExploding:
 		shoot()
 		ammo -= 1
 		update_ammo_display()
+
 
 	if ammo <= 0:
 		$CanvasLayer/ammoRemainingLabel.add_theme_color_override("default_color", Color(224, 27, 0))
@@ -132,6 +136,7 @@ func handle_input(delta):
 
 func apply_movement(delta):
 	position += velocity
+
 	if blackHole:
 		var suction_direction = (blackHole.global_position - global_position).normalized()
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
@@ -139,29 +144,30 @@ func apply_movement(delta):
 		var radius = collisionShape.shape.radius
 		var suction_strength = blackHoleSuction / (distance_to_black_hole - radius / radius)
 		position += suction_direction * suction_strength * delta
-	
+
+
 func shoot():
 	var random_variance = 0
 	# Calculate the spawn position of the projectile
 	if current_ammo == "Machine Gun":
-		random_variance =randf_range(-10,10)
+		random_variance = randf_range(-10, 10)
 	var spawn_position = position + Vector2(random_variance, -85).rotated(rotation)
-		# Instantiate the projectile scene
+
+	
+	# Instantiate the projectile scene
 	var new_projectile = projectile_scene.instantiate()
 	
-		# Set the projectile's position and rotation
+	# Set the projectile's position and rotation
 	new_projectile.position = spawn_position
 	new_projectile.rotation = rotation
 	
-		# Set the projectile's velocity
+	# Set the projectile's velocity
 	var shootDirection = Vector2(0, -1).rotated(rotation)
 	new_projectile.set_velocity(shootDirection * shoot_speed + self.velocity)
 	
-		# Add the projectile to the scene
+	# Add the projectile to the scene
 	new_projectile.setPlayer(self)
 	get_parent().add_child(new_projectile)
-	
-
 
 
 func start_reload():
@@ -170,6 +176,7 @@ func start_reload():
 		remaining_reload_time = reload_time
 		$Timer.start()
 		$CanvasLayer/ammoTypeLabel.text = "Reloading..."
+
 
 		# Show the reload progress bar
 		$CanvasLayer/ammoRemainingLabel.text = str(0) + "/" + str(max_ammo)
@@ -185,8 +192,10 @@ func _on_timer_timeout():
 	ammo = max_ammo
 	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 
+
 func setVelocity(newVelocity):
 	velocity = newVelocity
+
 
 func calculate_damage(distance):
 	var explosion_radius = 490.0
@@ -195,11 +204,12 @@ func calculate_damage(distance):
 	var damage_range = max_damage - min_damage
 	var normalized_distance = clamp((explosion_radius - distance) / explosion_radius, 0.0, 10.0)
 	var damage = int(min_damage + normalized_distance * damage_range)
-	return damage
 
+	return damage
 
 # Called when another area enters this area.
 func _on_area_2d_area_entered(area):
+
 	if area.name == "Obstical":
 		health -= 10
 		death()
@@ -226,6 +236,7 @@ func _on_area_2d_area_entered(area):
 		
 	if area.is_in_group("blackHole"):
 		blackHole = area
+
 		
 	if area.name == "blackHoleCenter":
 		health -= 100
@@ -241,34 +252,26 @@ func _on_area_2d_area_entered(area):
 		var direction = (global_position - area.global_position).normalized()
 		var explosion_strength = 5000 / distance_to_explosion
 		velocity = direction *  explosion_strength # Apply force to simulate blast effect
+
 		death()
-		
-		
-		
+
 func death():
 	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
+
 	if(health <= 0):
-			
 		# Implement player death logic here
 		isExploding = true
 		$death_timer.start()
-		
-
 
 func _on_player_hit_box_area_exited(area):
 	if area.is_in_group("blackHole"):
 		blackHole = null
-		
-
-
 
 
 func _on_death_delay_timeout():
-			
-		# 2. Display game over screen (if applicable)
+	# 2. Display game over screen (if applicable)
 	exploded.emit()
-	
-	
+
 
 func switchAmmo():
 	if current_ammo_index + 1 >= ammo_Type_list.size():
@@ -281,21 +284,24 @@ func switchAmmo():
 	max_ammo = max_amount_per_ammo[current_ammo_index]
 	ammo = max_ammo
 	$CanvasLayer/ammoTypeLabel.text = "Ammo: " + current_ammo
-	
 
 
 func _on_machine_gun_timer_timeout():
 	can_shoot = true
 
+
 func add_score(num):
 	score += num
 	$CanvasLayer/score.text = "Points: " + str(score)
 
+
 func set_team(New_team):
 	team = New_team
+
 	
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
+
 
 func update_ammo_display():
 	$CanvasLayer/TextureProgressBar.value = (float(ammo) / float(max_ammo)) * 100
