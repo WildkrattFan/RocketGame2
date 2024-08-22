@@ -1,8 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://tyjoqgwevkhl"]
+[gd_scene load_steps=4 format=3 uid="uid://tyjoqgwevkhl"]
 
 [ext_resource type="Script" path="res://script/nuke.gd" id="1_8vtjo"]
 [ext_resource type="Texture2D" uid="uid://30pj018r31od" path="res://assets/nuclearMissile.png" id="2_jj7by"]
-[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_uo7a1"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
 radius = 29.0548
@@ -15,7 +14,6 @@ script = ExtResource("1_8vtjo")
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.103253, 0.0940596)
 texture = ExtResource("2_jj7by")
-script = ExtResource("3_uo7a1")
 
 [node name="Timer" type="Timer" parent="."]
 

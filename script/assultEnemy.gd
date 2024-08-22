@@ -31,8 +31,8 @@ func _process(delta):
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var suction_strength = blackHoleSuction / distance_to_black_hole
 			# Adjust the rotation towards the black hole
-		#var target_rotation = suction_direction.angle()
-		#$Sprite2D.rotation = lerp_angle(rotation, target_rotation, 2 * delta)
+		var target_rotation = suction_direction.angle()
+		$Sprite2D.rotation = lerp_angle(rotation, target_rotation, 2 * delta)
 		
 		position += suction_direction * suction_strength * delta
 	
@@ -210,7 +210,7 @@ func _on_reload_timer_timeout():
 	ammo = 20
 	reloading = false
 
-
+#Makes the spaces between bullets possible
 func _on_shot_timer_timeout():
 	can_shoot = true
 

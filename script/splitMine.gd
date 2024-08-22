@@ -2,7 +2,7 @@ extends Node2D
 
 # Variables
 var player
-var smaller_mine_scene = preload("res://scenees/mine.tscn")
+var smaller_mine_scene = preload("res://scenees/player and weapons/mine.tscn")
 var health = 3
 var blackHole
 var blackHoleSuction = 1500000

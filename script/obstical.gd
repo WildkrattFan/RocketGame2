@@ -32,16 +32,17 @@ func _process(delta):
 	position += randomDirection
 	rotation += randomRotatation_speed
 	
-	
+	#Handles blackhole logic
 	if blackHole:
 		var suction_direction = (blackHole.global_position - global_position).normalized()
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var suction_strength = blackHoleSuction / distance_to_black_hole
 			# Adjust the rotation towards the black hole
-		#var target_rotation = suction_direction.angle()
-		#$Sprite2D.rotation = lerp_angle(rotation, target_rotation, 2 * delta)
+		var target_rotation = suction_direction.angle()
+		rotation = lerp_angle(rotation, target_rotation, 2 * delta)
 		
 		position += suction_direction * suction_strength * delta
+
 
 
 func _on_hitbox_area_entered(area):
@@ -88,7 +89,7 @@ func split(area):
 		_stateMachine.travel("80")
 	
 
-
+#Removes the obstical from the scene once destroyed
 func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 	if anim_name == "destruction":
 		queue_free()
