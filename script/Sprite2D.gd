@@ -17,7 +17,7 @@ var isExploding = false
 
 var team = "red"
 
-var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke", "Scanner"]
+var ammo_Type_list = ["Heat Missile", "Machine Gun","Nuke"]
 var ammo_link = [preload("res://scenees/player and weapons/heatMissile.tscn"),preload("res://scenees/player and weapons/bullet.tscn"),preload("res://scenees/player and weapons/nuke.tscn")]
 var max_amount_per_ammo = [3,40,1,1]
 

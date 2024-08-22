@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://b3hmt0x6urp0w"]
 
-[ext_resource type="Script" path="res://script/default_level.gd" id="1_88a0l"]
+[ext_resource type="Script" path="res://scenees/demo_levels/default_level.gd" id="1_ah6a3"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="1_lm03g"]
 [ext_resource type="Shader" path="res://script/default_level.gdshader" id="2_kjb2r"]
 [ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="4_eg5ea"]
@@ -11,7 +11,8 @@
 shader = ExtResource("2_kjb2r")
 
 [node name="DefaultLevel" type="Node2D"]
-script = ExtResource("1_88a0l")
+visible = false
+script = ExtResource("1_ah6a3")
 
 [node name="SpaceTitleScreen" type="Sprite2D" parent="."]
 show_behind_parent = true

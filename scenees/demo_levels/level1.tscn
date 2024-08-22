@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://d3mwlmk8mnki0"]
 
-[ext_resource type="Script" path="res://script/default_level.gd" id="1_gt8js"]
+[ext_resource type="Script" path="res://scenees/demo_levels/level_1.gd" id="1_skk4j"]
 [ext_resource type="Shader" path="res://script/default_level.gdshader" id="2_srbs3"]
 [ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="3_gbtm3"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_cipho"]
@@ -11,7 +11,7 @@
 shader = ExtResource("2_srbs3")
 
 [node name="Level1" type="Node2D"]
-script = ExtResource("1_gt8js")
+script = ExtResource("1_skk4j")
 
 [node name="SpaceTitleScreen" type="Sprite2D" parent="."]
 show_behind_parent = true

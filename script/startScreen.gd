@@ -7,11 +7,12 @@ var peer = ENetMultiplayerPeer.new()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	pass
 	# Connect signals for successful or failed connection
-	multiplayer.connected_to_server.connect(_on_connection_succeeded)
-	multiplayer.connection_failed.connect(_on_connection_failed)
-	multiplayer.server_disconnected.connect(_on_server_disconnected)
-	multiplayer.peer_connected.connect(_on_peer_connected)
+	#multiplayer.connected_to_server.connect(_on_connection_succeeded)
+	#multiplayer.connection_failed.connect(_on_connection_failed)
+	#multiplayer.server_disconnected.connect(_on_server_disconnected)
+	#multiplayer.peer_connected.connect(_on_peer_connected)
 	
 	
 func _process(delta: float) -> void:
@@ -35,8 +36,9 @@ func _on_host_pressed():
 	$hostPopup.visible = true
 
 func _on_play_pressed():
-	
+	print("switching scenes")
 	get_tree().change_scene_to_packed(levels_scene)
+	
 	#TODO: Implement online play!
 	#print("Attempting to create client...")
 	#peer.create_client("localhost", 135)

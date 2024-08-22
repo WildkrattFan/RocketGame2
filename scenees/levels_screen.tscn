@@ -27,7 +27,7 @@ offset_bottom = 635.0
 theme = ExtResource("3_q25b7")
 text = "Back"
 
-[node name="HFlowContainer" type="HFlowContainer" parent="."]
+[node name="level_buttons" type="HFlowContainer" parent="."]
 layout_mode = 0
 offset_left = 19.0
 offset_top = 89.0
@@ -35,23 +35,23 @@ offset_right = 1129.0
 offset_bottom = 580.0
 theme = ExtResource("3_q25b7")
 
-[node name="level_1" type="Button" parent="HFlowContainer"]
+[node name="level_1" type="Button" parent="level_buttons"]
 layout_mode = 2
 text = "1"
 
-[node name="level_2" type="Button" parent="HFlowContainer"]
+[node name="level_2" type="Button" parent="level_buttons"]
 layout_mode = 2
 text = "2"
 
-[node name="level_3" type="Button" parent="HFlowContainer"]
+[node name="level_3" type="Button" parent="level_buttons"]
 layout_mode = 2
 text = "3"
 
-[node name="level_4" type="Button" parent="HFlowContainer"]
+[node name="level_4" type="Button" parent="level_buttons"]
 layout_mode = 2
 text = "4"
 
-[node name="level_5" type="Button" parent="HFlowContainer"]
+[node name="level_5" type="Button" parent="level_buttons"]
 layout_mode = 2
 text = "5"
 
@@ -66,6 +66,6 @@ theme_override_font_sizes/normal_font_size = 50
 text = "Levels"
 
 [connection signal="button_down" from="back_bttn" to="." method="_on_back_bttn_button_down"]
-[connection signal="button_down" from="HFlowContainer/level_1" to="." method="_on_level_1_button_down"]
-[connection signal="button_down" from="HFlowContainer/level_2" to="." method="_on_level_2_button_down"]
-[connection signal="button_down" from="HFlowContainer/level_3" to="." method="_on_level_3_button_down"]
+[connection signal="button_down" from="level_buttons/level_1" to="." method="_on_level_1_button_down"]
+[connection signal="button_down" from="level_buttons/level_2" to="." method="_on_level_2_button_down"]
+[connection signal="button_down" from="level_buttons/level_3" to="." method="_on_level_3_button_down"]

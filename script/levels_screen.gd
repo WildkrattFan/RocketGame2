@@ -3,10 +3,23 @@ var startScene = preload("res://scenees/startScreen.tscn")
 
 var level_list = [preload("res://scenees/demo_levels/level1.tscn"),preload("res://scenees/demo_levels/level2.tscn"),preload("res://scenees/demo_levels/level3.tscn")]
 
+var current_level = GlobalLevelTracking.current_level
+
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	pass # Replace with function body.
+	
+	var level_button_list = $level_buttons.get_children()
+	
+	for i in range (level_button_list.size()):
+		if i <= current_level-1:
+			level_button_list[i].disabled = false
+			level_button_list[i].modulate = Color(1, 1, 1)  # Normal color
+		else:
+			level_button_list[i].disabled = true
+			level_button_list[i].modulate = Color(0.5, 0.5, 0.5)  # Gray out the button
+
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -15,7 +28,7 @@ func _process(delta: float) -> void:
 
 
 func _on_back_bttn_button_down() -> void:
-	switchScene(startScene)
+	get_tree().change_scene_to_packed(startScene)
 
 
 

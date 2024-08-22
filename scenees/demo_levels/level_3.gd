@@ -6,7 +6,7 @@ var levelsScene = preload("res://scenees/levels_screen.tscn")
 var pause_menu_instance
 var paused = false
 
-@export var goal_points = 6
+@export var goal_points = 20
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,4 +42,4 @@ func _on_player_main_points_added() -> void:
 	print($player/player.get_points())
 	if $player/player.get_points() >= goal_points:
 		get_tree().change_scene_to_packed(levelsScene)
-		GlobalLevelTracking.set_level(1)
+		GlobalLevelTracking.set_level(4)
