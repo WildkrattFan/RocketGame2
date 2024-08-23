@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://1576rsdrpj46" path="res://assets/neon-signs-simon-folwar-main-version-6833-02-40.mp3" id="3_sicsd"]
 
 [node name="StartScreen" type="Control"]
+process_mode = 3
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0

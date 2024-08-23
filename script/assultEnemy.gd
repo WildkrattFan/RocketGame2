@@ -18,6 +18,7 @@ var killedBy
 var ammo = 20
 var player_in_range = false
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player = get_parent().get_node("player").get_node('player')
@@ -104,6 +105,9 @@ func explosion():
 	if killedBy:
 		if killedBy.has_method("add_score"):
 			killedBy.add_score(3)
+		elif player:
+			if player.has_method("add_score"):
+				player.add_score(3)
 	var spawn_position = position + Vector2(64, 0).rotated(rotation)
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position

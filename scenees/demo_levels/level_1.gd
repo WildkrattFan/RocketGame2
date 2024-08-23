@@ -2,11 +2,11 @@ extends Node2D
 
 var gameOverScene = preload("res://scenees/GameOverScreen.tscn")
 var pauseMenuScene = preload("res://scenees/PauseMenu.tscn")
-var levelsScene = preload("res://scenees/levels_screen.tscn")
+var levelsScene = ("res://scenees/levels_screen.tscn")
 var pause_menu_instance
 var paused = false
 
-@export var goal_points = 5.9
+@export var goal_points = 6
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -42,5 +42,5 @@ func _on_player_main_points_added() -> void:
 	print($player/player.get_points())
 	if $player/player.get_points() >= goal_points:
 		print("goal met!")
-		get_tree().change_scene_to_packed(levelsScene)
+		get_tree().change_scene_to_file(levelsScene)
 		GlobalLevelTracking.set_level(2)

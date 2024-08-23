@@ -2,7 +2,7 @@ extends Node2D
 
 var gameOverScene = preload("res://scenees/GameOverScreen.tscn")
 var pauseMenuScene = preload("res://scenees/PauseMenu.tscn")
-var levelsScene = preload("res://scenees/levels_screen.tscn")
+var levelsScene = ("res://scenees/levels_screen.tscn")
 var pause_menu_instance
 var paused = false
 
@@ -41,5 +41,5 @@ func _toggle_pause_menu():
 func _on_player_main_points_added() -> void:
 	print($player/player.get_points())
 	if $player/player.get_points() >= goal_points:
-		get_tree().change_scene_to_packed(levelsScene)
+		get_tree().change_scene_to_file(levelsScene)
 		GlobalLevelTracking.set_level(4)
