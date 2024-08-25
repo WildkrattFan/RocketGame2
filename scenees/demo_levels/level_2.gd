@@ -42,4 +42,5 @@ func _on_player_main_points_added() -> void:
 	print($player/player.get_points())
 	if $player/player.get_points() >= goal_points:
 		get_tree().change_scene_to_file(levelsScene)
-		GlobalLevelTracking.set_level(3)
+		if GlobalLevelTracking.current_level < 3:
+			GlobalLevelTracking.set_level(3)

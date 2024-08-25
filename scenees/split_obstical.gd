@@ -13,16 +13,15 @@ var _stateMachine
 
 var obstical_scene = preload("res://scenees/split_obstical.tscn")
 
-var has_split = false
+var has_split
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	randomScale = randf_range(1,6)
-	scale.x = randomScale
-	scale.y = randomScale
-	health = randomScale * 10
+	$Sprite2D/hitbox.monitorable = false
+	health = scale.x * 10 + 1
 	max_health = health
 	randomDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-	randomSpeed = randf_range(0,3)
+	randomSpeed = randf_range(0,3) / scale.x
 	randomRotation = randf_range(0,359)
 	rotation = randomRotation
 	
@@ -55,7 +54,7 @@ func _on_hitbox_area_entered(area):
 		randomDirection = -randomDirection
 		randomRotatation_speed = -randomRotatation_speed
 		
-	elif area.name == "pearcing_missile":
+	if area.name == "pearcing_missile":
 		health -=10
 		
 	elif area.is_in_group("missile") and area.name != "nuclear_missile_area" :
@@ -88,15 +87,17 @@ func split(area):
 		var new_scale = scale / split_parts_num
 		var split_counter = 0
 		$Sprite2D/hitbox/CollisionPolygon2D.disabled = true
-		for i in range(split_parts_num):
-			split_counter += 1
-			var split_instance = obstical_scene.instantiate()
-			split_instance.position = position + Vector2(randf_range(scale.x * 100, scale.x * 200 ),randf_range(scale.y * 100, scale.y * 200))
-			split_instance.scale = new_scale
-			get_parent().call_deferred("add_child",split_instance)
-			queue_free()
-		has_split = true
-			
+		if new_scale >= Vector2(0.3,0.3):
+			for i in range(split_parts_num):
+				print("Splitting" + str(split_counter))
+				split_counter += 1
+				var split_instance = obstical_scene.instantiate()
+				split_instance.position = position + Vector2(randf_range(scale.x * 100, scale.x * 200 ),randf_range(scale.y * 100, scale.y * 200))
+				print(split_instance.position)
+				split_instance.scale = new_scale
+				get_parent().call_deferred("add_child",split_instance)
+				queue_free()
+			has_split = true
 		
 	elif health_percent <= 0.2:
 		_stateMachine.travel("20")
@@ -116,3 +117,7 @@ func _on_animation_tree_animation_finished(anim_name: StringName) -> void:
 		
 
 	
+
+
+func _on_spawn_grace_timeout() -> void:
+	$Sprite2D/hitbox.monitorable = true
