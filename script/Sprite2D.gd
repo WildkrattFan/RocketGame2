@@ -58,6 +58,8 @@ func _process(delta):
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
 	apply_movement(delta)
+	scan()
+
 
 func handle_input(delta):
 	# Check keyboard input for rotation
@@ -314,3 +316,35 @@ func update_ammo_display():
 	
 func get_points():
 	return score
+	
+func scan():
+	var closest_enemy: Node2D = null
+	var shortest_distance: float = INF  # Start with a very large number
+	var enemy_scanned_list = get_tree().get_nodes_in_group("enemy")
+	
+	for enemy in enemy_scanned_list:
+		if enemy.position != Vector2.ZERO:
+			var distance = (enemy.position - position).length()  # Calculate the distance
+
+		# Update closest_enemy if this enemy is closer
+			if distance < shortest_distance:
+				shortest_distance = distance
+				closest_enemy = enemy
+	# Print the closest enemy's position if one is found
+	 # Update arrow if a closest enemy is found
+	if closest_enemy != null:
+		var closest_enemy_position = closest_enemy.global_position
+		var direction_to_enemy = (closest_enemy_position - global_position).normalized()  # Direction vector
+		
+		# Calculate rotation in radians
+		var angle_to_enemy = direction_to_enemy.angle()
+ # Adjust as needed
+		angle_to_enemy += PI/2
+		# Rotate the arrow to face the direction of the enemy
+		$CanvasLayer/Arrow.rotation = angle_to_enemy
+		
+		# Optionally, scale the arrow based on distance or adjust its appearance
+		print("Direction to Closest Enemy: ", direction_to_enemy.x * 180/PI, direction_to_enemy.y * 180/PI)
+	else:
+		# Hide the arrow if no enemies are found
+		$CanvasLayer/Arrow.visible = false
