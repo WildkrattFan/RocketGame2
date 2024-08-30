@@ -329,7 +329,7 @@ func scan():
 	
 	for enemy in enemy_scanned_list:
 		if enemy.position != Vector2.ZERO:
-			var distance = (enemy.position - position).length()  # Calculate the distance
+			var distance = (enemy.position - global_position).length()  # Calculate the distance
 
 		# Update closest_enemy if this enemy is closer
 			if distance < shortest_distance:
