@@ -3,6 +3,8 @@ extends Sprite2D
 @export var speed = 50
 @export var rotation_speed = 2
 @export var shoot_speed = 1500
+@export var arrowText : Texture2D
+@export var red_arrowText : Texture2D
 var health
 const MAX_HEALTH = 10
 var reload_time = 5.0
@@ -40,6 +42,9 @@ var directionList = []
 
 signal exploded
 signal points_added
+
+
+
 
 func _ready():
 
@@ -330,7 +335,6 @@ func scan():
 			if distance < shortest_distance:
 				shortest_distance = distance
 				closest_enemy = enemy
-	# Print the closest enemy's position if one is found
 	 # Update arrow if a closest enemy is found
 	if closest_enemy != null:
 		var closest_enemy_position = closest_enemy.global_position
@@ -343,8 +347,17 @@ func scan():
 		# Rotate the arrow to face the direction of the enemy
 		$CanvasLayer/Arrow.rotation = angle_to_enemy
 		
-		# Optionally, scale the arrow based on distance or adjust its appearance
-		print("Direction to Closest Enemy: ", direction_to_enemy.x * 180/PI, direction_to_enemy.y * 180/PI)
 	else:
 		# Hide the arrow if no enemies are found
 		$CanvasLayer/Arrow.visible = false
+
+
+func _on_super_close_area_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		$CanvasLayer/Arrow.texture = red_arrowText
+	
+
+
+func _on_super_close_area_area_exited(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		$CanvasLayer/Arrow.texture = arrowText

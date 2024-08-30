@@ -1,10 +1,9 @@
-[gd_scene load_steps=51 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=50 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Script" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
 [ext_resource type="Script" path="res://script/Sprite2D.gd" id="3_ilhu4"]
 [ext_resource type="Script" path="res://script/Area2D.gd" id="4_4tu5c"]
-[ext_resource type="Texture2D" uid="uid://ckhcmhuvk5p3i" path="res://assets/red_arrow.png" id="5_ab5l3"]
 [ext_resource type="Script" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
 [ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="6_7gyul"]
@@ -353,7 +352,7 @@ hue_variation_max = 0.2
 hue_variation_curve = SubResource("CurveTexture_akhtx")
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_06iks"]
-radius = 15373.8
+radius = 3525.0
 
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
 scale = Vector2(2, 2)
@@ -366,8 +365,9 @@ scale = Vector2(0.1, 0.1)
 texture = ExtResource("1_ymuer")
 hframes = 12
 script = ExtResource("3_ilhu4")
-arrowText = ExtResource("10_v43cp")
-red_arrowText = ExtResource("5_ab5l3")
+speed = null
+rotation_speed = null
+shoot_speed = null
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
 visible = false
@@ -514,4 +514,3 @@ shape = SubResource("CircleShape2D_06iks")
 [connection signal="timeout" from="player/machine_gun_timer" to="player" method="_on_machine_gun_timer_timeout"]
 [connection signal="timeout" from="player/machine_gun_timer2" to="player" method="_on_machine_gun_timer_timeout"]
 [connection signal="area_entered" from="player/super_close_area" to="player" method="_on_super_close_area_area_entered"]
-[connection signal="area_exited" from="player/super_close_area" to="player" method="_on_super_close_area_area_exited"]
