@@ -1,7 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://btu1fjdg3tft"]
+[gd_scene load_steps=26 format=3 uid="uid://btu1fjdg3tft"]
 
 [ext_resource type="Script" path="res://script/obstical.gd" id="1_5hcse"]
 [ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_b27cs"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fgena"]
+radius = 165.0
+height = 330.0
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ci40t"]
 animation = &"100"
@@ -149,18 +153,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [4]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/hitbox/CollisionPolygon2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_vba30"]
 resource_name = "destruction"
@@ -175,18 +167,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [4, 5, 6]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/hitbox/CollisionPolygon2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0jsh"]
@@ -211,9 +191,9 @@ frame = 4
 [node name="hitbox" type="Area2D" parent="Sprite2D" groups=["Obstical", "obstical"]]
 collision_layer = 7
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/hitbox"]
-position = Vector2(2, 0)
-polygon = PackedVector2Array(-50, -149, -150, -83, -192, -48, -191, -13, -176, 23, -122, 73, -67, 100, -26, 119, 37, 119, 111, 87, 133, 21, 116, -64, 15, -151)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+position = Vector2(-22, -12)
+shape = SubResource("CapsuleShape2D_fgena")
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
 root_node = NodePath("../..")

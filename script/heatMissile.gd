@@ -73,6 +73,7 @@ func _on_timer_timeout():
 
 func _on_heat_seaking_missile_area_entered(area):
 	if area.is_in_group("player"):
+		print("entered player!")
 		call_deferred("explosion")
 	if area.is_in_group("mine"):
 		call_deferred("explosion")

@@ -43,9 +43,9 @@ text = "Controls"
 
 [node name="play" type="Button" parent="."]
 layout_mode = 0
-offset_left = 549.0
+offset_left = 697.0
 offset_top = 380.0
-offset_right = 659.0
+offset_right = 807.0
 offset_bottom = 421.0
 theme = ExtResource("3_0t8ob")
 text = "Play"
@@ -78,15 +78,6 @@ R: Reload
 E: Boost"
 fit_content = true
 
-[node name="Host" type="Button" parent="."]
-layout_mode = 0
-offset_left = 789.0
-offset_top = 381.0
-offset_right = 892.0
-offset_bottom = 422.0
-theme = ExtResource("3_0t8ob")
-text = "Host"
-
 [node name="hostPopup" type="Popup" parent="."]
 transparent_bg = true
 position = Vector2i(-27, 274)
@@ -111,4 +102,3 @@ volume_db = -21.027
 [connection signal="button_down" from="controlsButton" to="." method="_on_controls_button_button_down"]
 [connection signal="button_down" from="play" to="." method="_on_play_button_down"]
 [connection signal="pressed" from="play" to="." method="_on_play_pressed"]
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]

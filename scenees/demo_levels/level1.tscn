@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3mwlmk8mnki0"]
+[gd_scene load_steps=10 format=3 uid="uid://d3mwlmk8mnki0"]
 
 [ext_resource type="Script" path="res://scenees/demo_levels/level_1.gd" id="1_skk4j"]
 [ext_resource type="Shader" path="res://script/default_level.gdshader" id="2_srbs3"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="6_bripe"]
 [ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="6_llbwd"]
 [ext_resource type="PackedScene" uid="uid://x0tkfwl42ld6" path="res://scenees/split_obstical.tscn" id="7_eocww"]
+[ext_resource type="PackedScene" uid="uid://coyghgvye142q" path="res://scenees/ability_cards/shield.tscn" id="8_6kdtk"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
 shader = ExtResource("2_srbs3")
@@ -64,6 +65,9 @@ position = Vector2(1935, -1542)
 
 [node name="Split_Obstical" parent="." instance=ExtResource("7_eocww")]
 position = Vector2(580, 305)
+
+[node name="Shield" parent="." instance=ExtResource("8_6kdtk")]
+position = Vector2(275, 1368)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
 [connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]
