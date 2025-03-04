@@ -1,6 +1,6 @@
 [gd_scene load_steps=25 format=3 uid="uid://x0tkfwl42ld6"]
 
-[ext_resource type="Script" path="res://scenees/split_obstical.gd" id="1_7xedr"]
+[ext_resource type="Script" uid="uid://c4yvljj5ey61j" path="res://scenees/split_obstical.gd" id="1_7xedr"]
 [ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_hadfr"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ci40t"]
@@ -191,13 +191,13 @@ tracks/1/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0jsh"]
 _data = {
-"100": SubResource("Animation_hgd0l"),
-"20": SubResource("Animation_p0b4t"),
-"40": SubResource("Animation_rmnvl"),
-"60": SubResource("Animation_hfl3n"),
-"80": SubResource("Animation_vnaiq"),
-"RESET": SubResource("Animation_k4hj4"),
-"destruction": SubResource("Animation_vba30")
+&"100": SubResource("Animation_hgd0l"),
+&"20": SubResource("Animation_p0b4t"),
+&"40": SubResource("Animation_rmnvl"),
+&"60": SubResource("Animation_hfl3n"),
+&"80": SubResource("Animation_vnaiq"),
+&"RESET": SubResource("Animation_k4hj4"),
+&"destruction": SubResource("Animation_vba30")
 }
 
 [node name="Split_Obstical" type="Node2D" groups=["Obstical"]]

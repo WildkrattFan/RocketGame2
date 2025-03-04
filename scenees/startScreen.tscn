@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://b1xa61s4wsnfi"]
 
-[ext_resource type="Script" path="res://script/startScreen.gd" id="1_wy37u"]
+[ext_resource type="Script" uid="uid://c3cyqgdy80noy" path="res://script/startScreen.gd" id="1_wy37u"]
 [ext_resource type="Texture2D" uid="uid://clch8r61b7v5e" path="res://assets/spaceTitleScreen.png" id="1_ydybr"]
 [ext_resource type="Theme" uid="uid://bwmoc62uymsn6" path="res://pause_menu_theme.tres" id="3_0t8ob"]
 [ext_resource type="AudioStream" uid="uid://1576rsdrpj46" path="res://assets/neon-signs-simon-folwar-main-version-6833-02-40.mp3" id="3_sicsd"]

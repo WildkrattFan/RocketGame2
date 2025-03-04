@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://btudaqt3ssook"]
 
-[ext_resource type="Script" path="res://script/levels_screen.gd" id="1_r3q7a"]
+[ext_resource type="Script" uid="uid://cspg52nusgebi" path="res://script/levels_screen.gd" id="1_r3q7a"]
 [ext_resource type="Texture2D" uid="uid://clch8r61b7v5e" path="res://assets/spaceTitleScreen.png" id="2_5tufe"]
 [ext_resource type="Theme" uid="uid://bwmoc62uymsn6" path="res://pause_menu_theme.tres" id="3_q25b7"]
 

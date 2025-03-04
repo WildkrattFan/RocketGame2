@@ -1,8 +1,8 @@
 [gd_scene load_steps=5 format=3 uid="uid://bkw1ancve754p"]
 
-[ext_resource type="Script" path="res://script/assultMissile.gd" id="1_pxfak"]
+[ext_resource type="Script" uid="uid://bs3mdtdbieio" path="res://script/assultMissile.gd" id="1_pxfak"]
 [ext_resource type="Texture2D" uid="uid://cj07nasi6jni" path="res://assets/image (1).png" id="2_rj6rb"]
-[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_enq0o"]
+[ext_resource type="Script" uid="uid://k7kjy1coekgj" path="res://script/Sprite2D (2).gd" id="3_enq0o"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8ugvu"]
 radius = 148.842

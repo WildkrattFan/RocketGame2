@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=3 uid="uid://ct2qovqtw2wt6"]
 
-[ext_resource type="Script" path="res://script/mediumExplosion.gd" id="1_rq742"]
+[ext_resource type="Script" uid="uid://b7p7you163ug3" path="res://script/mediumExplosion.gd" id="1_rq742"]
 [ext_resource type="Texture2D" uid="uid://ckhum6ejjgw1o" path="res://assets/explosion-Sheet.png" id="1_se635"]
 [ext_resource type="AudioStream" uid="uid://b8w2242kfkimp" path="res://assets/overheadexplosion-89709.mp3" id="3_c0yxk"]
 
@@ -111,8 +111,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kdfty"]
 _data = {
-"RESET": SubResource("Animation_kvp0b"),
-"explosionAnimation": SubResource("Animation_bkoak")
+&"RESET": SubResource("Animation_kvp0b"),
+&"explosionAnimation": SubResource("Animation_bkoak")
 }
 
 [node name="MediumExplosion" type="Node2D" groups=["explosion"]]

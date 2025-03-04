@@ -1,8 +1,8 @@
 [gd_scene load_steps=21 format=3 uid="uid://btdoppmsv78tv"]
 
 [ext_resource type="Texture2D" uid="uid://betw0tvg2amcl" path="res://assets/missileTurret-Sheet.png" id="1_k4u0e"]
-[ext_resource type="Script" path="res://script/turret.gd" id="1_m3e43"]
-[ext_resource type="Shader" path="res://script/assultEnemy.gdshader" id="2_07hp0"]
+[ext_resource type="Script" uid="uid://clbqtkilvnjvg" path="res://script/turret.gd" id="1_m3e43"]
+[ext_resource type="Shader" uid="uid://bppmiscp8er2p" path="res://script/assultEnemy.gdshader" id="2_07hp0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_krc6s"]
 shader = ExtResource("2_07hp0")
@@ -107,10 +107,10 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_yamt3"]
 _data = {
-"RESET": SubResource("Animation_efkk8"),
-"hasMissile": SubResource("Animation_1xahl"),
-"launchMissile": SubResource("Animation_s5avb"),
-"noMissile": SubResource("Animation_omrif")
+&"RESET": SubResource("Animation_efkk8"),
+&"hasMissile": SubResource("Animation_1xahl"),
+&"launchMissile": SubResource("Animation_s5avb"),
+&"noMissile": SubResource("Animation_omrif")
 }
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_u5n1d"]
@@ -146,7 +146,7 @@ anim_player = NodePath("../AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_yamt3")
+&"": SubResource("AnimationLibrary_yamt3")
 }
 
 [node name="firingArea" type="Area2D" parent="."]

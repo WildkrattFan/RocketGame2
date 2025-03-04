@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://gjjfywwhcjoh"]
 
-[ext_resource type="Script" path="res://script/heatMissile.gd" id="1_hxh77"]
+[ext_resource type="Script" uid="uid://kljj3ubrbvqg" path="res://script/heatMissile.gd" id="1_hxh77"]
 [ext_resource type="Texture2D" uid="uid://ddqpboxxiymgk" path="res://assets/heatSeakingMissile-Sheet.png" id="2_85ip5"]
-[ext_resource type="Script" path="res://script/Sprite2D (2).gd" id="3_1wd3c"]
+[ext_resource type="Script" uid="uid://k7kjy1coekgj" path="res://script/Sprite2D (2).gd" id="3_1wd3c"]
 
 [sub_resource type="Animation" id="Animation_2mpef"]
 length = 0.001
@@ -95,11 +95,11 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_0vvqn"]
 _data = {
-"RESET": SubResource("Animation_2mpef"),
-"engineOff": SubResource("Animation_ihbqb"),
-"engineStart": SubResource("Animation_rem47"),
-"engineStop": SubResource("Animation_u1btu"),
-"flying": SubResource("Animation_t4oxt")
+&"RESET": SubResource("Animation_2mpef"),
+&"engineOff": SubResource("Animation_ihbqb"),
+&"engineStart": SubResource("Animation_rem47"),
+&"engineStop": SubResource("Animation_u1btu"),
+&"flying": SubResource("Animation_t4oxt")
 }
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3e05x"]
@@ -163,7 +163,7 @@ script = ExtResource("3_1wd3c")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_0vvqn")
+&"": SubResource("AnimationLibrary_0vvqn")
 }
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]

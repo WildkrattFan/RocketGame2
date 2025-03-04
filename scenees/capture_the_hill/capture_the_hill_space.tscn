@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://d0uooh231uisb"]
 
-[ext_resource type="Script" path="res://scenees/capture_the_hill/capture_the_hill_space.gd" id="1_8bjsg"]
+[ext_resource type="Script" uid="uid://kjifhf4on85h" path="res://scenees/capture_the_hill/capture_the_hill_space.gd" id="1_8bjsg"]
 [ext_resource type="PackedScene" uid="uid://camp71o4ahpar" path="res://scenees/capture_the_hill/capture_area.tscn" id="2_uvtru"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="4_s03ej"]
 [ext_resource type="Texture2D" uid="uid://cwwwuw7rmajvl" path="res://assets/bars/blueProgress.png" id="5_mek5s"]

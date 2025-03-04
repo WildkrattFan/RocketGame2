@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://cs5dtqgf7yjfd"]
 
-[ext_resource type="Script" path="res://script/mediumExplosion.gd" id="1_xptjq"]
+[ext_resource type="Script" uid="uid://b7p7you163ug3" path="res://script/mediumExplosion.gd" id="1_xptjq"]
 [ext_resource type="Texture2D" uid="uid://ckhum6ejjgw1o" path="res://assets/explosion-Sheet.png" id="2_x67st"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hi2x5"]
@@ -110,8 +110,8 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_kdfty"]
 _data = {
-"RESET": SubResource("Animation_kvp0b"),
-"explosionAnimation": SubResource("Animation_bkoak")
+&"RESET": SubResource("Animation_kvp0b"),
+&"explosionAnimation": SubResource("Animation_bkoak")
 }
 
 [node name="MediumExplosion" type="Node2D"]
