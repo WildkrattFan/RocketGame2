@@ -43,6 +43,8 @@ var directionList = []
 var direction = Vector2.ZERO
 
 @export var abilityCards = []
+var abilityInstances = []
+var spriteChildren = []
 
 signal exploded
 signal points_added
@@ -61,12 +63,20 @@ func _ready():
 	health = MAX_HEALTH
 	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
 	
+
+	var abilityPosition = 400
 	for ability in abilityCards:
 		var abilitySprite = Sprite2D.new()
 		var abilityInstance = ability.instantiate()
-		abilitySprite.position = Vector2(100, 100)
-		abilitySprite.texture = abilityInstance.get_child("Sprite2D").texture
-		$CanvasLayer.add_child(abilitySprite)
+		add_child(abilityInstance)
+		abilitySprite.texture = abilityInstance.get_child(0).texture
+		abilitySprite.scale = Vector2(.05,.05)
+		abilitySprite.position = Vector2(abilityPosition,20)
+		$CanvasLayer/abilities.add_child(abilitySprite)
+		abilityInstances.append(abilityInstance)
+		spriteChildren.append(abilitySprite)
+		abilityPosition += 35
+
 	
 	# Start a timer to replenish ammo after a certain duration
 
@@ -97,15 +107,7 @@ func handle_input(delta):
 		velocity += direction * speed * delta
 		_stateMachine.travel("flying")
 		$trail.emitting = true
-	if Input.is_action_just_pressed("ability"):
-		print("calling ability function!")
-		#TODO: Hande abilities
-		var ability = abilityCards.pop_front()
-		if ability:
-			print("ability:", ability)
-			ability = ability.instantiate()
-			print("using ability!")
-			ability.use(delta, self)
+
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")
@@ -123,6 +125,14 @@ func handle_input(delta):
 	
 	if velocity.length() > max_velocity:
 		velocity = velocity.normalized() * max_velocity
+	
+	if Input.is_action_just_pressed("ability"):
+
+		var ability = abilityInstances.pop_front()
+		if ability:
+			ability.use(delta, self)
+			$CanvasLayer/abilities.offset = Vector2($CanvasLayer/abilities.offset.x - 35, $CanvasLayer/abilities.offset.y)
+			$CanvasLayer/abilities.remove_child(spriteChildren.pop_front())
 
 
 	# Shooting logic
@@ -293,6 +303,7 @@ func _on_player_hit_box_area_exited(area):
 
 func _on_death_delay_timeout():
 	# 2. Display game over screen (if applicable)
+	$CanvasLayer/abilities.visible = false
 	exploded.emit()
 
 

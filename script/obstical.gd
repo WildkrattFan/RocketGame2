@@ -87,7 +87,7 @@ func split(area):
 		var split_parts_num = randf_range(2,4)
 		var new_scale = scale / split_parts_num
 		var split_counter = 0
-		$Sprite2D/hitbox/CollisionPolygon2D.disabled = true
+		#$Sprite2D/hitbox/CollisionPolygon2D.disabled = true
 		for i in range(split_parts_num):
 			split_counter += 1
 			var split_instance = obstical_scene.instantiate()

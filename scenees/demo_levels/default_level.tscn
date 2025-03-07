@@ -28,5 +28,9 @@ polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -
 [node name="player" parent="." instance=ExtResource("1_lm03g")]
 position = Vector2(466, 1465)
 
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1e+07
+autostart = true
+
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
 [connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]

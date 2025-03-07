@@ -1,42 +1,34 @@
-[gd_scene load_steps=6 format=3 uid="uid://coyghgvye142q"]
+[gd_scene load_steps=5 format=3 uid="uid://coyghgvye142q"]
 
 [ext_resource type="Texture2D" uid="uid://y5a6fax1u5no" path="res://assets/ability_sprites/shield.png" id="1_it8dl"]
 [ext_resource type="Script" uid="uid://b4gikey7u46od" path="res://scenees/ability_cards/shield.gd" id="1_v0f2e"]
 [ext_resource type="Texture2D" uid="uid://ciafi618choor" path="res://assets/ability_sprites/shield_bubble.png" id="3_702fm"]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_nplxq"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6pti"]
-radius = 104.0
+radius = 130.349
 
 [node name="Shield" type="Node2D"]
-scale = Vector2(5, 5)
 script = ExtResource("1_v0f2e")
 
 [node name="Pickup_sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.04375, 0.04375)
 texture = ExtResource("1_it8dl")
 
-[node name="pickup_area" type="Area2D" parent="." groups=["powerup"]]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="pickup_area"]
-shape = SubResource("CapsuleShape2D_nplxq")
-
 [node name="Shield_Bubble_Sprite" type="Sprite2D" parent="."]
-visible = false
-position = Vector2(0, -1)
-scale = Vector2(0.319, 0.319)
+position = Vector2(0, 2)
+scale = Vector2(6, 6)
 texture = ExtResource("3_702fm")
 
 [node name="bubble_area" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bubble_area" groups=["player"]]
+scale = Vector2(14, 14)
 shape = SubResource("CircleShape2D_b6pti")
+disabled = true
 
 [node name="Ability_timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
 
-[connection signal="area_entered" from="pickup_area" to="." method="_on_pickup_area_area_entered"]
 [connection signal="area_entered" from="bubble_area" to="." method="_on_bubble_area_area_entered"]
 [connection signal="timeout" from="Ability_timer" to="." method="_on_ability_timer_timeout"]
