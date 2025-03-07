@@ -40,6 +40,10 @@ var enemyScannedList = []
 var enemyPosList = []
 var directionList = []
 
+var direction = Vector2.ZERO
+
+@export var abilityCards = []
+
 signal exploded
 signal points_added
 
@@ -56,6 +60,13 @@ func _ready():
 	$CanvasLayer/ammoRemainingLabel.text = str(ammo) + "/" + str(max_ammo)
 	health = MAX_HEALTH
 	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
+	
+	for ability in abilityCards:
+		var abilitySprite = Sprite2D.new()
+		var abilityInstance = ability.instantiate()
+		abilitySprite.position = Vector2(100, 100)
+		abilitySprite.texture = abilityInstance.get_child("Sprite2D").texture
+		$CanvasLayer.add_child(abilitySprite)
 	
 	# Start a timer to replenish ammo after a certain duration
 
@@ -78,7 +89,7 @@ func handle_input(delta):
 	rotate(rotation_speed * rotation_direction * delta)
 
 	# Calculate movement direction based on rotation
-	var direction = Vector2(0, -1).rotated(rotation)
+	direction = Vector2(0, -1).rotated(rotation)
 
 
 	# Check keyboard input for movement
@@ -86,13 +97,15 @@ func handle_input(delta):
 		velocity += direction * speed * delta
 		_stateMachine.travel("flying")
 		$trail.emitting = true
-		if Input.is_action_pressed("boost"):
-			velocity += direction * speed * 10 * delta
-			$Camera2D.position_smoothing_speed = 15
-			max_velocity = 100
-		elif max_velocity > normal_max_velocity:
-			max_velocity *= .97
-			$Camera2D.position_smoothing_speed = 4
+	if Input.is_action_just_pressed("ability"):
+		print("calling ability function!")
+		#TODO: Hande abilities
+		var ability = abilityCards.pop_front()
+		if ability:
+			print("ability:", ability)
+			ability = ability.instantiate()
+			print("using ability!")
+			ability.use(delta, self)
 	elif Input.is_action_pressed("down"):
 		velocity -= direction * speed / 2 * delta
 		_stateMachine.travel("engineOff")
