@@ -46,6 +46,8 @@ var direction = Vector2.ZERO
 var abilityInstances = []
 var spriteChildren = []
 
+var invincible = false
+
 signal exploded
 signal points_added
 
@@ -254,15 +256,15 @@ func _on_area_2d_area_entered(area):
 		health -=10
 		death()
 		
-	elif area.name == "missile":
+	elif area.name == "missile" and !invincible:
 		health -= 3
 		death()
 		
-	elif area.name == "nuclear_missile_area":
+	elif area.name == "nuclear_missile_area" and !invincible:
 		health -= 1
 		death()
 		
-	if area.name == "bullet_area":
+	if area.name == "bullet_area" and !invincible:
 		health -= 1
 		death()
 		
@@ -278,7 +280,7 @@ func _on_area_2d_area_entered(area):
 		health -= 100
 		death()
 		
-	if area.name == "mediumExplosionArea":
+	if area.name == "mediumExplosionArea" and !invincible:
 		var distance_to_explosion = global_position.distance_to(area.global_position)
 		var damage = calculate_damage(distance_to_explosion)
 		health -= damage

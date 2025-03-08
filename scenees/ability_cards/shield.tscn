@@ -1,11 +1,61 @@
-[gd_scene load_steps=5 format=3 uid="uid://coyghgvye142q"]
+[gd_scene load_steps=11 format=3 uid="uid://coyghgvye142q"]
 
 [ext_resource type="Texture2D" uid="uid://y5a6fax1u5no" path="res://assets/ability_sprites/shield.png" id="1_it8dl"]
 [ext_resource type="Script" uid="uid://b4gikey7u46od" path="res://scenees/ability_cards/shield.gd" id="1_v0f2e"]
-[ext_resource type="Texture2D" uid="uid://ciafi618choor" path="res://assets/ability_sprites/shield_bubble.png" id="3_702fm"]
+[ext_resource type="Texture2D" uid="uid://cpq81wo4via8p" path="res://assets/ability_sprites/shield_bubble-Sheet.png" id="3_sbilu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b6pti"]
-radius = 130.349
+radius = 46.3992
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sbilu"]
+animation = &"loop"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_h4l45"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_sbilu"]
+states/loop/node = SubResource("AnimationNodeAnimation_sbilu")
+states/loop/position = Vector2(351, 41)
+transitions = ["Start", "loop", SubResource("AnimationNodeStateMachineTransition_h4l45")]
+
+[sub_resource type="Animation" id="Animation_sbilu"]
+resource_name = "loop"
+loop_mode = 1
+step = 0.0666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield_Bubble_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 0.266667, 0.3, 0.333333, 0.366667, 0.4, 0.433333, 0.466667, 0.5, 0.533333, 0.566667, 0.6, 0.633333, 0.666667, 0.7, 0.733333, 0.766667, 0.8, 0.833333, 0.866667, 0.9, 0.933333, 0.966667, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 4, 5, 6, 0, 1, 2, 3, 5]
+}
+
+[sub_resource type="Animation" id="Animation_h4l45"]
+length = 0.001
+step = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Shield_Bubble_Sprite:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_1afme"]
+_data = {
+&"RESET": SubResource("Animation_h4l45"),
+&"loop": SubResource("Animation_sbilu")
+}
 
 [node name="Shield" type="Node2D"]
 script = ExtResource("1_v0f2e")
@@ -13,15 +63,18 @@ script = ExtResource("1_v0f2e")
 [node name="Pickup_sprite" type="Sprite2D" parent="."]
 scale = Vector2(0.04375, 0.04375)
 texture = ExtResource("1_it8dl")
+hframes = 7
 
 [node name="Shield_Bubble_Sprite" type="Sprite2D" parent="."]
-position = Vector2(0, 2)
-scale = Vector2(6, 6)
-texture = ExtResource("3_702fm")
+position = Vector2(0, -30)
+scale = Vector2(2, 2)
+texture = ExtResource("3_sbilu")
+hframes = 7
 
 [node name="bubble_area" type="Area2D" parent="." groups=["player"]]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="bubble_area" groups=["player"]]
+position = Vector2(0, -30)
 scale = Vector2(14, 14)
 shape = SubResource("CircleShape2D_b6pti")
 disabled = true
@@ -29,6 +82,16 @@ disabled = true
 [node name="Ability_timer" type="Timer" parent="."]
 wait_time = 10.0
 one_shot = true
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_sbilu")
+advance_expression_base_node = NodePath("../AnimationPlayer")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_1afme")
+}
 
 [connection signal="area_entered" from="bubble_area" to="." method="_on_bubble_area_area_entered"]
 [connection signal="timeout" from="Ability_timer" to="." method="_on_ability_timer_timeout"]
