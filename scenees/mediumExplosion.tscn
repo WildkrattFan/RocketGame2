@@ -120,7 +120,7 @@ script = ExtResource("1_rq742")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_kdfty")
+&"": SubResource("AnimationLibrary_kdfty")
 }
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

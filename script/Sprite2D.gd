@@ -258,10 +258,12 @@ func _on_area_2d_area_entered(area):
 		
 	elif area.name == "missile" and !invincible:
 		health -= 3
+		shake_camera(100,.25)
 		death()
 		
 	elif area.name == "nuclear_missile_area" and !invincible:
 		health -= 1
+		
 		death()
 		
 	if area.name == "bullet_area" and !invincible:
@@ -287,6 +289,7 @@ func _on_area_2d_area_entered(area):
 		var direction = (global_position - area.global_position).normalized()
 		var explosion_strength = 5000 / distance_to_explosion
 		velocity = direction *  explosion_strength # Apply force to simulate blast effect
+		shake_camera(100,.25)
 
 		death()
 
@@ -387,3 +390,12 @@ func _on_super_close_area_area_entered(area: Area2D) -> void:
 func _on_super_close_area_area_exited(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
 		$CanvasLayer/Arrow.texture = arrowText
+		
+		
+func shake_camera(intensity: float, duration: float):
+	var shake_timer = duration
+	while shake_timer > 0:
+		$Camera2D.offset = Vector2(randf_range(-intensity, intensity), randf_range(-intensity, intensity))
+		await get_tree().create_timer(0.05).timeout
+		shake_timer -= 0.05
+	$Camera2D.offset = Vector2.ZERO

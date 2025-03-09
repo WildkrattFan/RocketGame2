@@ -3,6 +3,7 @@ extends Node2D
 var gameOverScene = preload("res://scenees/GameOverScreen.tscn")
 var pauseMenuScene = preload("res://scenees/PauseMenu.tscn")
 var levelsScene = ("res://scenees/levels_screen.tscn")
+var scoreScene = ("res://scenees/score_screen.tscn")
 var pause_menu_instance
 var paused = false
 
@@ -58,6 +59,6 @@ func _on_player_main_points_added() -> void:
 		
 		GlobalLevelTracking.set_previous_score(score)
 		
-		get_tree().change_scene_to_file(levelsScene)
+		get_tree().change_scene_to_file(scoreScene)
 		if GlobalLevelTracking.current_level < 2:
 			GlobalLevelTracking.set_level(2)
