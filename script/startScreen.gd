@@ -36,7 +36,18 @@ func load_score():
 	if FileAccess.file_exists(save_path):
 		print("file found")
 		var file = FileAccess.open(save_path, FileAccess.READ)
-		GlobalLevelTracking.current_level = file.get_var(GlobalLevelTracking.current_level)
+		GlobalLevelTracking.current_level = file.get_var()
+		GlobalLevelTracking.levelAbilities = file.get_var(true)
+
+		
+		if !GlobalLevelTracking.current_level:
+			GlobalLevelTracking.current_level = 1
+		if !GlobalLevelTracking.levelAbilities:
+			GlobalLevelTracking.levelAbilities = []
+			
+		print("current level", int(GlobalLevelTracking.current_level))
+		print("level abilities", (GlobalLevelTracking.levelAbilities))
 	else:
 		print("file not found")
 		GlobalLevelTracking.current_level = 1
+		GlobalLevelTracking.levelAbilities = []

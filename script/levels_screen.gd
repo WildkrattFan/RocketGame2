@@ -18,7 +18,7 @@ func _ready() -> void:
 	var level_button_list = $level_buttons.get_children()
 	
 	for i in range (level_button_list.size()):
-		if i <= GlobalLevelTracking.current_level-1:
+		if i <= int(GlobalLevelTracking.current_level)-1:
 			level_button_list[i].disabled = false
 			level_button_list[i].modulate = Color(1, 1, 1)  # Normal color
 		else:
@@ -71,4 +71,6 @@ func _on_level_changed():
 func save_score():
 	var file = FileAccess.open(save_path, FileAccess.WRITE)
 	file.store_var(GlobalLevelTracking.current_level)
+	file.store_var(GlobalLevelTracking.levelAbilities)
+
 	

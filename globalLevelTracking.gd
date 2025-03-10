@@ -1,8 +1,11 @@
 extends Node
 
 var current_level = 1
+var justPlayedLevel = 0
+var previousScore = 150
+var levelAbilities = []
 
-var previousScore = 0
+@export var commonAbilities = ["res://scenees/ability_cards/speed_boost_card.tscn","res://scenees/ability_cards/shield.tscn"]
 
 
 # Called when the node enters the scene tree for the first time.
