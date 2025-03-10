@@ -61,7 +61,7 @@ _data = {
 script = ExtResource("1_v0f2e")
 
 [node name="Pickup_sprite" type="Sprite2D" parent="."]
-scale = Vector2(0.04375, 0.04375)
+scale = Vector2(0.044, 0.044)
 texture = ExtResource("1_it8dl")
 hframes = 7
 

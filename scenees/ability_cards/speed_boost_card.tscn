@@ -8,7 +8,7 @@
 script = ExtResource("1_b3m54")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-scale = Vector2(0.25, 0.25)
+scale = Vector2(0.004, 0.004)
 texture = ExtResource("2_qtjnn")
 
 [node name="Timer" type="Timer" parent="."]

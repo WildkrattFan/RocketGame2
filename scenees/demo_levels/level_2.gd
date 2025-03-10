@@ -16,7 +16,7 @@ var paused = false
 func _ready():
 	#TODO: Fix
 	if GlobalLevelTracking.levelAbilities:
-		$player/player.setAbilityCards(GlobalLevelTracking.levelAbilities[1])
+		$player/player.setAbilityCards(GlobalLevelTracking.levelAbilities[2])
 		
 
 	print($player/player.abilityCards)

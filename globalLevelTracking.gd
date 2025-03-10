@@ -2,7 +2,7 @@ extends Node
 
 var current_level: int = 1
 var justPlayedLevel: int = 0
-var previousScore: int = 150
+var previousScore: int = 200
 var levelAbilities = []
 
 @export var commonAbilities = ["res://scenees/ability_cards/speed_boost_card.tscn","res://scenees/ability_cards/shield.tscn"]
