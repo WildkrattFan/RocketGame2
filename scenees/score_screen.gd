@@ -4,6 +4,7 @@ var textNum = 0
 var nextAbilities = []
 var rng = RandomNumberGenerator.new()
 var save_path = "user://score.save"
+var levels_scene = ("res://scenees/levels_screen.tscn")
 
 
 func _ready() -> void:
@@ -18,16 +19,16 @@ func openChest():
 
 	if GlobalLevelTracking.previousScore > 500:
 		var randomNum = rng.randi_range(5,8)
-		getAbilities(randomNum, GlobalLevelTracking.epicAbilities + GlobalLevelTracking.legendaryAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
 	elif GlobalLevelTracking.previousScore > 400:
 		var randomNum = rng.randi_range(4,6)
-		getAbilities(randomNum, GlobalLevelTracking.rareAbilities + GlobalLevelTracking.legendaryAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
 	elif GlobalLevelTracking.previousScore > 300:
 		var randomNum = rng.randi_range(3,5)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities + GlobalLevelTracking.epicAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
 	elif GlobalLevelTracking.previousScore > 200:
 		var randomNum = rng.randi_range(2,4)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities + GlobalLevelTracking.rareAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
 	else:
 		var randomNum = rng.randi_range(1,3)
 		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
@@ -41,3 +42,7 @@ func getAbilities(count, abilityPool):
 	GlobalLevelTracking.levelAbilities[GlobalLevelTracking.justPlayedLevel + 1] = nextAbilities
 	# Output the selected abilities (for debugging or display)
 	print("Abilities received: ", nextAbilities)
+
+
+func _on_button_pressed() -> void:
+	get_tree().change_scene_to_file(levels_scene)

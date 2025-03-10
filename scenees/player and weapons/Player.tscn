@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=51 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Script" uid="uid://fmkhkf54omtd" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
@@ -8,8 +8,6 @@
 [ext_resource type="Script" uid="uid://clmo6d2l6wa4h" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
 [ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="6_7gyul"]
-[ext_resource type="PackedScene" uid="uid://cb5aw4unt6bss" path="res://scenees/ability_cards/speed_boost_card.tscn" id="6_c4eeg"]
-[ext_resource type="PackedScene" uid="uid://coyghgvye142q" path="res://scenees/ability_cards/shield.tscn" id="7_6rouw"]
 [ext_resource type="Texture2D" uid="uid://c7n0ny8cm4bxj" path="res://assets/bars/reloadBarMain.png" id="7_iq23l"]
 [ext_resource type="Texture2D" uid="uid://s3jq4ii3sfc6" path="res://assets/trai2l.png" id="9_31u5o"]
 [ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
@@ -368,7 +366,6 @@ hframes = 12
 script = ExtResource("3_ilhu4")
 arrowText = ExtResource("10_v43cp")
 red_arrowText = ExtResource("5_ab5l3")
-abilityCards = [ExtResource("7_6rouw"), ExtResource("6_c4eeg"), ExtResource("6_c4eeg")]
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
 visible = false

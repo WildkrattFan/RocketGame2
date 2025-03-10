@@ -1,8 +1,8 @@
 extends Node
 
-var current_level = 1
-var justPlayedLevel = 0
-var previousScore = 150
+var current_level: int = 1
+var justPlayedLevel: int = 0
+var previousScore: int = 150
 var levelAbilities = []
 
 @export var commonAbilities = ["res://scenees/ability_cards/speed_boost_card.tscn","res://scenees/ability_cards/shield.tscn"]
@@ -10,6 +10,7 @@ var levelAbilities = []
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	levelAbilities.resize(20)
 	pass # Replace with function body.
 
 

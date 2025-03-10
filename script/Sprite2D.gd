@@ -65,6 +65,8 @@ func _ready():
 	health = MAX_HEALTH
 	$CanvasLayer/healthBar.value = (float(health) / float(MAX_HEALTH)) * 100
 	
+	print("abilities in player", abilityCards)
+	
 
 	var abilityPosition = 400
 	for ability in abilityCards:
@@ -399,3 +401,22 @@ func shake_camera(intensity: float, duration: float):
 		await get_tree().create_timer(0.05).timeout
 		shake_timer -= 0.05
 	$Camera2D.offset = Vector2.ZERO
+
+func setAbilityCards(newCards):
+	var newCardsCopy = newCards.duplicate()
+	abilityCards = newCardsCopy
+	print(abilityCards)
+	
+	var abilityPosition = 400
+	for ability in abilityCards:
+		print(ability)
+		var abilitySprite = Sprite2D.new()
+		var abilityInstance = load(ability).instantiate()
+		add_child(abilityInstance)
+		abilitySprite.texture = abilityInstance.get_child(0).texture
+		abilitySprite.scale = Vector2(.05,.05)
+		abilitySprite.position = Vector2(abilityPosition,20)
+		$CanvasLayer/abilities.add_child(abilitySprite)
+		abilityInstances.append(abilityInstance)
+		spriteChildren.append(abilitySprite)
+		abilityPosition += 35

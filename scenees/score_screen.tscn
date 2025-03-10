@@ -15,6 +15,21 @@ states/loop/node = SubResource("AnimationNodeAnimation_54c58")
 states/loop/position = Vector2(350, 46)
 transitions = ["Start", "loop", SubResource("AnimationNodeStateMachineTransition_5ec8i")]
 
+[sub_resource type="Animation" id="Animation_vsx38"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
 [sub_resource type="Animation" id="Animation_5ec8i"]
 resource_name = "loop"
 loop_mode = 1
@@ -30,21 +45,6 @@ tracks/0/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [0, 1, 2]
-}
-
-[sub_resource type="Animation" id="Animation_vsx38"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_a8rg8"]
@@ -80,6 +80,7 @@ libraries = {
 }
 
 [node name="Score" type="RichTextLabel" parent="."]
+layout_mode = 0
 offset_left = 449.0
 offset_top = 118.0
 offset_right = 1601.0
@@ -87,3 +88,13 @@ offset_bottom = 763.0
 theme = ExtResource("3_5ec8i")
 fit_content = true
 scroll_active = false
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 0
+offset_left = 559.0
+offset_top = 492.0
+offset_right = 615.0
+offset_bottom = 523.0
+text = "Levels"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

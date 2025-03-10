@@ -15,7 +15,10 @@ var paused = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#TODO: Fix
-	$player/player.abilityCards = GlobalLevelTracking.levelAbilities[1]
+	if GlobalLevelTracking.levelAbilities:
+		$player/player.abilityCards = GlobalLevelTracking.levelAbilities[1]
+	else:
+		$player/player.abilityCards = []
 	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -66,6 +69,6 @@ func _on_player_main_points_added() -> void:
 		GlobalLevelTracking.set_previous_score(score)
 		
 		get_tree().change_scene_to_file(scoreScene)
-		if GlobalLevelTracking.current_level < 2:
+		if int(GlobalLevelTracking.current_level) < 2:
 			GlobalLevelTracking.set_level(2)
 			GlobalLevelTracking.justPlayedLevel = 1
