@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3mwlmk8mnki0"]
+[gd_scene load_steps=11 format=3 uid="uid://d3mwlmk8mnki0"]
 
 [ext_resource type="Script" uid="uid://v7lg2hr6qtw1" path="res://scenees/demo_levels/level_1.gd" id="1_skk4j"]
 [ext_resource type="Shader" uid="uid://cqdxgn78bv6h" path="res://script/default_level.gdshader" id="2_srbs3"]
@@ -8,6 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="6_llbwd"]
 [ext_resource type="PackedScene" uid="uid://x0tkfwl42ld6" path="res://scenees/split_obstical.tscn" id="7_eocww"]
 [ext_resource type="PackedScene" uid="uid://coyghgvye142q" path="res://scenees/ability_cards/shield.tscn" id="8_6kdtk"]
+[ext_resource type="PackedScene" uid="uid://ddq2f8xek6ot6" path="res://scenees/blackHole.tscn" id="9_qx2u8"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
 shader = ExtResource("2_srbs3")
@@ -72,6 +73,9 @@ position = Vector2(275, 1368)
 [node name="Timer" type="Timer" parent="."]
 wait_time = 999998.0
 autostart = true
+
+[node name="BlackHole" parent="." instance=ExtResource("9_qx2u8")]
+position = Vector2(-5446, 928)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
 [connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]

@@ -22,7 +22,7 @@ func _ready():
 	health = randomScale * 10
 	max_health = health
 	randomDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-	randomSpeed = randf_range(0,3)
+	randomSpeed = randf_range(0,35) / randomScale
 	randomRotation = randf_range(0,359)
 	rotation = randomRotation
 	
@@ -32,7 +32,7 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	position += randomDirection
+	position += randomDirection * randomSpeed
 	rotation += randomRotatation_speed
 	
 	#Handles blackhole logic

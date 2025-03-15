@@ -15,7 +15,7 @@ func _ready():
 	scale.y = randomScale
 	health = randomScale * 10
 	randomDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-	randomSpeed = randf_range(0,3)
+	randomSpeed = randf_range(0,90 / randomScale)
 	randomRotation = randf_range(0,359)
 	rotation = randomRotation
 	

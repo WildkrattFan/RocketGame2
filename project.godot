@@ -35,6 +35,7 @@ player=""
 enemy=""
 blackHole=""
 powerup=""
+emp=""
 
 [input]
 

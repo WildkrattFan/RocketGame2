@@ -21,7 +21,7 @@ func _ready():
 	health = scale.x * 10 + 1
 	max_health = health
 	randomDirection = Vector2(randf_range(-1, 1), randf_range(-1, 1))
-	randomSpeed = randf_range(0,3) / scale.x
+	randomSpeed = randf_range(0,15) / scale.x
 	randomRotation = randf_range(0,359)
 	rotation = randomRotation
 	

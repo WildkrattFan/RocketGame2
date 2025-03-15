@@ -203,7 +203,7 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_h0jsh")
+&"": SubResource("AnimationLibrary_h0jsh")
 }
 
 [connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
