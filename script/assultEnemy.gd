@@ -37,7 +37,7 @@ func _process(delta):
 		
 		position += suction_direction * suction_strength * delta
 	
-	if behavior_state == "hunting":
+	if behavior_state == "hunting" and player.find_child("playerHitBox").monitorable:
 		var direction_to_player = (player.global_position - global_position)
 		update_raycast_target()
 		check_line_of_sight(delta)
@@ -80,9 +80,9 @@ func move_towards_target(delta):
 
 func _on_hit_box_area_entered(area):
 	if area.is_in_group("player"):
+		killedBy = area
 		call_deferred("explosion")
-	if area.is_in_group("mine"):
-		call_deferred("explosion")
+
 	if area.is_in_group("missile"):
 		killedBy = area.get_parent().shotBy
 		call_deferred("explosion")
@@ -91,6 +91,7 @@ func _on_hit_box_area_entered(area):
 	if area.name == "blackHoleCenter":
 		call_deferred("explosion")
 	if area.name == "mediumExplosionArea":
+		killedBy = area.get_parent().shotBy
 		call_deferred("explosion")
 	if area.name == "turretHitBox":
 		call_deferred("explosion")

@@ -16,7 +16,7 @@ var paused = false
 func _ready():
 	#TODO: Fix
 	if GlobalLevelTracking.levelAbilities:
-		$player/player.abilityCards = GlobalLevelTracking.levelAbilities[1]
+		$player/player.setAbilityCards(GlobalLevelTracking.levelAbilities[0])
 	else:
 		$player/player.abilityCards = []
 	get_tree().paused = false
@@ -35,6 +35,7 @@ func player_explosion():
 
 
 func _on_player_main_player_exploded():
+	Engine.time_scale = 1.0
 	player_explosion()
 
 func _toggle_pause_menu():

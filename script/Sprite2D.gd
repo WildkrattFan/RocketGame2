@@ -141,7 +141,7 @@ func handle_input(delta):
 
 	# Shooting logic
 	if Input.is_action_pressed("shoot") and ammo > 0 and current_ammo == "Machine Gun" and $Timer.time_left <= 0 and !isExploding:
-		if can_shoot:
+		if can_shoot == true:
 			shoot()
 			ammo -= 1
 			update_ammo_display()
@@ -150,9 +150,10 @@ func handle_input(delta):
 
 	
 	if Input.is_action_just_pressed("shoot") and ammo > 0 and $Timer.time_left <= 0 and !isExploding:
-		shoot()
-		ammo -= 1
-		update_ammo_display()
+		if can_shoot == true:
+			shoot()
+			ammo -= 1
+			update_ammo_display()
 
 
 	if ammo <= 0:
@@ -403,7 +404,9 @@ func shake_camera(intensity: float, duration: float):
 	$Camera2D.offset = Vector2.ZERO
 
 func setAbilityCards(newCards):
-	var newCardsCopy = newCards.duplicate()
+	var newCardsCopy = []
+	if newCards:
+		newCardsCopy = newCards.duplicate()
 	abilityCards = newCardsCopy
 	print(abilityCards)
 	
@@ -420,3 +423,7 @@ func setAbilityCards(newCards):
 		abilityInstances.append(abilityInstance)
 		spriteChildren.append(abilitySprite)
 		abilityPosition += 35
+		
+		
+func switchShoot(val):
+	can_shoot = val

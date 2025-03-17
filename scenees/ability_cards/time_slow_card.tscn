@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://b8io1l7jeryj4"]
+
+[ext_resource type="Script" uid="uid://swlx60bwewn2" path="res://scenees/ability_cards/time_slow_card.gd" id="1_e11o7"]
+[ext_resource type="Texture2D" uid="uid://cn5d720xw3j6j" path="res://assets/ability_sprites/time_slow_icon.png" id="1_ra3al"]
+
+[node name="TimeSlowCard" type="Node2D"]
+script = ExtResource("1_e11o7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_ra3al")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 10.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

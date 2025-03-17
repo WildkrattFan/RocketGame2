@@ -13,39 +13,11 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_wjwjq"]
 switch_mode = 1
-advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_w4hha"]
 states/explode/node = SubResource("AnimationNodeAnimation_wjwjq")
 states/explode/position = Vector2(405, 22)
 transitions = ["explode", "End", SubResource("AnimationNodeStateMachineTransition_m86hl"), "Start", "explode", SubResource("AnimationNodeStateMachineTransition_wjwjq")]
-
-[sub_resource type="Animation" id="Animation_wjwjq"]
-resource_name = "explode"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("Sprite2D2:frame")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
-"update": 1,
-"values": [0, 1, 2, 3, 4, 5, 6, 7]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Area2D/CollisionShape2D:scale")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.09, 0.15, 0.2, 0.24),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
-"update": 0,
-"values": [Vector2(1, 1), Vector2(0.93, 0.93), Vector2(2.83, 2.83), Vector2(4.09, 4.09), Vector2(6.26, 6.26), Vector2(8.15, 8.15)]
-}
 
 [sub_resource type="Animation" id="Animation_xoe4w"]
 length = 0.001
@@ -73,6 +45,57 @@ tracks/1/keys = {
 "update": 0,
 "values": [Vector2(1, 1)]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
+
+[sub_resource type="Animation" id="Animation_wjwjq"]
+resource_name = "explode"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D2:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667, 0.2, 0.233333, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Area2D/CollisionShape2D:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.09, 0.15, 0.2, 0.24, 1),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(0.93, 0.93), Vector2(2.83, 2.83), Vector2(4.09, 4.09), Vector2(6.26, 6.26), Vector2(8.15, 8.15), Vector2(8.15, 8.15)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D2:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_xhpdl"]
 _data = {
@@ -81,7 +104,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_wjwjq"]
-radius = 79.8868
+radius = 160.048
 
 [node name="EmpCard" type="Node2D"]
 script = ExtResource("1_wjwjq")
@@ -91,6 +114,7 @@ visible = false
 texture = ExtResource("1_xpgnt")
 
 [node name="Sprite2D2" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
 texture = ExtResource("3_xhpdl")
 hframes = 8
 
@@ -108,3 +132,5 @@ libraries = {
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(3, 0)
 shape = SubResource("CircleShape2D_wjwjq")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

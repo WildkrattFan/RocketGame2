@@ -26,6 +26,7 @@ func player_explosion():
 
 
 func _on_player_main_player_exploded():
+	Engine.time_scale = 1.0
 	player_explosion()
 
 func _toggle_pause_menu():

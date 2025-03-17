@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://btu1fjdg3tft"]
+[gd_scene load_steps=27 format=3 uid="uid://btu1fjdg3tft"]
 
 [ext_resource type="Script" uid="uid://vuo7vlawkjtq" path="res://script/obstical.gd" id="1_5hcse"]
 [ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_b27cs"]
@@ -180,6 +180,9 @@ _data = {
 &"destruction": SubResource("Animation_vba30")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_dpl22"]
+polygon = PackedVector2Array(-55, -138, -150, -88, -190, -48, -189, -14, -177, 19, -107, 90, -78, 97, -43, 99, -33, 117, 41, 130, 59, 130, 110, 89, 129, 50, 130, -1, 120, -60, 19, -150, -49, -150)
+
 [node name="Obstical" type="Node2D" groups=["Obstical"]]
 script = ExtResource("1_5hcse")
 
@@ -192,6 +195,7 @@ frame = 4
 collision_layer = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+visible = false
 position = Vector2(-22, -12)
 shape = SubResource("CapsuleShape2D_fgena")
 
@@ -205,6 +209,9 @@ root_node = NodePath("../..")
 libraries = {
 &"": SubResource("AnimationLibrary_h0jsh")
 }
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_dpl22")
 
 [connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="animation_finished" from="Sprite2D/AnimationTree" to="." method="_on_animation_tree_animation_finished"]

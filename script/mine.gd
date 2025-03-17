@@ -2,6 +2,7 @@ extends Node2D
 
 # Variables
 var player
+var shooter = null
 var attraction_force = 300
 
 # Define variables for explosions
@@ -44,6 +45,7 @@ func explode():
 	var explosion = explosion_scene.instantiate()
 	explosion.position = spawn_position
 	get_parent().add_child(explosion)
+	explosion.setPlayer(shooter)
 	queue_free()
 	
 	# Set monitorable to true when the mine explodes
@@ -54,7 +56,7 @@ func _on_timer_timeout():
 	explode()
 
 func _on_area_2d_2_area_entered(area):
-	if area.is_in_group("player"):
+	if area.is_in_group("enemy"):
 		
 		# Set the player reference
 		player = area
@@ -63,8 +65,12 @@ func _on_area_2d_2_area_entered(area):
 		$Timer.start()
 
 func _on_area_2d_area_entered(area):
-	if area.is_in_group("player"):
+	if area.is_in_group("enemy"):
 		# Pass delta as an argument to explode function
+		explode()
+	if area.is_in_group("player"):
+		explode()
+	if(area.is_in_group("obstical")):
 		explode()
 	if area.is_in_group("missile"):
 		# Pass delta as an argument to explode function

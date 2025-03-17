@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcfec5l8yxpko"]
+
+[ext_resource type="Texture2D" uid="uid://ihnhe57xh2kn" path="res://assets/mine.png" id="1_e10di"]
+[ext_resource type="Script" uid="uid://dclmj1y5o65vx" path="res://scenees/ability_cards/mine_card.gd" id="1_vh5cl"]
+
+[node name="MineCard" type="Node2D"]
+script = ExtResource("1_vh5cl")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("1_e10di")

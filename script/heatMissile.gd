@@ -14,6 +14,7 @@ var shotBy
 var explosion_scene = preload("res://scenees/mediumExplosion.tscn")
 
 var _stateMachine
+var short_curcuting = false
 
 func _ready():
 	$Timer.set_wait_time(time_to_explode)
@@ -95,7 +96,7 @@ func _on_heat_seaking_missile_area_entered(area):
 
 
 func _on_tracking_area_area_entered(area):
-	if !player:
+	if !player and !short_curcuting:
 		if area.name == "playerHitBox":
 			player = area
 		if area.name == "turretHitBox":
@@ -110,3 +111,7 @@ func _on_tracking_area_area_exited(area):
 		
 func setPlayer(player):
 	shotBy = player
+	
+func short_circut():
+	player = null
+	print("short circuting!!")

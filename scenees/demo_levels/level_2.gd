@@ -9,17 +9,16 @@ var paused = false
 
 
 
-@export var goal_points = 6
+@export var goal_points = 20
 @export var max_time = 30
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	#TODO: Fix
 	if GlobalLevelTracking.levelAbilities:
-		$player/player.setAbilityCards(GlobalLevelTracking.levelAbilities[2])
-		
-
-	print($player/player.abilityCards)
+		$player/player.setAbilityCards(GlobalLevelTracking.levelAbilities[1])
+	else:
+		$player/player.abilityCards = []
 	get_tree().paused = false
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -36,6 +35,7 @@ func player_explosion():
 
 
 func _on_player_main_player_exploded():
+	Engine.time_scale = 1.0
 	player_explosion()
 
 func _toggle_pause_menu():

@@ -5,7 +5,7 @@ var justPlayedLevel: int = 0
 var previousScore: int = 200
 var levelAbilities = []
 
-@export var commonAbilities = ["res://scenees/ability_cards/speed_boost_card.tscn","res://scenees/ability_cards/shield.tscn"]
+@export var commonAbilities = ["res://scenees/ability_cards/speed_boost_card.tscn","res://scenees/ability_cards/shield.tscn", "res://scenees/ability_cards/emp_card.tscn", "res://scenees/ability_cards/tripple_missile.tscn", "res://scenees/ability_cards/ghost_card.tscn", "res://scenees/ability_cards/time_slow_card.tscn", "res://scenees/ability_cards/mine_card.tscn"]
 
 
 # Called when the node enters the scene tree for the first time.

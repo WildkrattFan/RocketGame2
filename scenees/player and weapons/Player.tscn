@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://chxgvrijiwjix"]
+[gd_scene load_steps=53 format=3 uid="uid://chxgvrijiwjix"]
 
 [ext_resource type="Script" uid="uid://fmkhkf54omtd" path="res://scenees/player and weapons/Player.gd" id="1_n223q"]
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ymuer"]
@@ -8,7 +8,6 @@
 [ext_resource type="Script" uid="uid://clmo6d2l6wa4h" path="res://script/CollisionShape2D.gd" id="5_ftsce"]
 [ext_resource type="Texture2D" uid="uid://cfys1i7fhxo40" path="res://assets/bars/barUnder.png" id="5_g2a1h"]
 [ext_resource type="FontFile" uid="uid://cu4ynwccsuf4v" path="res://assets/upheaval/upheavtt.ttf" id="6_7gyul"]
-[ext_resource type="PackedScene" uid="uid://by6mwr7sycp4c" path="res://scenees/ability_cards/emp_card.tscn" id="6_c4eeg"]
 [ext_resource type="Texture2D" uid="uid://c7n0ny8cm4bxj" path="res://assets/bars/reloadBarMain.png" id="7_iq23l"]
 [ext_resource type="Texture2D" uid="uid://s3jq4ii3sfc6" path="res://assets/trai2l.png" id="9_31u5o"]
 [ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="9_uvvyq"]
@@ -354,6 +353,15 @@ hue_variation_curve = SubResource("CurveTexture_akhtx")
 [sub_resource type="CircleShape2D" id="CircleShape2D_06iks"]
 radius = 15373.8
 
+[sub_resource type="Gradient" id="Gradient_c4eeg"]
+offsets = PackedFloat32Array(0, 0.688312)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6rouw"]
+gradient = SubResource("Gradient_c4eeg")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="player" type="Node2D" groups=["player", "shotBy"]]
 scale = Vector2(2, 2)
 script = ExtResource("1_n223q")
@@ -367,10 +375,8 @@ hframes = 12
 script = ExtResource("3_ilhu4")
 arrowText = ExtResource("10_v43cp")
 red_arrowText = ExtResource("5_ab5l3")
-abilityCards = [ExtResource("6_c4eeg")]
 
 [node name="playerHitBox" type="Area2D" parent="player" groups=["hitbox", "player", "player_hitbox"]]
-visible = false
 script = ExtResource("4_4tu5c")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/playerHitBox" groups=["player"]]
@@ -386,7 +392,6 @@ wait_time = 2.0
 one_shot = true
 
 [node name="Camera2D" type="Camera2D" parent="player"]
-visible = false
 position = Vector2(10, 10)
 zoom = Vector2(0.2, 0.2)
 limit_smoothed = true
@@ -408,7 +413,6 @@ libraries = {
 speed_scale = 0.75
 
 [node name="explosionArea" type="Area2D" parent="player"]
-visible = false
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/explosionArea"]
 position = Vector2(10, -60)
@@ -485,7 +489,6 @@ texture = ExtResource("10_v43cp")
 replication_config = SubResource("SceneReplicationConfig_iphfq")
 
 [node name="visibility area" type="Area2D" parent="player" groups=["player"]]
-visible = false
 rotation = -0.00873252
 collision_layer = 2
 collision_mask = 2
@@ -505,6 +508,16 @@ process_material = SubResource("ParticleProcessMaterial_1re50")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="player/super_close_area"]
 position = Vector2(0, -96.05)
 shape = SubResource("CircleShape2D_06iks")
+
+[node name="PointLight2D" type="PointLight2D" parent="player"]
+position = Vector2(0, -96.05)
+scale = Vector2(20.5469, 22.0689)
+energy = 0.75
+shadow_enabled = true
+shadow_filter = 1
+shadow_filter_smooth = 10.0
+texture = SubResource("GradientTexture2D_6rouw")
+texture_scale = 0.54
 
 [connection signal="exploded" from="player" to="." method="_on_player_exploded"]
 [connection signal="points_added" from="player" to="." method="_on_player_points_added"]

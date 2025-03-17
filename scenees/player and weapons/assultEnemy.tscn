@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://btp0cnq64nui6"]
+[gd_scene load_steps=12 format=3 uid="uid://btp0cnq64nui6"]
 
 [ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="1_ro37q"]
 [ext_resource type="Script" uid="uid://e21offsurb0l" path="res://script/assultEnemy.gd" id="1_svosa"]
@@ -23,6 +23,15 @@ size = Vector2(43.7677, 20.8021)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lnfek"]
 radius = 1324.71
+
+[sub_resource type="Gradient" id="Gradient_n68st"]
+offsets = PackedFloat32Array(0, 0.62987)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wa33"]
+gradient = SubResource("Gradient_n68st")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
 
 [node name="AssultEnemy" type="Node2D" groups=["enemy"]]
 scale = Vector2(2, 2)
@@ -84,6 +93,11 @@ wait_time = 5.0
 
 [node name="shot_timer" type="Timer" parent="."]
 wait_time = 0.05
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["enemy"]]
+color = Color(1, 0, 0, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_1wa33")
 
 [connection signal="area_entered" from="Sprite2D/hitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="Sprite2D/shoot_area" to="." method="_on_shoot_area_area_entered"]

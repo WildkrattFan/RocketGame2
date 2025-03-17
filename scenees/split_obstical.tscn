@@ -1,7 +1,11 @@
-[gd_scene load_steps=25 format=3 uid="uid://x0tkfwl42ld6"]
+[gd_scene load_steps=27 format=3 uid="uid://x0tkfwl42ld6"]
 
 [ext_resource type="Script" uid="uid://c4yvljj5ey61j" path="res://scenees/split_obstical.gd" id="1_7xedr"]
 [ext_resource type="Texture2D" uid="uid://cfm37iqn5xela" path="res://assets/comet-Sheet.png" id="2_hadfr"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_l0uro"]
+radius = 133.054
+height = 348.077
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ci40t"]
 animation = &"100"
@@ -149,18 +153,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [4]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/hitbox/CollisionPolygon2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
 
 [sub_resource type="Animation" id="Animation_vba30"]
 resource_name = "destruction"
@@ -176,18 +168,6 @@ tracks/0/keys = {
 "update": 1,
 "values": [4, 5, 6]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Sprite2D/hitbox/CollisionPolygon2D:disabled")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.0666667),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [false, true]
-}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0jsh"]
 _data = {
@@ -200,6 +180,9 @@ _data = {
 &"destruction": SubResource("Animation_vba30")
 }
 
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_l0uro"]
+polygon = PackedVector2Array(114, -68, 17, -149, -47, -149, -86, -122, -144, -89, -195, -51, -192, -16, -178, 21, -112, 84, -79, 99, -34, 111, -24, 121, 41, 129, 59, 128, 112, 87, 128, 49, 129, -3)
+
 [node name="Split_Obstical" type="Node2D" groups=["Obstical"]]
 script = ExtResource("1_7xedr")
 
@@ -211,9 +194,11 @@ frame = 4
 [node name="hitbox" type="Area2D" parent="Sprite2D" groups=["Obstical", "obstical"]]
 collision_layer = 7
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Sprite2D/hitbox"]
-position = Vector2(2, 0)
-polygon = PackedVector2Array(-50, -149, -150, -83, -192, -48, -191, -13, -176, 23, -122, 73, -67, 100, -26, 119, 37, 119, 111, 87, 133, 21, 116, -64, 15, -151)
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+visible = false
+position = Vector2(-30, -6)
+rotation = -1.30027
+shape = SubResource("CapsuleShape2D_l0uro")
 
 [node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
 root_node = NodePath("../..")
@@ -223,12 +208,15 @@ anim_player = NodePath("../AnimationPlayer")
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
 root_node = NodePath("../..")
 libraries = {
-"": SubResource("AnimationLibrary_h0jsh")
+&"": SubResource("AnimationLibrary_h0jsh")
 }
 
 [node name="Spawn_grace" type="Timer" parent="."]
 one_shot = true
 autostart = true
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_l0uro")
 
 [connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="animation_finished" from="Sprite2D/AnimationTree" to="." method="_on_animation_tree_animation_finished"]

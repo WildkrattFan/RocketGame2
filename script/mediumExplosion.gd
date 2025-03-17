@@ -7,6 +7,7 @@ var shotBy
 func _ready():
 	$AnimationPlayer.play("explosionAnimation")
 	$AudioStreamPlayer2D.play()
+	$CPUParticles2D.emitting = true
 
 
 

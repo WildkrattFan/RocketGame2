@@ -86,14 +86,15 @@ func split(area):
 		var split_parts_num = randf_range(2,4)
 		var new_scale = scale / split_parts_num
 		var split_counter = 0
-		$Sprite2D/hitbox/CollisionPolygon2D.disabled = true
+		if($Sprite2D/hitbox/CollisionPolygon2D):
+			$Sprite2D/hitbox/CollisionPolygon2D.disabled = true
 		if new_scale >= Vector2(0.3,0.3):
 			for i in range(split_parts_num):
-				print("Splitting" + str(split_counter))
+
 				split_counter += 1
 				var split_instance = obstical_scene.instantiate()
 				split_instance.position = position + Vector2(randf_range(scale.x * 100, scale.x * 200 ),randf_range(scale.y * 100, scale.y * 200))
-				print(split_instance.position)
+
 				split_instance.scale = new_scale
 				get_parent().call_deferred("add_child",split_instance)
 				queue_free()

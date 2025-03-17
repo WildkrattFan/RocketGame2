@@ -11,13 +11,23 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-
 	pass
-
 	
 func use(delta,player):
 	$Sprite2D2.visible = true
+	var root = get_tree().current_scene  # The main scene root
+	get_parent().remove_child(self)  # Remove from current parent
+	root.add_child(self)  # Add to the main scene
 	global_position = player.global_position
 	_stateMachine.travel("explode")
-	pass
+	await $AnimationPlayer.animation_finished
+	queue_free()
 	
+
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	var parent = area.get_parent()
+	print(parent)
+	if parent.has_method("short_circut"):
+		print("it has the method!!!!")
+		parent.short_circut()

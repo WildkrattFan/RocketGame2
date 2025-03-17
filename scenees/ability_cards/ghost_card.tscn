@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://5wbrrebw0dnw"]
+
+[ext_resource type="Script" uid="uid://bqo7n4r88pf2x" path="res://scenees/ability_cards/ghost_card.gd" id="1_o6hyw"]
+[ext_resource type="Texture2D" uid="uid://dridkvsicdswp" path="res://assets/ability_sprites/invisible_icon.png" id="2_3a25j"]
+
+[node name="GhostCard" type="Node2D"]
+script = ExtResource("1_o6hyw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("2_3a25j")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 7.0
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

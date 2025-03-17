@@ -7,6 +7,13 @@ var save_path = "user://score.save"
 var levels_scene = ("res://scenees/levels_screen.tscn")
 var _portalMachine
 
+var rarity_colors = {
+	"Common": Color(1, 1, 1),       # White glow
+	"Rare": Color(0, 0, 1),         # Blue glow
+	"Epic": Color(0.5, 0, 0.5),     # Purple glow
+	"Legendary": Color(1, 0.84, 0)  # Gold glow
+}
+
 
 func _ready() -> void:
 	while textNum < GlobalLevelTracking.previousScore:
@@ -74,6 +81,8 @@ func displayAbilities():
 		add_child(abilityInstance)
 		abilitySprite.texture = abilityInstance.get_child(0).texture
 		abilitySprite.scale = Vector2(0.05, 0.05)
+		
+		#TODO: Add a rarity property to each ability
 
 		# Start all abilities from the center point
 		abilitySprite.position = start_position
