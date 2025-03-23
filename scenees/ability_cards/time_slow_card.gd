@@ -3,6 +3,7 @@ extends Node2D
 var player = null
 var original_time_scale = 1.0  # Store the normal time scale
 var colorRect
+var rarity = "epic"
 
 func use(delta, player):
 	self.player = player

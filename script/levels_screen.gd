@@ -1,7 +1,7 @@
 extends Control
 var startScene = ("res://scenees/startScreen.tscn")
 
-var level_list = [("res://scenees/demo_levels/level1.tscn"),("res://scenees/demo_levels/level2.tscn"),("res://scenees/demo_levels/level3.tscn")]
+var level_list = [("res://levels/tutorial_level/tutorial_level.tscn"),("res://levels/level1/level1.tscn"),("res://scenees/demo_levels/level3.tscn")]
 var save_path = "user://score.save"
 
 

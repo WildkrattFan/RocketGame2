@@ -1,0 +1,53 @@
+[gd_scene load_steps=7 format=3 uid="uid://ddq2f8xek6ot6"]
+
+[ext_resource type="Script" uid="uid://bf1osnemw0me7" path="res://script/blackHole.gd" id="1_ms01d"]
+[ext_resource type="Texture2D" uid="uid://bbfmim4e0rfn6" path="res://assets/ability_sprites/blackhole.png" id="2_sqboa"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_g4hkx"]
+radius = 2188.78
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vppbt"]
+radius = 166.364
+
+[sub_resource type="Gradient" id="Gradient_sqboa"]
+offsets = PackedFloat32Array(0, 0.766234)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qsj53"]
+gradient = SubResource("Gradient_sqboa")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="BlackHole" type="Node2D" groups=["blackHole"]]
+script = ExtResource("1_ms01d")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-98.705, 0)
+texture = ExtResource("2_sqboa")
+
+[node name="wideBlackHoleRadius" type="Area2D" parent="Sprite2D" groups=["blackHole"]]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/wideBlackHoleRadius"]
+shape = SubResource("CircleShape2D_g4hkx")
+
+[node name="blackHoleCenter" type="Area2D" parent="Sprite2D"]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/blackHoleCenter"]
+shape = SubResource("CircleShape2D_vppbt")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(17.9999, -10)
+scale = Vector2(122.953, 84.1098)
+color = Color(0.926566, 0.313601, 1.92523e-07, 1)
+texture = SubResource("GradientTexture2D_qsj53")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+amount = 20
+lifetime_randomness = 0.17
+emission_shape = 1
+emission_sphere_radius = 128.0
+spread = 180.0
+scale_amount_min = 29.58
+scale_amount_max = 48.62

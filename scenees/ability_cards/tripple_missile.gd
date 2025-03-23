@@ -2,6 +2,7 @@ extends Node2D
 
 var player = null;
 var missile = preload("res://scenees/player and weapons/heatMissile.tscn")
+var rarity = "common"
 @export var shoot_speed = 1500
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:

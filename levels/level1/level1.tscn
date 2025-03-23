@@ -1,0 +1,164 @@
+[gd_scene load_steps=21 format=3 uid="uid://db7pu15um0ssb"]
+
+[ext_resource type="Script" uid="uid://cwb11cijcdfmn" path="res://levels/level1/level_1.gd" id="1_8yb7b"]
+[ext_resource type="Shader" uid="uid://cqdxgn78bv6h" path="res://script/default_level.gdshader" id="2_kkmtg"]
+[ext_resource type="Texture2D" uid="uid://cnd815unfj2p1" path="res://assets/backgrounds/space-station.png" id="3_8k31e"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="5_jbmpp"]
+[ext_resource type="PackedScene" uid="uid://bd6jlmqtgghaw" path="res://levels/tutorial_level/Actionable.tscn" id="6_h1ni1"]
+[ext_resource type="PackedScene" uid="uid://bvr5gw28onr2s" path="res://levels/level1/portal.tscn" id="7_3jy00"]
+[ext_resource type="Texture2D" uid="uid://dfux4e4eh7jaj" path="res://levels/level1/assets/portal-Sheet.png" id="7_8yb7b"]
+[ext_resource type="Resource" uid="uid://bg2h0omvu3vbe" path="res://dialogue/main.dialogue" id="7_xqy4e"]
+[ext_resource type="PackedScene" uid="uid://dhmiw3ghfhjmu" path="res://levels/level1/ally.tscn" id="9_gw1fo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
+shader = ExtResource("2_kkmtg")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axelv"]
+radius = 573.043
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2trq"]
+size = Vector2(165.591, 167.139)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8yb7b"]
+radius = 289.836
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gw1fo"]
+animation = &"jaxon_enters"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jhqhn"]
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f7y8c"]
+states/jaxon_enters/node = SubResource("AnimationNodeAnimation_gw1fo")
+states/jaxon_enters/position = Vector2(405, 34)
+transitions = ["Start", "jaxon_enters", SubResource("AnimationNodeStateMachineTransition_jhqhn")]
+
+[sub_resource type="Animation" id="Animation_ddtso"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Jaxson:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(750, 1506)]
+}
+
+[sub_resource type="Animation" id="Animation_gw1fo"]
+resource_name = "end"
+
+[sub_resource type="Animation" id="Animation_jhqhn"]
+resource_name = "jaxon_enters"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../Jaxson:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(750, 1506), Vector2(750, -314.93)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_f7y8c"]
+_data = {
+&"RESET": SubResource("Animation_ddtso"),
+&"end": SubResource("Animation_gw1fo"),
+&"jaxon_enters": SubResource("Animation_jhqhn")
+}
+
+[node name="level1" type="Node2D"]
+script = ExtResource("1_8yb7b")
+
+[node name="AssultEnemy" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(493, 2007)
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_71qnq")
+position = Vector2(139, -3121)
+scale = Vector2(2, 2)
+texture = ExtResource("3_8k31e")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -15847, -12671, -15847, -12609, -16235, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="player" parent="." instance=ExtResource("5_jbmpp")]
+position = Vector2(466, 1465)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 999998.0
+autostart = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.513236, 0.513232, 0.513232, 1)
+
+[node name="Actionable" parent="." instance=ExtResource("6_h1ni1")]
+visible = false
+position = Vector2(4095, 932)
+scale = Vector2(42.295, 42.295)
+priority = 1
+dialouge_resource = ExtResource("7_xqy4e")
+dialouge_start = "spaceJump"
+sprite = ExtResource("7_8yb7b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+shape = SubResource("CircleShape2D_axelv")
+
+[node name="MissileRecognition" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MissileRecognition"]
+position = Vector2(-159, -3470)
+scale = Vector2(160.25, 160.25)
+shape = SubResource("RectangleShape2D_r2trq")
+
+[node name="Portal" parent="." instance=ExtResource("7_3jy00")]
+position = Vector2(621, -572)
+
+[node name="Area2D" type="Area2D" parent="Portal"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Portal/Area2D"]
+shape = SubResource("CircleShape2D_8yb7b")
+
+[node name="AssultEnemy4" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(681, 2017)
+
+[node name="AssultEnemy3" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(656, 1714)
+scale = Vector2(1.5, 1.5)
+
+[node name="AssultEnemy5" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(681, 2017)
+scale = Vector2(1.5, 1.5)
+
+[node name="AssultEnemy2" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(465, 1742)
+scale = Vector2(1.5, 1.5)
+
+[node name="Jaxson" parent="." instance=ExtResource("9_gw1fo")]
+position = Vector2(750, 1506)
+scale = Vector2(1.5, 1.5)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath(".")
+tree_root = SubResource("AnimationNodeStateMachine_f7y8c")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../AnimationTree")
+libraries = {
+&"": SubResource("AnimationLibrary_f7y8c")
+}
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+[connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]
+[connection signal="area_entered" from="MissileRecognition" to="." method="_on_missile_recognition_area_entered"]
+[connection signal="area_entered" from="Portal/Area2D" to="." method="_on_area_2d_area_entered"]

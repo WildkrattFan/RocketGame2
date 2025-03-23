@@ -1,0 +1,97 @@
+[gd_scene load_steps=12 format=3 uid="uid://2un8uq2bfuwc"]
+
+[ext_resource type="Script" uid="uid://b8ob5saxu5bvl" path="res://levels/tutorial_level/tutorial_level.gd" id="1_r2trq"]
+[ext_resource type="Shader" uid="uid://cqdxgn78bv6h" path="res://script/default_level.gdshader" id="2_r2trq"]
+[ext_resource type="Texture2D" uid="uid://cnd815unfj2p1" path="res://assets/backgrounds/space-station.png" id="3_l60hg"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_cxq8o"]
+[ext_resource type="PackedScene" uid="uid://bd6jlmqtgghaw" path="res://levels/tutorial_level/Actionable.tscn" id="5_26fse"]
+[ext_resource type="Resource" uid="uid://bg2h0omvu3vbe" path="res://dialogue/main.dialogue" id="6_r2trq"]
+[ext_resource type="Texture2D" uid="uid://c2jo8s32ubmlg" path="res://assets/dialouge_sprites/SpaceSuit-export.png" id="7_l60hg"]
+[ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="8_cxq8o"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
+shader = ExtResource("2_r2trq")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_axelv"]
+radius = 573.043
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r2trq"]
+size = Vector2(165.591, 167.139)
+
+[node name="Tutorial" type="Node2D"]
+script = ExtResource("1_r2trq")
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_71qnq")
+position = Vector2(139, -3121)
+scale = Vector2(2, 2)
+texture = ExtResource("3_l60hg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="SpaceTitleScreen"]
+layer = 101
+
+[node name="Control" type="Control" parent="SpaceTitleScreen/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 466.0
+offset_top = 1465.0
+offset_right = 506.0
+offset_bottom = 1505.0
+
+[node name="LineEdit" type="LineEdit" parent="SpaceTitleScreen/CanvasLayer/Control"]
+z_index = 500
+layout_mode = 0
+offset_left = -693.0
+offset_top = -259.0
+offset_right = -608.438
+offset_bottom = -228.0
+scale = Vector2(20, 20)
+clear_button_enabled = true
+
+[node name="TextureRect" type="TextureRect" parent="SpaceTitleScreen/CanvasLayer"]
+offset_left = 229.0
+offset_top = 895.0
+offset_right = 869.0
+offset_bottom = 1535.0
+texture = ExtResource("8_cxq8o")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -15847, -12671, -15847, -12609, -16235, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="player" parent="." instance=ExtResource("4_cxq8o")]
+position = Vector2(466, 1465)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 999998.0
+autostart = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.733007, 0.733005, 0.733005, 1)
+
+[node name="Actionable" parent="." instance=ExtResource("5_26fse")]
+visible = false
+position = Vector2(4095, 932)
+scale = Vector2(42.295, 42.295)
+monitoring = false
+monitorable = false
+dialouge_resource = ExtResource("6_r2trq")
+dialouge_start = "tutorial"
+sprite = ExtResource("7_l60hg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+shape = SubResource("CircleShape2D_axelv")
+
+[node name="MissileRecognition" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MissileRecognition"]
+position = Vector2(-159, -3470)
+scale = Vector2(160.25, 160.25)
+shape = SubResource("RectangleShape2D_r2trq")
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+[connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]
+[connection signal="area_entered" from="MissileRecognition" to="." method="_on_missile_recognition_area_entered"]

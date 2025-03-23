@@ -3,7 +3,7 @@ extends Node2D
 var activated = false
 
 var user = null;
-
+var rarity = "rare"
 
 
 func use(delta, player):

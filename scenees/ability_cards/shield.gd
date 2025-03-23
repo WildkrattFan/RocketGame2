@@ -2,6 +2,7 @@ extends Node2D
 
 var player = null;
 var _stateMachine
+var rarity = "common"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$Shield_Bubble_Sprite.visible = false

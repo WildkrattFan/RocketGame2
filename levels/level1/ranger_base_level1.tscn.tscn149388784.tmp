@@ -1,0 +1,154 @@
+[gd_scene load_steps=17 format=3 uid="uid://c4o81gpjdmhlj"]
+
+[ext_resource type="Script" uid="uid://dlt2ha2ys4g2w" path="res://levels/level1/ranger_base_level_1.tscn.gd" id="1_41mwl"]
+[ext_resource type="Shader" uid="uid://cqdxgn78bv6h" path="res://script/default_level.gdshader" id="2_27iy0"]
+[ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="3_avqvj"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_fiwou"]
+[ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="6_mcfes"]
+[ext_resource type="PackedScene" uid="uid://bvr5gw28onr2s" path="res://levels/level1/portal.tscn" id="7_27iy0"]
+[ext_resource type="PackedScene" uid="uid://bd6jlmqtgghaw" path="res://levels/tutorial_level/Actionable.tscn" id="7_fiwou"]
+[ext_resource type="Resource" uid="uid://bg2h0omvu3vbe" path="res://dialogue/main.dialogue" id="8_ico1n"]
+[ext_resource type="Texture2D" uid="uid://dfux4e4eh7jaj" path="res://levels/level1/assets/portal-Sheet.png" id="9_mcfes"]
+[ext_resource type="Texture2D" uid="uid://cia6r56cayy55" path="res://assets/ranger_base.png" id="12_ks0mo"]
+[ext_resource type="Texture2D" uid="uid://3yy7lebedtdk" path="res://assets/shield_bubble.png" id="16_14u7g"]
+[ext_resource type="Texture2D" uid="uid://cqc8qjlbq6sxe" path="res://assets/bars/healthBarMain.png" id="17_pe7j1"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
+shader = ExtResource("2_27iy0")
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ks0mo"]
+radius = 23546.9
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_14u7g"]
+radius = 1297.24
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pe7j1"]
+size = Vector2(25511, 25585)
+
+[node name="ranger_base_level1" type="Node2D"]
+script = ExtResource("1_41mwl")
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_71qnq")
+position = Vector2(44, -3146)
+scale = Vector2(2, 2)
+texture = ExtResource("3_avqvj")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -15847, -12671, -15847, -12609, -16235, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="player" parent="." instance=ExtResource("4_fiwou")]
+position = Vector2(466, 1465)
+
+[node name="Obstical" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-2747, 2360)
+
+[node name="Obstical2" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-2544, 805)
+
+[node name="Obstical3" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-426, -781)
+
+[node name="Obstical4" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(2255, 3706)
+
+[node name="Obstical5" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(4141, 1460)
+
+[node name="Obstical6" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-3525, -3960)
+
+[node name="Obstical7" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-5072, 836)
+
+[node name="Obstical8" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-1174, 3700)
+
+[node name="Obstical9" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(4678, 4856)
+
+[node name="Obstical10" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(6474, 2632)
+
+[node name="Obstical11" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(4935, -789)
+
+[node name="Obstical12" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(4406, -2706)
+
+[node name="Obstical13" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-4644, -1159)
+
+[node name="Obstical14" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-3646, 4856)
+
+[node name="Obstical15" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(1742, 4571)
+
+[node name="Obstical16" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(-3911, -1963)
+
+[node name="Obstical17" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(3110, -618)
+
+[node name="Obstical18" parent="." instance=ExtResource("6_mcfes")]
+position = Vector2(4564, 3260)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 1e+07
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.691358, 0.691356, 0.691357, 1)
+
+[node name="Portal" parent="." instance=ExtResource("7_27iy0")]
+position = Vector2(463, 1458)
+
+[node name="startTimer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+autostart = true
+
+[node name="Actionable" parent="." instance=ExtResource("7_fiwou")]
+visible = false
+position = Vector2(170, 788)
+monitoring = false
+monitorable = false
+dialouge_resource = ExtResource("8_ico1n")
+dialouge_start = "ranger_base_one"
+sprite = ExtResource("9_mcfes")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Actionable"]
+position = Vector2(292, 673)
+shape = SubResource("CircleShape2D_ks0mo")
+
+[node name="Error" parent="." instance=ExtResource("7_fiwou")]
+visible = false
+position = Vector2(439, -3338)
+dialouge_resource = ExtResource("8_ico1n")
+dialouge_start = "ranger_base_gone"
+sprite = ExtResource("16_14u7g")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Error"]
+shape = SubResource("CircleShape2D_14u7g")
+
+[node name="Success" parent="." instance=ExtResource("7_fiwou")]
+visible = false
+position = Vector2(-1930, -1574)
+dialouge_resource = ExtResource("8_ico1n")
+dialouge_start = "ranger_base_success"
+sprite = ExtResource("17_pe7j1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Success"]
+position = Vector2(2194, -1745)
+shape = SubResource("RectangleShape2D_pe7j1")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(14, -3486)
+texture = ExtResource("12_ks0mo")
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+[connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]
+[connection signal="timeout" from="startTimer" to="." method="_on_start_timer_timeout"]

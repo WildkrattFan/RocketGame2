@@ -1,26 +1,192 @@
-[gd_scene load_steps=5 format=3 uid="uid://ddq2f8xek6ot6"]
+[gd_scene load_steps=14 format=3 uid="uid://ddq2f8xek6ot6"]
 
-[ext_resource type="Texture2D" uid="uid://dsembjtmjdhbx" path="res://assets/blackholeLol-removebg-preview.png" id="1_4qa37"]
 [ext_resource type="Script" uid="uid://bf1osnemw0me7" path="res://script/blackHole.gd" id="1_ms01d"]
+[ext_resource type="Texture2D" uid="uid://5fcvny4rla4l" path="res://assets/ability_sprites/blackhole-Sheet.png" id="2_sqboa"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_g4hkx"]
-radius = 2188.78
+radius = 9114.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vppbt"]
-radius = 166.364
+radius = 1027.0
+
+[sub_resource type="Gradient" id="Gradient_sqboa"]
+offsets = PackedFloat32Array(0, 0.766234)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_qsj53"]
+gradient = SubResource("Gradient_sqboa")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sqboa"]
+animation = &"expand"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qsj53"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sqboa"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_f4dm8"]
+states/expand/node = SubResource("AnimationNodeAnimation_sqboa")
+states/expand/position = Vector2(299, 20)
+transitions = ["Start", "expand", SubResource("AnimationNodeStateMachineTransition_qsj53"), "expand", "End", SubResource("AnimationNodeStateMachineTransition_sqboa")]
+
+[sub_resource type="Animation" id="Animation_2xrnt"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/blackHoleCenter:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.035, 1.035)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/wideBlackHoleRadius:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0.36, 0.36)]
+}
+
+[sub_resource type="Animation" id="Animation_dq2pu"]
+resource_name = "expand"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1, 0.133333, 0.166667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("CPUParticles2D:emitting")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.11),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite2D/blackHoleCenter:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.22),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.245, 0.245), Vector2(1.07, 1.07)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Sprite2D/wideBlackHoleRadius:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.37),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(0.09, 0.09), Vector2(0.31, 0.31)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xmpln"]
+_data = {
+&"RESET": SubResource("Animation_2xrnt"),
+&"expand": SubResource("Animation_dq2pu")
+}
 
 [node name="BlackHole" type="Node2D" groups=["blackHole"]]
 script = ExtResource("1_ms01d")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_4qa37")
+texture = ExtResource("2_sqboa")
+hframes = 6
+frame = 5
 
 [node name="wideBlackHoleRadius" type="Area2D" parent="Sprite2D" groups=["blackHole"]]
+position = Vector2(86, 0)
+scale = Vector2(0.36, 0.36)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/wideBlackHoleRadius"]
 shape = SubResource("CircleShape2D_g4hkx")
 
 [node name="blackHoleCenter" type="Area2D" parent="Sprite2D"]
+position = Vector2(111.94, 0)
+scale = Vector2(1.035, 1.035)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/blackHoleCenter"]
 shape = SubResource("CircleShape2D_vppbt")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(17.9999, -10)
+scale = Vector2(122.953, 84.1098)
+color = Color(0.926566, 0.313601, 1.92523e-07, 1)
+energy = 2.0
+texture = SubResource("GradientTexture2D_qsj53")
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+visible = false
+scale = Vector2(36.86, 36.86)
+amount = 40
+lifetime_randomness = 0.17
+emission_shape = 2
+emission_sphere_radius = 128.0
+spread = 180.0
+gravity = Vector2(0, 0)
+scale_amount_min = 29.58
+scale_amount_max = 70.0
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_f4dm8")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_xmpln")
+}

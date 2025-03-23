@@ -1,0 +1,108 @@
+~ tutorial
+
+Zyra: Welcome to basic training cadet! Try not to embarrass yourself.
+Zyra: Lets get this over with quickly so you can get exploring and I can get back to doing an actually interesting job.
+Zyra: Lets see here... {{State.playerName}}? Huh. Can't say I've heard that name before...
+Zyra: Maybe you'll do something to make it worth remembering...
+
+Zyra: Anyways lets get moving! Use WASD to move around. Once you've got the hang of it press F to continue!
+
+Zyra: Your Nomad 7500 is equipped with a state-of-the-art weapons system!
+Zyra: Try shooting by pressing SPACE
+=> shot_tutorial
+=> END
+
+~ shot_tutorial
+
+if State.has_shot:
+	Zyra: Not bad! At least you didn't blow up on your first try.
+	Zyra: Reload with R, switch ammo types with SHIFT.
+	Zyra: Thats enough hand holding for today... Good luck in the field ranger!
+	do State.switch_to_scene("res://levels/level1/level1.tscn")
+	
+else:
+	Zyra: You can't move on until you shoot...
+	Zyra: Press SPACE and let's move it along!
+	=> shot_tutorial
+=> END
+
+
+~ spaceJump
+Jaxson: Hey there! How's it goin'?
+- Amazing!
+	Jaxson: Wow I'm glad to hear it!
+- Horrible
+	Jaxson: Yikes now I feel bad.
+- Nervous
+	Jaxson: Yeah I think thats how we are all feeling...
+Jaxson: Scared to hop on a Voidstream for the first time?
+- Whats a Voidstream again?
+	Jaxson: You're in for a ride dude.
+	Jaxson: It's this super cool wormhole-esque thing that shoots you through space and time to your destination!
+	Jaxson: I hear they're super hardcore... Hope you had a light breakfast!
+	=> goingFirst
+
+- Nah I eat Voidstreams for breakfast!
+	Jaxson: Woah major respect! You're way braver than me...
+	=> goingFirst
+- Definetly!
+	Jaxson: Hahaha same here! Good luck us!
+	=> goingFirst
+	
+~ goingFirst
+
+General Greg: Listen up graduates! Today marks the date of your new lives!
+General Greg: You've trained, you've bled, and now-you're finally almost full-fledged Rangers.
+General Greg: But that title isn't just given... it needs to be earned.
+General Greg: Your first assignment is a 30 day deployment to an outpost. No backup. No second chances.
+General Greg: Survive, and you'll be offically rangers. If not... well we won't have to worry about throwing a welcome back part.
+General Greg: Good luck out there—you’re gonna need it.
+General Greg: Move out! Take your posts!
+
+Jaxson: You wanna go first or should I?
+- I'll go first.
+	do State.set_player_can_move()
+	Jaxson: Alrighty! After you then!
+- You can go first.
+	Jaxson: Sick. I hope we meet again!
+	do State.jaxson_enter()
+
+
+=> END
+
+=> END
+
+~ ranger_base_one
+if !State.ranger_base_computer_spoken:
+	Computer: Sector B5-T18, System: A25-Y1, Nearest Planet: L-12
+	Computer: Voidstream successful!
+	Computer: Begin mission: Explore and locate Ranger base Omega-215
+	do State.ranger_base_computer_spoken = true
+=> END
+
+~ ranger_base_gone
+[next=auto]
+Computer: [shake rate=20 level=10]Error: Current coordinates intersect with ranger base Omega-215[/shake]
+[next=auto]
+Computer: [shake rate=20 level=10]Base not found Error.[/shake]
+[next=auto]
+Computer: [shake rate=20 level=10]Error[/shake]
+do State.ranger_spawn_enemies = true
+=> ranger_enemies_approach
+
+=> END
+
+~ ranger_enemies_approach
+Computer: WARNING! Detecting multiple unauthorized craft approaching!
+=> END
+
+~ try_dock
+Computer: Ranger base in sight! Fly close to the docking port and automatic docking systems will take over.
+do State.base_in_sight_spooken = true
+=> END
+
+~ dock_success
+Computer: You docked successfully, mission complete. 
+Computer: Your real missions begin tomorrow
+do State.endTutorial()
+=> END

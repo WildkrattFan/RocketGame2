@@ -24,6 +24,7 @@ script = ExtResource("1_pknlo")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
+layer = 101
 
 [node name="Sprite2D" type="Sprite2D" parent="CanvasLayer"]
 show_behind_parent = true

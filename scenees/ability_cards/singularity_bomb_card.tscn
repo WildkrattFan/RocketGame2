@@ -1,0 +1,11 @@
+[gd_scene load_steps=3 format=3 uid="uid://cgsfghqiuyt0x"]
+
+[ext_resource type="Script" uid="uid://1y07gvkqbigy" path="res://scenees/ability_cards/singularity_bomb_card.gd" id="1_ab7bq"]
+[ext_resource type="Texture2D" uid="uid://bxoboc08xsmau" path="res://assets/ability_sprites/blackhole_icon.png" id="1_l8xpv"]
+
+[node name="SingularityBombCard" type="Node2D"]
+script = ExtResource("1_ab7bq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+visible = false
+texture = ExtResource("1_l8xpv")

@@ -1,0 +1,179 @@
+[gd_scene load_steps=18 format=3 uid="uid://dhmiw3ghfhjmu"]
+
+[ext_resource type="Script" uid="uid://oh0q8ik6imiy" path="res://levels/level1/fake_enemy.gd" id="1_kycye"]
+[ext_resource type="Texture2D" uid="uid://1dtkucd4eyja" path="res://assets/spaceShipEngineStarting-Sheet.png" id="2_0u1va"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kycye"]
+animation = &"engine_start"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0u1va"]
+animation = &"flying"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xxwno"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_vxp0b"]
+switch_mode = 1
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_qmooi"]
+states/engine_start/node = SubResource("AnimationNodeAnimation_kycye")
+states/engine_start/position = Vector2(358, 40)
+states/flying/node = SubResource("AnimationNodeAnimation_0u1va")
+states/flying/position = Vector2(515, 100)
+transitions = ["engine_start", "flying", SubResource("AnimationNodeStateMachineTransition_xxwno"), "Start", "engine_start", SubResource("AnimationNodeStateMachineTransition_vxp0b")]
+
+[sub_resource type="Animation" id="Animation_fomqe"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"update": 1,
+"values": []
+}
+
+[sub_resource type="Animation" id="Animation_7hl7p"]
+resource_name = "engine_start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667, 0.1),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3]
+}
+
+[sub_resource type="Animation" id="Animation_7jemg"]
+resource_name = "flying"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ysuv1"]
+_data = {
+&"RESET": SubResource("Animation_fomqe"),
+&"engine_start": SubResource("Animation_7hl7p"),
+&"flying": SubResource("Animation_7jemg")
+}
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_x700c"]
+radius = 16.0
+height = 50.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u8eua"]
+size = Vector2(215, 1472.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_lhvbx"]
+size = Vector2(43.7677, 20.8021)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_lnfek"]
+radius = 1324.71
+
+[sub_resource type="Gradient" id="Gradient_n68st"]
+offsets = PackedFloat32Array(0, 0.62987)
+colors = PackedColorArray(1, 1, 1, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1wa33"]
+gradient = SubResource("Gradient_n68st")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="AssultEnemy" type="Node2D"]
+scale = Vector2(2, 2)
+script = ExtResource("1_kycye")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(4.54, 13)
+scale = Vector2(0.157813, 0.157813)
+texture = ExtResource("2_0u1va")
+hframes = 12
+frame = 3
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+tree_root = SubResource("AnimationNodeStateMachine_qmooi")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+libraries = {
+&"": SubResource("AnimationLibrary_ysuv1")
+}
+
+[node name="hitBox" type="Area2D" parent="Sprite2D"]
+visible = false
+scale = Vector2(6.33661, 6.33661)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitBox"]
+position = Vector2(-4, -18)
+shape = SubResource("CapsuleShape2D_x700c")
+
+[node name="shoot_area" type="Area2D" parent="Sprite2D"]
+visible = false
+position = Vector2(-25.3465, -82.376)
+scale = Vector2(6.33661, 6.33661)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/shoot_area"]
+position = Vector2(1, -734.75)
+shape = SubResource("RectangleShape2D_u8eua")
+
+[node name="RayCast2D" type="RayCast2D" parent="."]
+visible = false
+target_position = Vector2(5, -438)
+collision_mask = 2
+collide_with_areas = true
+
+[node name="dodge_area" type="Area2D" parent="."]
+visible = false
+position = Vector2(0, -2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="dodge_area"]
+position = Vector2(-11, -119.5)
+scale = Vector2(30.045, 30.045)
+shape = SubResource("RectangleShape2D_lhvbx")
+
+[node name="sight_area" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="sight_area"]
+position = Vector2(2.5, -499)
+shape = SubResource("CircleShape2D_lnfek")
+
+[node name="reload_timer" type="Timer" parent="."]
+wait_time = 5.0
+
+[node name="shot_timer" type="Timer" parent="."]
+wait_time = 0.05
+
+[node name="PointLight2D" type="PointLight2D" parent="." groups=["enemy"]]
+energy = 0.5
+texture = SubResource("GradientTexture2D_1wa33")
+
+[connection signal="area_entered" from="Sprite2D/hitBox" to="." method="_on_hit_box_area_entered"]
+[connection signal="area_entered" from="Sprite2D/shoot_area" to="." method="_on_shoot_area_area_entered"]
+[connection signal="area_exited" from="Sprite2D/shoot_area" to="." method="_on_shoot_area_area_exited"]
+[connection signal="area_entered" from="dodge_area" to="." method="_on_dodge_area_area_entered"]
+[connection signal="area_exited" from="dodge_area" to="." method="_on_dodge_area_area_exited"]
+[connection signal="area_entered" from="sight_area" to="." method="_on_sight_area_area_entered"]
+[connection signal="area_exited" from="sight_area" to="." method="_on_sight_area_area_exited"]
+[connection signal="timeout" from="reload_timer" to="." method="_on_reload_timer_timeout"]
+[connection signal="timeout" from="shot_timer" to="." method="_on_shot_timer_timeout"]

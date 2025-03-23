@@ -1,0 +1,207 @@
+[gd_scene load_steps=26 format=3 uid="uid://c1b8c43ehrely"]
+
+[ext_resource type="Script" uid="uid://x20collqiulq" path="res://scenees/rubble.gd" id="1_d0p7a"]
+[ext_resource type="Texture2D" uid="uid://dk86qmuu0gvb3" path="res://assets/rubble/rubble5.png" id="2_d0p7a"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jl1k0"]
+size = Vector2(5, 63)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ci40t"]
+animation = &"100"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_aunmy"]
+animation = &"20"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ksawf"]
+animation = &"40"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_14kkw"]
+animation = &"60"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_dj31w"]
+animation = &"80"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_lxlrl"]
+animation = &"destruction"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_xv5sn"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_06yjp"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ddumh"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ms01r"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_tsohq"]
+switch_mode = 1
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_11b4w"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_211xm"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_pb4c3"]
+states/100/node = SubResource("AnimationNodeAnimation_ci40t")
+states/100/position = Vector2(202, 78)
+states/20/node = SubResource("AnimationNodeAnimation_aunmy")
+states/20/position = Vector2(837, 103)
+states/40/node = SubResource("AnimationNodeAnimation_ksawf")
+states/40/position = Vector2(680, 112)
+states/60/node = SubResource("AnimationNodeAnimation_14kkw")
+states/60/position = Vector2(514, 106)
+states/80/node = SubResource("AnimationNodeAnimation_dj31w")
+states/80/position = Vector2(376, 95)
+states/End/position = Vector2(1069, 116)
+states/Start/position = Vector2(57, 69)
+states/destruction/node = SubResource("AnimationNodeAnimation_lxlrl")
+states/destruction/position = Vector2(938, 44)
+transitions = ["100", "80", SubResource("AnimationNodeStateMachineTransition_xv5sn"), "80", "60", SubResource("AnimationNodeStateMachineTransition_06yjp"), "60", "40", SubResource("AnimationNodeStateMachineTransition_ddumh"), "40", "20", SubResource("AnimationNodeStateMachineTransition_ms01r"), "20", "destruction", SubResource("AnimationNodeStateMachineTransition_tsohq"), "destruction", "End", SubResource("AnimationNodeStateMachineTransition_11b4w"), "Start", "100", SubResource("AnimationNodeStateMachineTransition_211xm")]
+
+[sub_resource type="Animation" id="Animation_hgd0l"]
+resource_name = "100"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_p0b4t"]
+resource_name = "20"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_rmnvl"]
+resource_name = "40"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_hfl3n"]
+resource_name = "60"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_vnaiq"]
+resource_name = "80"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [1]
+}
+
+[sub_resource type="Animation" id="Animation_k4hj4"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
+[sub_resource type="Animation" id="Animation_vba30"]
+resource_name = "destruction"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:frame")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.0333333, 0.0666667),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [4, 5, 6]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0jsh"]
+_data = {
+&"100": SubResource("Animation_hgd0l"),
+&"20": SubResource("Animation_p0b4t"),
+&"40": SubResource("Animation_rmnvl"),
+&"60": SubResource("Animation_hfl3n"),
+&"80": SubResource("Animation_vnaiq"),
+&"RESET": SubResource("Animation_k4hj4"),
+&"destruction": SubResource("Animation_vba30")
+}
+
+[node name="Rubble" type="Node2D" groups=["Obstical"]]
+script = ExtResource("1_d0p7a")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_d0p7a")
+
+[node name="hitbox" type="Area2D" parent="Sprite2D" groups=["Obstical", "obstical"]]
+collision_layer = 7
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sprite2D/hitbox"]
+position = Vector2(-0.5, 0.5)
+shape = SubResource("RectangleShape2D_jl1k0")
+
+[node name="AnimationTree" type="AnimationTree" parent="Sprite2D"]
+root_node = NodePath("../..")
+tree_root = SubResource("AnimationNodeStateMachine_pb4c3")
+anim_player = NodePath("../AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Sprite2D"]
+root_node = NodePath("../..")
+libraries = {
+&"": SubResource("AnimationLibrary_h0jsh")
+}
+
+[connection signal="area_entered" from="Sprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
+[connection signal="animation_finished" from="Sprite2D/AnimationTree" to="." method="_on_animation_tree_animation_finished"]

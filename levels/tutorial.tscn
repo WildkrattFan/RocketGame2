@@ -1,0 +1,84 @@
+[gd_scene load_steps=11 format=3 uid="uid://bbxh3vt4n50cf"]
+
+[ext_resource type="Script" uid="uid://v7lg2hr6qtw1" path="res://scenees/demo_levels/level_1.gd" id="1_vvqp3"]
+[ext_resource type="Shader" uid="uid://cqdxgn78bv6h" path="res://script/default_level.gdshader" id="2_bp3yb"]
+[ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="3_jfmsd"]
+[ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_d2yhp"]
+[ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="5_5h72f"]
+[ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="6_o146j"]
+[ext_resource type="PackedScene" uid="uid://x0tkfwl42ld6" path="res://scenees/split_obstical.tscn" id="7_fkhgs"]
+[ext_resource type="PackedScene" uid="uid://coyghgvye142q" path="res://scenees/ability_cards/shield.tscn" id="8_qvtyd"]
+[ext_resource type="PackedScene" uid="uid://ddq2f8xek6ot6" path="res://scenees/blackHole.tscn" id="9_ud5cb"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
+shader = ExtResource("2_bp3yb")
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_vvqp3")
+
+[node name="SpaceTitleScreen" type="Sprite2D" parent="."]
+show_behind_parent = true
+material = SubResource("ShaderMaterial_71qnq")
+position = Vector2(44, -3146)
+scale = Vector2(2, 2)
+texture = ExtResource("3_jfmsd")
+
+[node name="world_border" type="Area2D" parent="." groups=["Obstical"]]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="world_border"]
+polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -15847, -12671, -15847, -12609, -16235, 14013, -17172, 15594, -3020, 15032, 12173, -14664, 11661, -14920, -17395)
+
+[node name="player" parent="." instance=ExtResource("4_d2yhp")]
+position = Vector2(466, 1465)
+
+[node name="Turret" parent="." instance=ExtResource("5_5h72f")]
+position = Vector2(-1883, -1627)
+
+[node name="Turret2" parent="." instance=ExtResource("5_5h72f")]
+position = Vector2(3223, 340)
+
+[node name="Turret3" parent="." instance=ExtResource("5_5h72f")]
+position = Vector2(1489, 2987)
+
+[node name="Obstical" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(-998, 3333)
+
+[node name="Obstical2" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(2333, 2274)
+
+[node name="Obstical3" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(-3308, 1963)
+
+[node name="Obstical4" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(983, 4424)
+
+[node name="Obstical5" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(2648, 1317)
+
+[node name="Obstical6" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(-1505, 544)
+
+[node name="Obstical7" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(-218, -1838)
+
+[node name="Obstical8" parent="." instance=ExtResource("6_o146j")]
+position = Vector2(1935, -1542)
+
+[node name="Split_Obstical" parent="." instance=ExtResource("7_fkhgs")]
+position = Vector2(580, 305)
+
+[node name="Shield" parent="." instance=ExtResource("8_qvtyd")]
+position = Vector2(275, 1368)
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 999998.0
+autostart = true
+
+[node name="CanvasModulate" type="CanvasModulate" parent="."]
+color = Color(0.733007, 0.733005, 0.733005, 1)
+
+[node name="BlackHole" parent="." instance=ExtResource("9_ud5cb")]
+position = Vector2(-9796, 852)
+
+[connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
+[connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]

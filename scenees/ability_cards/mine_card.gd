@@ -1,6 +1,7 @@
 extends Node2D
 
 var mine_scene = preload("res://scenees/player and weapons/mine.tscn")
+var rarity = "common"
 
 func use(delta,player):
 	var mineI = mine_scene.instantiate()

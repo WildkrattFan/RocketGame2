@@ -6,23 +6,36 @@ var rng = RandomNumberGenerator.new()
 var save_path = "user://score.save"
 var levels_scene = ("res://scenees/levels_screen.tscn")
 var _portalMachine
+#var gradient_texture : GradientTexture2D
+#
 
 var rarity_colors = {
-	"Common": Color(1, 1, 1),       # White glow
-	"Rare": Color(0, 0, 1),         # Blue glow
-	"Epic": Color(0.5, 0, 0.5),     # Purple glow
-	"Legendary": Color(1, 0.84, 0)  # Gold glow
+	"common": Color(1, 1, 1),       # White glow
+	"rare": Color(0, 0, 1),         # Blue glow
+	"epic": Color(0.5, 0, 0.5),     # Purple glow
+	"legendary": Color(1, 0.84, 0)  # Gold glow
 }
 
-
 func _ready() -> void:
+	#var gradient = Gradient.new()
+	#gradient.add_point(0.0, Color(1, 1, 1, 1))  # White in the center
+	#gradient.add_point(1, Color(1, 1, 1, 0))  # Transparent at the edges
+	#
+	#gradient_texture = GradientTexture2D.new()
+	#gradient_texture.gradient = gradient
+	#gradient_texture.width = 256
+	#gradient_texture.height = 256
+	#gradient_texture.fill = GradientTexture2D.FILL_RADIAL
+	#gradient_texture.fill_from = Vector2(0.5, 0.5)
+	#gradient_texture.fill_to = Vector2(1, 1)
+	
 	while textNum < GlobalLevelTracking.previousScore:
 		textNum += 1
 		$Score.text = "Final Score: " + str(textNum)
 		$portal.visible = false
 		$CenterContainer/Levels_bttn.visible = false
 		await get_tree().create_timer(0.001).timeout
-		_portalMachine = $AnimationTree2.get("parameters/playback")
+	_portalMachine = $AnimationTree2.get("parameters/playback")
 	openChest()
 
 func openChest():
@@ -30,16 +43,16 @@ func openChest():
 
 	if GlobalLevelTracking.previousScore > 500:
 		var randomNum = rng.randi_range(5,8)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.epicAbilities + GlobalLevelTracking.legendaryAbilities)
 	elif GlobalLevelTracking.previousScore > 400:
 		var randomNum = rng.randi_range(4,6)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.epicAbilities + GlobalLevelTracking.rareAbilities + GlobalLevelTracking.legendaryAbilities)
 	elif GlobalLevelTracking.previousScore > 300:
 		var randomNum = rng.randi_range(3,5)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities + GlobalLevelTracking.rareAbilities + GlobalLevelTracking.epicAbilities)
 	elif GlobalLevelTracking.previousScore > 200:
 		var randomNum = rng.randi_range(2,4)
-		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
+		getAbilities(randomNum, GlobalLevelTracking.commonAbilities + GlobalLevelTracking.rareAbilities)
 	else:
 		var randomNum = rng.randi_range(2,3)
 		getAbilities(randomNum, GlobalLevelTracking.commonAbilities)
@@ -54,6 +67,7 @@ func getAbilities(count, abilityPool):
 	# Output the selected abilities (for debugging or display)
 	print("Abilities received: ", nextAbilities)
 	displayAbilities()
+
 func displayAbilities():
 	$portal.visible = true
 	_portalMachine.start("open")
@@ -82,11 +96,16 @@ func displayAbilities():
 		abilitySprite.texture = abilityInstance.get_child(0).texture
 		abilitySprite.scale = Vector2(0.05, 0.05)
 		
-		#TODO: Add a rarity property to each ability
+		# Assign light color based on rarity
+		var rarity = abilityInstance.rarity
+		var light_color = rarity_colors.get(rarity, Color(1, 1, 1))  # Default to white if rarity is not found
+		print("Rarity: ", rarity, "Light Color: ", light_color)  # Debugging output
 
-		# Start all abilities from the center point
+		# Create the light
 		abilitySprite.position = start_position
 		$CanvasLayer.add_child(abilitySprite)
+
+
 
 		# Ensure the tween is created after the node is added to the scene
 		var tween = create_tween()
@@ -100,8 +119,9 @@ func displayAbilities():
 
 		# Delay each ability animation slightly for a cascade effect
 		await get_tree().create_timer(0.2).timeout
-		$CenterContainer/Levels_bttn.visible = true
+	$CenterContainer/Levels_bttn.visible = true
 
+# Helper function to create particles
 
 
 

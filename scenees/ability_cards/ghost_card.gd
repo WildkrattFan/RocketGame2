@@ -3,6 +3,7 @@ extends Node2D
 var hitBox = null
 var player = null
 var visibilityArea = null
+var rarity = "epic"
 
 func use(delta, player):
 	self.player = player

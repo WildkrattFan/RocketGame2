@@ -223,4 +223,6 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="CPUParticles2D" type="CPUParticles2D" parent="."]
+
 [connection signal="pressed" from="CenterContainer/Levels_bttn" to="." method="_on_button_pressed"]

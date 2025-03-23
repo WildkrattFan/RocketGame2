@@ -1,0 +1,3 @@
+[gd_scene format=3 uid="uid://bnbow3prcsqft"]
+
+[node name="FakePlayer" type="Node2D"]

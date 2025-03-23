@@ -73,3 +73,8 @@ func _on_player_main_points_added() -> void:
 		if int(GlobalLevelTracking.current_level) < 2:
 			GlobalLevelTracking.set_level(2)
 			GlobalLevelTracking.justPlayedLevel = 1
+
+
+func _on_missile_recognition_area_entered(area: Area2D) -> void:
+	if(area.is_in_group("missile")):
+		State.has_shot = true

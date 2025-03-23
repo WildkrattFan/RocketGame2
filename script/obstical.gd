@@ -13,6 +13,8 @@ var _stateMachine
 
 var obstical_scene = preload("res://scenees/split_obstical.tscn")
 
+
+
 var has_split = false
 # Called when the node enters the scene tree for the first time.
 func _ready():

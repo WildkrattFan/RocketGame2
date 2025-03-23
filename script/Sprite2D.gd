@@ -51,8 +51,11 @@ var invincible = false
 signal exploded
 signal points_added
 
+@onready var actionable_finder: Area2D = $ActionableFinder
 
+var actionables
 
+var can_move = true
 
 func _ready():
 
@@ -83,11 +86,32 @@ func _ready():
 
 	
 	# Start a timer to replenish ammo after a certain duration
+	
+func _unhandled_input(event: InputEvent) -> void:
+	if Input.is_action_just_pressed("ui_accept"):
+		print("handeling it")
+		actionables = actionable_finder.get_overlapping_areas()
+		if actionables.size() > 0:
+			actionables[0].action()
+			return
+			
+#func _input(event: InputEvent) -> void:
+	#if Input.is_action_pressed("next_dialouge"):
+		#actionables = actionable_finder.get_overlapping_areas()
+		#if actionables.size() > 0:
+			#actionables[0].action()
+			#return
 
 func _process(delta):
+
+	
+	
 	if is_multiplayer_authority() or true:
 		handle_input(delta)
-	apply_movement(delta)
+	if can_move:
+		apply_movement(delta)
+	else:
+		$trail.emitting = false
 	scan()
 
 
@@ -119,6 +143,11 @@ func handle_input(delta):
 	else:
 		_stateMachine.travel("engineOff")
 		$trail.emitting = false
+	#if Input.is_action_pressed("ui_accept"):
+		#var actionables = actionable_finder.get_overlapping_areas()
+		#if actionables.size() > 0:
+			#actionables[0].action()
+			#return
 
 	if isExploding:
 		_stateMachine.travel("explosion")
@@ -176,11 +205,13 @@ func apply_movement(delta):
 	position += velocity
 
 	if blackHole:
+		
 		var suction_direction = (blackHole.global_position - global_position).normalized()
 		var distance_to_black_hole = global_position.distance_to(blackHole.global_position)
 		var collisionShape = blackHole.get_node("CollisionShape2D") # Assuming the collision shape node is named "wideBlackHoleArea"
 		var radius = collisionShape.shape.radius
 		var suction_strength = blackHoleSuction / (distance_to_black_hole - radius / radius)
+		shake_camera(suction_strength/15,1)
 		position += suction_direction * suction_strength * delta
 
 
@@ -280,6 +311,7 @@ func _on_area_2d_area_entered(area):
 		
 	if area.name == "blackHoleCenter":
 		health -= 100
+		print("blackholeCenter entered!!!!")
 		death()
 	if area.name == "hitBox":
 		health -= 100
@@ -378,6 +410,7 @@ func scan():
 		angle_to_enemy += PI/2
 		# Rotate the arrow to face the direction of the enemy
 		$CanvasLayer/Arrow.rotation = angle_to_enemy
+		$CanvasLayer/Arrow.visible = true
 		
 	else:
 		# Hide the arrow if no enemies are found
@@ -427,3 +460,16 @@ func setAbilityCards(newCards):
 		
 func switchShoot(val):
 	can_shoot = val
+
+
+func _on_actionable_finder_area_entered(area: Area2D) -> void:
+	actionables = actionable_finder.get_overlapping_areas()
+	if actionables.size() > 0:
+		actionables[0].action()
+		return
+
+
+func _on_actionable_finder_area_exited(area: Area2D) -> void:
+	if actionables.size() > 0:
+		actionables[0].close()
+		return

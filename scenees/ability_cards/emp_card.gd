@@ -3,6 +3,7 @@ extends Node2D
 var player = null;
 var _stateMachine
 var exploded = false
+var rarity = "common"
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	_stateMachine = $AnimationTree.get("parameters/playback")
