@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://dy7npcibq2mpr"]
+
+[ext_resource type="Texture2D" uid="uid://crsf8olgb3tqq" path="res://assets/chain_ball.png" id="1_e4nw2"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_vyirm"]
+
+[node name="ChainBall" type="Node2D"]
+
+[node name="Skeleton2D" type="Skeleton2D" parent="."]
+
+[node name="Bone2D" type="Bone2D" parent="Skeleton2D"]
+scale = Vector2(0.972, 1)
+rest = Transform2D(15.845, 0, 10.085, 0, 0, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(5, 5)
+texture = ExtResource("1_e4nw2")
+
+[node name="RigidBody2D" type="RigidBody2D" parent="."]
+physics_material_override = SubResource("PhysicsMaterial_vyirm")
