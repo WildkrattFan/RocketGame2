@@ -1,7 +1,7 @@
 extends Node2D
 
-var gameOverScene = preload("res://scenees/GameOverScreen.tscn")
-var pauseMenuScene = preload("res://scenees/PauseMenu.tscn")
+var gameOverScene = load("res://scenees/GameOverScreen.tscn")
+var pauseMenuScene = load("res://scenees/PauseMenu.tscn")
 var levelsScene = ("res://scenees/levels_screen.tscn")
 var nextScene = ("res://levels/level1/level1.tscn")
 var scoreScene = ("res://scenees/score_screen.tscn")

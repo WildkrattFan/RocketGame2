@@ -1,7 +1,7 @@
 [gd_resource type="Theme" load_steps=5 format=3 uid="uid://b43o8w87vgskk"]
 
-[ext_resource type="StyleBox" uid="uid://bt40pkyuf1dnx" path="res://addons/dialogue_quest/resources/themes/default/components/stylebox/default_panel.tres" id="1_e03ju"]
-[ext_resource type="StyleBox" uid="uid://dvtav16gx0cbc" path="res://addons/dialogue_quest/resources/themes/default/components/stylebox/default_panel_foreground.tres" id="2_pb7ya"]
+[ext_resource type="StyleBox" uid="uid://bt40pkyuf1dnx" path="res://DialogueQuest-b1f39b11c5ac0410c3e14db135c0cdc2dda847e9/addons/dialogue_quest/resources/themes/default/components/stylebox/default_panel.tres" id="1_e03ju"]
+[ext_resource type="StyleBox" uid="uid://dvtav16gx0cbc" path="res://DialogueQuest-b1f39b11c5ac0410c3e14db135c0cdc2dda847e9/addons/dialogue_quest/resources/themes/default/components/stylebox/default_panel_foreground.tres" id="2_pb7ya"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_cpuxy"]
 content_margin_left = 4.0
