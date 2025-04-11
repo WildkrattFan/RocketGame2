@@ -99,6 +99,10 @@ color = Color(1, 0, 0, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_1wa33")
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+debug_enabled = true
+
 [connection signal="area_entered" from="Sprite2D/hitBox" to="." method="_on_hit_box_area_entered"]
 [connection signal="area_entered" from="Sprite2D/shoot_area" to="." method="_on_shoot_area_area_entered"]
 [connection signal="area_exited" from="Sprite2D/shoot_area" to="." method="_on_shoot_area_area_exited"]

@@ -5,13 +5,17 @@
 [ext_resource type="Texture2D" uid="uid://bffbdnluytlwo" path="res://assets/game_background.png" id="3_gbtm3"]
 [ext_resource type="PackedScene" uid="uid://chxgvrijiwjix" path="res://scenees/player and weapons/Player.tscn" id="4_cipho"]
 [ext_resource type="PackedScene" uid="uid://btu1fjdg3tft" path="res://scenees/obstical.tscn" id="6_bripe"]
-[ext_resource type="PackedScene" uid="uid://btdoppmsv78tv" path="res://scenees/player and weapons/turret.tscn" id="6_llbwd"]
 [ext_resource type="PackedScene" uid="uid://x0tkfwl42ld6" path="res://scenees/split_obstical.tscn" id="7_eocww"]
 [ext_resource type="PackedScene" uid="uid://coyghgvye142q" path="res://scenees/ability_cards/shield.tscn" id="8_6kdtk"]
-[ext_resource type="PackedScene" uid="uid://ddq2f8xek6ot6" path="res://scenees/blackHole.tscn" id="9_qx2u8"]
+[ext_resource type="PackedScene" uid="uid://btp0cnq64nui6" path="res://scenees/player and weapons/assultEnemy.tscn" id="8_j0ow3"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_71qnq"]
 shader = ExtResource("2_srbs3")
+
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_qx2u8"]
+vertices = PackedVector2Array(12740, 9564.94, -12712, 9414.05, -12757, -15850, 12759, -15877)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-12767, -15860, 12769, -15887, 12750, 9575, -12722, 9424)])
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_skk4j")
@@ -30,15 +34,6 @@ polygon = PackedVector2Array(-12674, -15848, -12675, 9575, 12750, 9573, 12744, -
 
 [node name="player" parent="." instance=ExtResource("4_cipho")]
 position = Vector2(466, 1465)
-
-[node name="Turret" parent="." instance=ExtResource("6_llbwd")]
-position = Vector2(-1883, -1627)
-
-[node name="Turret2" parent="." instance=ExtResource("6_llbwd")]
-position = Vector2(3223, 340)
-
-[node name="Turret3" parent="." instance=ExtResource("6_llbwd")]
-position = Vector2(1489, 2987)
 
 [node name="Obstical" parent="." instance=ExtResource("6_bripe")]
 position = Vector2(-998, 3333)
@@ -77,8 +72,12 @@ autostart = true
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
 color = Color(0.733007, 0.733005, 0.733005, 1)
 
-[node name="BlackHole" parent="." instance=ExtResource("9_qx2u8")]
-position = Vector2(-9796, 852)
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+visible = false
+navigation_polygon = SubResource("NavigationPolygon_qx2u8")
+
+[node name="AssultEnemy" parent="." instance=ExtResource("8_j0ow3")]
+position = Vector2(3856, 2130)
 
 [connection signal="mainPlayerExploded" from="player" to="." method="_on_player_main_player_exploded"]
 [connection signal="mainPointsAdded" from="player" to="." method="_on_player_main_points_added"]

@@ -18,6 +18,8 @@ var killedBy
 var ammo = 20
 var player_in_range = false
 
+@onready var nav_agent: NavigationAgent2D = $NavigationAgent2D
+
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,10 +39,12 @@ func _process(delta):
 		
 		position += suction_direction * suction_strength * delta
 	
-	if behavior_state == "hunting" and player.find_child("playerHitBox").monitorable:
-		var direction_to_player = (player.global_position - global_position)
-		update_raycast_target()
-		check_line_of_sight(delta)
+	if behavior_state == "hunting":
+		if player and player.find_child("playerHitBox").monitorable:
+			nav_agent.target_position = player.global_position
+			update_raycast_target()
+			check_line_of_sight(delta)
+
 	elif behavior_state == "patrol":
 		pass
 	elif behavior_state == "dodging":
@@ -61,6 +65,8 @@ func update_raycast_target():
 
 func check_line_of_sight(delta):
 	# Enable the raycast and update it
+	nav_agent.target_position = player.global_position
+
 	$RayCast2D.enabled = true
 	$RayCast2D.force_raycast_update()
 	
@@ -72,10 +78,17 @@ func check_line_of_sight(delta):
 
 func move_towards_target(delta):
 	if player:
-		var direction = (player.global_position - global_position).normalized()
+		nav_agent.target_position = player.global_position
+		var next_path_position = nav_agent.get_next_path_position()
+		var direction = (next_path_position - global_position).normalized()
+		
+		# Move toward that direction
 		position += direction * speed * delta
-		var goal_rotation = direction.angle() - Vector2(0,-1).angle()
+		
+		# Rotate smoothly toward movement direction
+		var goal_rotation = direction.angle() - Vector2(0, -1).angle()
 		$Sprite2D.rotation = lerp_angle($Sprite2D.rotation, goal_rotation, 3 * delta)
+
 
 
 func _on_hit_box_area_entered(area):

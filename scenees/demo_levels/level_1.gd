@@ -69,7 +69,7 @@ func _on_player_main_points_added() -> void:
 		
 		GlobalLevelTracking.set_previous_score(score)
 		
-		get_tree().change_scene_to_file(scoreScene)
+		get_tree().change_scene_to_fdwile(scoreScene)
 		if int(GlobalLevelTracking.current_level) < 2:
 			GlobalLevelTracking.set_level(2)
 			GlobalLevelTracking.justPlayedLevel = 1
